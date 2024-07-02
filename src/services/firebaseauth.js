@@ -13,8 +13,23 @@ export const signUp = async (email, password) => {
     console.log("User signed up successfully:", userCredential.user);
     return userCredential.user;
   } catch (error) {
-    console.error("Error signing up:", error.message);
     throw error;
+  }
+};
+
+export const checkEmailExists = async (email) => {
+  try {
+    // Try to fetch sign-in methods for the email
+    await auth().fetchSignInMethodsForEmail(email);
+    return true;
+  } catch (error) {
+    if (error.code === "auth/invalid-email") {
+      throw new Error("Invalid email format.");
+    } else if (error.code === "auth/user-not-found") {
+      return false;
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -29,7 +44,6 @@ export const signIn = async (email, password) => {
     console.log("User signed in successfully:", userCredential.user);
     return userCredential.user;
   } catch (error) {
-    console.error("Error signing in:", error.message);
     throw error;
   }
 };
