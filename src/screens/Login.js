@@ -8,35 +8,41 @@ import {
   Pressable,
   SafeAreaView,
   StyleSheet,
-  Switch,
   Text,
   Linking,
   TextInput,
   View,
 } from "react-native";
+
 import { signIn } from "../services/firebaseauth";
 import AuthContext from "../context/authContext";
 import { createNotification } from "../services/firebasefirestore";
 
 const logo = require("../images/logo.png");
 
-const sampleImage = require("../images/video.jpg");
-
 function Login({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [click, setClick] = useState(false);
   const { setUser } = useContext(AuthContext);
 
   const handleSignIn = async () => {
+    if (!username || !password) {
+      Alert.alert("Validation Error", "Please enter both email and password.");
+      return false;
+    }
+
     try {
       const user = await signIn(username, password);
-      await setUser(user);
+      setUser(user);
       Alert.alert("Sign In Successful", `Welcome back, ${user.email}`);
       return user;
     } catch (error) {
-      Alert.alert("Sign In Failed", error.message);
-      return null;
+      if (error.code === "auth/invalid-credential") {
+        Alert.alert("Sign In Failed", "User not found. Please register.");
+      } else {
+        Alert.alert("Sign In Failed", error.message);
+      }
+      return false;
     }
   };
 
@@ -52,6 +58,7 @@ function Login({ navigation }) {
           onChangeText={setUsername}
           autoCorrect={false}
           autoCapitalize="none"
+          accessibilityLabel="Email Input"
         />
         <TextInput
           style={styles.input}
@@ -61,6 +68,7 @@ function Login({ navigation }) {
           onChangeText={setPassword}
           autoCorrect={false}
           autoCapitalize="none"
+          accessibilityLabel="Password Input"
         />
       </View>
       <View style={styles.buttonView}>
@@ -69,15 +77,15 @@ function Login({ navigation }) {
           onPress={async () => {
             const signInSuccess = await handleSignIn();
 
-            if (
-              signInSuccess &&
-              signInSuccess.uid === "DMKClrz8iXb0WxVSV64x3J8vj6j1"
-            ) {
-              navigation.navigate("AdminHome");
-            } else {
-              navigation.navigate("Home");
+            if (signInSuccess) {
+              navigation.navigate(
+                signInSuccess.uid === "DMKClrz8iXb0WxVSV64x3J8vj6j1"
+                  ? "AdminHome"
+                  : "Home"
+              );
             }
           }}
+          accessibilityLabel="Login Button"
         >
           <Text style={styles.buttonText}>Login</Text>
         </Pressable>
@@ -89,9 +97,8 @@ function Login({ navigation }) {
       <View style={styles.buttonView}>
         <Pressable
           style={styles.registerButton}
-          onPress={() => {
-            navigation.navigate("Register1");
-          }}
+          onPress={() => navigation.navigate("Register1")}
+          accessibilityLabel="Register Button"
         >
           <Text style={styles.buttonText}>Register</Text>
         </Pressable>
@@ -137,18 +144,6 @@ const styles = StyleSheet.create({
     height: 160,
     width: "100%",
   },
-  sampleImage: {
-    height: 100,
-    width: 100,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    textAlign: "center",
-    paddingVertical: 40,
-    color: "#001E44",
-  },
   inputView: {
     gap: 15,
     width: "100%",
@@ -162,26 +157,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 7,
   },
-  rememberView: {
+  buttonView: {
     width: "100%",
     paddingHorizontal: 50,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom: 8,
-  },
-  switch: {
-    flexDirection: "row",
-    gap: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  rememberText: {
-    fontSize: 13,
-  },
-  forgetText: {
-    fontSize: 11,
-    color: "red",
   },
   button: {
     backgroundColor: "#001E44",
@@ -210,28 +188,6 @@ const styles = StyleSheet.create({
     color: "#001E44",
     fontSize: 28,
     fontWeight: "bold",
-  },
-  buttonView: {
-    width: "100%",
-    paddingHorizontal: 50,
-  },
-  optionsText: {
-    textAlign: "center",
-    paddingVertical: 10,
-    color: "gray",
-    fontSize: 13,
-    marginBottom: 6,
-  },
-  mediaIcons: {
-    flexDirection: "row",
-    gap: 15,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 23,
-  },
-  icons: {
-    width: 40,
-    height: 40,
   },
   footerText: {
     textAlign: "center",

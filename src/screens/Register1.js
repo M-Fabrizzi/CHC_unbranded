@@ -13,14 +13,14 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { signUp } from "../services/firebaseauth";
+import { checkEmailExists } from "../services/firebaseauth";
 
 const logo = require("../images/logo.png");
 
 const sampleImage = require("../images/video.jpg");
 
 function Register1({ navigation }) {
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
@@ -29,13 +29,33 @@ function Register1({ navigation }) {
     if (
       password.length >= 8 &&
       confirmPassword.length >= 8 &&
-      password === confirmPassword
+      password === confirmPassword &&
+      email.length > 0
     ) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [password, confirmPassword]);
+  }, [password, confirmPassword, email]);
+
+  const handleNext = async () => {
+    if (!email || !password || !confirmPassword) {
+      Alert.alert("All fields are required.");
+      return;
+    }
+
+    try {
+      const emailExists = await checkEmailExists(email);
+      if (emailExists) {
+        Alert.alert("This email is already in use on another account.");
+        return;
+      }
+
+      navigation.navigate("Register2", { email, password });
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,7 +65,7 @@ function Register1({ navigation }) {
           style={styles.input}
           placeholder="Email"
           value={email}
-          onChangeText={setemail}
+          onChangeText={setEmail}
           autoCorrect={false}
           autoCapitalize="none"
         />
@@ -68,18 +88,10 @@ function Register1({ navigation }) {
           autoCapitalize="none"
         />
       </View>
-      {/* <View>
-              <Pressable onPress={() => Alert.alert("Forget Password!")}>
-                  <Text style={styles.forgetText}>Forgot Password?</Text>
-              </Pressable>
-          </View> */}
-
       <View style={styles.buttonView}>
         <Pressable
           style={isDisabled ? styles.disabledButton : styles.button}
-          onPress={async () => {
-            navigation.navigate("Register2", { email, password });
-          }}
+          onPress={handleNext}
           disabled={isDisabled}
         >
           <Text style={styles.buttonText}>Next</Text>
