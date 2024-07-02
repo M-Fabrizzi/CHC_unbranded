@@ -72,7 +72,7 @@ const AdminNotification = ({ navigation }) => {
 
   return (
     <Provider theme={theme}>
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <View style={styles.container}>
           <Dropdown
             style={[styles.dropdown]}
@@ -223,8 +223,8 @@ const AdminNotification = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    justifyContent: "center",
+    padding: 10,
+    backgroundColor: 'white',
   },
   input: {
     height: 40,
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   descInput: {
     height: 120,
@@ -240,19 +240,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   multiselect: {
     width: "100%",
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: 1,
     marginBottom: 10,
   },
   uploadButton: {
     width: "100%",
-    paddingVertical: 15,
+    paddingVertical: 8,
     backgroundColor: "#001f54",
     borderRadius: 8,
     alignItems: "center",
