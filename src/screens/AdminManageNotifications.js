@@ -133,23 +133,27 @@ const styles = StyleSheet.create({
   dropdownContainer: {
     marginBottom: 20,
   },
-  dropdown: {
-    backgroundColor: "white",
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 5,
+  dropdown:{
+    width: "95%",
     padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    backgroundColor: "white",
+
   },
   button: {
-    backgroundColor: "#001f54",
+    width: "100%",
     paddingVertical: 15,
-    borderRadius: 5,
-    marginBottom: 20,
+    backgroundColor: "#001f54",
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 15,
   },
   buttonText: {
-    color: "white",
-    textAlign: "center",
+    color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
   },
   notificationCard: {
     backgroundColor: "white",
