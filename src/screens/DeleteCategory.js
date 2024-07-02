@@ -1,3 +1,4 @@
+
 import React, { useContext, useState, useEffect } from "react";
 import {SafeAreaView, View, Text, Alert, Pressable, StyleSheet} from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
@@ -99,20 +100,18 @@ const DeleteCategory = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 20,
     backgroundColor: "#fff",
   },
-  content: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   dropdown: {
     margin: 10,
-    width: "100%",
+    marginTop: 10,
+    width: "95%",
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: 10,
   },
   deleteButton: {
     width: "90%",
@@ -120,9 +119,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#001f54",
     borderRadius: 12,
     alignItems: "center",
-    position: 'absolute',
     bottom: 50, // Adjust
     marginLeft: 19,
+    marginTop: 70,
   },
   deleteButtonText: {
     color: 'white',
@@ -132,3 +131,4 @@ const styles = StyleSheet.create({
 });
 
 export default DeleteCategory;
+

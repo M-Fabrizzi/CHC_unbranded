@@ -118,9 +118,8 @@ const NewCategoryScreen = ({navigation}) =>
           styles={{
   
             selectToggle: styles.dropdown,
-            chipText: styles.chipText,
+             chipText: styles.chipText,
             itemText: styles.itemText,
-            subItemText: styles.subItemText,
             selectedItemText: styles.selectedItemText,
           }}
         />
@@ -169,8 +168,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
-    
+    borderRadius: 10,
   },
   chipText: {
     fontSize: 16,
