@@ -1,3 +1,4 @@
+
 import React, { useContext, useState, useEffect } from "react";
 import {
   View,
@@ -180,18 +181,20 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     margin: 10,
-    width: "100%",
+    width: "95%",
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: 15,
   },
   fetchButton: {
-    marginTop: 20,
-    padding: 15,
+    width: "95%",
+    paddingVertical: 15,
     backgroundColor: "#001f54",
     borderRadius: 8,
     alignItems: "center",
+    marginBottom: 15,
+    marginTop: 20,
   },
   fetchButtonText: {
     color: "white",
@@ -228,3 +231,4 @@ const styles = StyleSheet.create({
 });
 
 export default ManageVideos;
+
