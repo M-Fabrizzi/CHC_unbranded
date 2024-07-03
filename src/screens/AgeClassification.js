@@ -61,7 +61,7 @@ const AgeClassification = () => {
     <ScrollView contentContainerStyle={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter Age"
+        placeholder="Enter Transitional Age"
         keyboardType="numeric"
         value={enteredAge}
         onChangeText={(text) => setEnteredAge(text)}
