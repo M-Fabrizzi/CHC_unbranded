@@ -53,17 +53,6 @@ const AdminHomeScreen = ({ navigation }) => {
         <Text style={styles.optionText}>Create New Video Category</Text>
       </Pressable>
 
-      <Pressable style={styles.optionContainer}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => {
-            navigation.navigate("DeleteCategory");
-          }}
-        >
-          <MaterialIcons name="add-circle-outline" size={60} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.optionText}>Delete Video Sub-Category</Text>
-      </Pressable>
 
       <Pressable style={styles.optionContainer}>
         <TouchableOpacity
@@ -81,24 +70,13 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
-            navigation.navigate("ManageVideos");
-          }}
-        >
-          <MaterialIcons name="add-circle-outline" size={60} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.optionText}>Manage Videos</Text>
-      </Pressable>
-      <Pressable style={styles.optionContainer}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => {
 
             navigation.navigate("AgeClassification");
           }}
         >
           <MaterialIcons name="add-circle-outline" size={60} color="white" />
         </TouchableOpacity>
-        <Text style={styles.optionText}>Age Classification</Text>
+        <Text style={styles.optionText}>Transitional Messaging</Text>
       </Pressable>
       <Pressable style={styles.optionContainer}>
         <TouchableOpacity
@@ -113,7 +91,29 @@ const AdminHomeScreen = ({ navigation }) => {
         <Text style={styles.optionText}>Edit Doctors</Text>
       </Pressable>
 
+      <Pressable style={styles.optionContainer}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => {
+            navigation.navigate("ManageVideos");
+          }}
+        >
+          <MaterialIcons name="remove-circle-outline" size={60} color="white" />
+          </TouchableOpacity>
+        <Text style={styles.optionText}>Delete Video</Text>
+      </Pressable>
 
+      <Pressable style={styles.optionContainer}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => {
+            navigation.navigate("DeleteCategory");
+          }}
+        >
+          <MaterialIcons name="remove-circle-outline" size={60} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.optionText}>Delete Video Sub-Category</Text>
+      </Pressable>
     </ScrollView>
   );
 };
