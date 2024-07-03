@@ -29,9 +29,13 @@ const EditDoctorsScreen = ({ navigation }) => {
 
   const removeDoctorPressed = async () => {
     try {
+      if(selectedDoctors.length === 0){
+        Alert.alert('Error', 'Please select a doctor to deactivate.');
+        return;
+      }
       await deactivateDoctor(selectedDoctors);
       setSelectedDoctors('');
-      Alert.alert('Success', 'Doctor deactivated');
+      Alert.alert('Success', 'Doctor(s) deactivated');
     } catch (error) {
       console.error('Failed to remove doctor: ', error);
     }
