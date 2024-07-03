@@ -112,14 +112,14 @@ const App = () => {
                             name="AgeClassification"
                             component={AgeClassification}
                             options={({ navigation }) => ({
-                              title: "Age Classification",
+                              title: "Transitional Messaging",
                             })}
                           />
                           <Stack.Screen
                             name="ManageVideos"
                             component={ManageVideos}
                             options={({ navigation }) => ({
-                              title: "Manage Videos",
+                              title: "Delete Video",
                             })}
                           />
                           <Stack.Screen

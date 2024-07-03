@@ -45,11 +45,11 @@ function Register1({ navigation }) {
     }
 
     try {
-      const emailExists = await checkEmailExists(email);
-      if (emailExists) {
-        Alert.alert("This email is already in use on another account.");
-        return;
-      }
+      // const emailExists = await checkEmailExists(email);
+      // if (emailExists) {
+      //   Alert.alert("This email is already in use on another account.");
+      //   return;
+      // }
 
       navigation.navigate("Register2", { email, password });
     } catch (error) {
