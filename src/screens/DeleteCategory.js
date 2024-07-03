@@ -5,6 +5,8 @@ import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import CategoryContext from "../context/categoryContext";
 import { deleteCategory } from "../services/firebasefirestore";
+import { confirmAndDeleteCategory } from "../services/firebasefirestore";
+
 
 const DeleteCategory = ({ navigation }) => {
   const [category, setCategory] = useState([]);
@@ -19,10 +21,16 @@ const DeleteCategory = ({ navigation }) => {
         Alert.alert('Please select Age group, Category, and Video type.');
         return;
       }
-        await deleteCategory(videoType, ageGroup, category[0]); 
+  
+      const result = await confirmAndDeleteCategory(videoType, ageGroup, category[0]);
+  
+      if (result) {
         navigation.navigate("AdminHome");
-        Alert.alert('Category was sucessfully deleted');
-
+        Alert.alert('Category was successfully deleted');
+      } else {
+        console.log("Category deletion cancelled");
+      }
+  
     } catch (error) {
       console.error("Error deleting category:", error);
       Alert.alert("Error", "Failed to delete category. Please try again.");

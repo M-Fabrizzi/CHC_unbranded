@@ -150,13 +150,31 @@ export const deleteCategory = async (videoType, ageGroup, category) => {
     } else {
       throw new Error("Invalid videoType");
     }
-
     await collectionRef.doc(category).delete();
     return true;
   } catch (error) {
     console.error("Error deleting category:", error);
     throw error;
   }
+};
+
+
+export const confirmAndDeleteCategory = async (videoType, ageGroup, category) => {
+  return new Promise((resolve, reject) => {
+    Alert.alert(
+      "Confirm Sub-Category Deletion",
+      "Are you sure you want to delete this video sub-category? All video contents of this sub-category will be relocated",
+      [{ text: "Cancel", onPress: () => resolve(false), style: "cancel" },
+        {text: "OK", onPress: async () => {
+            try {
+              const result = await deleteCategory(videoType, ageGroup, category);
+              resolve(result); } 
+            catch (error) {
+              reject(error);
+            }}}
+      ],
+      { cancelable: false });
+  });
 };
 
 
