@@ -70,6 +70,7 @@ const AdminNotification = ({ navigation }) => {
     }
   };
 
+
   return (
     <Provider theme={theme}>
       <ScrollView style={styles.container}>
