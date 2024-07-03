@@ -484,4 +484,3 @@ export const fetchUserData = async () => {
 fetchUserData().then((userData) => {
   console.log("fetchUserData: Fetched user data", userData);
 });
-
