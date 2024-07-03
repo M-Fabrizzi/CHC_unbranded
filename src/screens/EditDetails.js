@@ -4,6 +4,7 @@ import {
   View,
   Text,
   TextInput,
+  Alert,
   StyleSheet,
   TouchableOpacity,
   Button,
@@ -243,6 +244,10 @@ function EditDetails({ navigation }) {
         <Pressable
           style={styles.submitButton}
           onPress={async () => {
+            if (!firstNameValue || !lastNameValue || !dob || !birthValue || !raceValue || !iscardiologistValue || !CardiologistValue || !zipCode || !diagnosisValue) {
+                  Alert.alert("Error", "Please fill out all fields before submitting.");
+                  return;
+            }
             await updateUserData(user.uid, {
               first_name: firstNameValue,
               last_name: lastNameValue,
