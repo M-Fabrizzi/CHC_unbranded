@@ -147,7 +147,7 @@ const App = () => {
                             name="DeleteCategory"
                             component={DeleteCategory}
                             options={({ navigation }) => ({
-                              title: "Delete Category",
+                              title: "Delete Video Sub-Category",
                             })}
                           />
                           <Stack.Screen

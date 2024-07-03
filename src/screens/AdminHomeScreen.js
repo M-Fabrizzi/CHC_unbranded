@@ -112,7 +112,7 @@ const AdminHomeScreen = ({ navigation }) => {
         >
           <MaterialIcons name="remove-circle-outline" size={60} color="white" />
         </TouchableOpacity>
-        <Text style={styles.optionText}>Delete Category</Text>
+        <Text style={styles.optionText}>Delete Video Sub-Category</Text>
       </Pressable>
     </ScrollView>
   );
