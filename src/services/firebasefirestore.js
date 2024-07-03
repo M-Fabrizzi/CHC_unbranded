@@ -7,6 +7,8 @@ import { doc, updateDoc, deleteField } from "firebase/firestore";
 import { parse } from "date-fns"; // Install date-fns if not already installed: npm install date-fns
 import { useState } from "react";
 import auth from "@react-native-firebase/auth";
+import { Alert } from "react-native";
+import { TurboModuleRegistry } from "react-native";
 
 const calculateAge = (dob) => {
   const today = new Date();
@@ -184,12 +186,18 @@ export const addUserToNotif = async (email, diagnosis, ageGroup, notifId) => {
   }
 };
 
-export const pushNotificationtobulk = async (diagnoses, ages, data) => {
-  try {
+export const pushNotificationtobulk = async (diagnoses, ages, data, navigation) => {
+  try { 
+
     // Handle single or multiple values for diagnoses and ages gracefully
     diagnoses = Array.isArray(diagnoses) ? diagnoses : [diagnoses];
     ages = Array.isArray(ages) ? ages : [ages];
 
+    if (diagnoses.length === 0 || ages.length === 0 || data.length === 0 ) {
+      alert("Please fill in all fields.");
+      return false;
+    }
+    else {
     // Iterate through each combination of diagnosis and age
     for (const diagnosis of diagnoses) {
       for (const age of ages) {
@@ -200,34 +208,52 @@ export const pushNotificationtobulk = async (diagnoses, ages, data) => {
           .add({
             title: data.title,
             description: data.description,
-            isResearch: data.isResearch,
           }); // Use set() for overwriting existing data (if needed)
-      }
+          console.log("successful");
+          Alert.alert("Response Recorded", "The notification has been sent");
+          return true;
+      }}
+      
     }
 
     console.log("Documents successfully added!");
   } catch (error) {
     console.error("Error writing documents:", error);
+    return true;
   }
 };
+
+
 export const pushNotificationtoindividual = async (email, data) => {
   try {
-    const userId = await (
-      await firestore().collection("users").doc(email).get()
-    ).data().uid;
 
-    await firestore()
-      .collection("UserPost")
-      .doc(userId)
-      .collection("Notifications")
-      .add(data);
+    if (email.length === 0 || data.length === 0) {
+      Alert.alert("Empty fields", "Please fill in all the fields and try again");
+      return false;
+    }
+    else {
+      // Check if the user with the provided email exists in the database
+      const userSnapshot = await firestore().collection("users").doc(email).get();
+      if (!userSnapshot.exists) {
+        Alert.alert("User not found", "User with this email does not exist in the database");
+        return false;
+      }
 
-    console.log("Documents successfully added!");
+      const userId = userSnapshot.data().uid;
+
+      await firestore()
+        .collection("UserPost")
+        .doc(userId)
+        .collection("Notifications")
+        .add(data);
+      
+      return true;
+    }
   } catch (error) {
     console.error("Error writing documents:", error);
+    return false;
   }
 };
-
 export const pushNotificationtouid = async (uid, data) => {
   try {
     await firestore()
