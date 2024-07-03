@@ -245,6 +245,10 @@ function Register2({ route, navigation }) {
         <Pressable
           style={styles.submitButton}
           onPress={async () => {
+            if (!firstNameValue || !lastNameValue || !dob || !birthValue || !raceValue || !iscardiologistValue || !CardiologistValue || !zipCode || !diagnosisValue) {
+              Alert.alert("Error", "Please fill out all fields before submitting.");
+              return;
+            }
             const user = await handleSignUp();
             if (user) {
               const userid = user.uid;
