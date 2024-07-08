@@ -90,6 +90,7 @@ const ManageVideos = ({ navigation }) => {
             await deleteVideoById(videoType, ageGroup, category[0], videoId);
             await deleteVideoinStorage(videoId);
             await deleteCachedVideo(videoId); // Delete the cached video
+            Alert.alert("Success", "Video deleted successfully");
             handleFetchVideos(); // Refresh the list after deletion
           },
         },
