@@ -243,7 +243,7 @@ function Register1({ navigation }) {
               !raceValue ||
               !iscardiologistValue ||
               !CardiologistValue ||
-              !zipCode ||
+              !zipCodeValue ||
               !diagnosisValue
             ) {
               Alert.alert(

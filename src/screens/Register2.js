@@ -94,10 +94,6 @@ function Register2({ route, navigation }) {
         <Pressable
           style={isDisabled ? styles.disabledButton : styles.button}
           onPress={async () => {
-            if (!firstNameValue || !lastNameValue || !dob || !birthValue || !raceValue || !iscardiologistValue || !CardiologistValue || !zipCode || !diagnosisValue) {
-              Alert.alert("Error", "Please fill out all fields before submitting.");
-              return;
-            }
             const user = await handleSignUp();
 
             if (user) {
