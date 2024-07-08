@@ -31,7 +31,7 @@ const ContactInfoScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={require("../images/logo.png")} style={styles.logo} />
+      <Image source={require("../../images/logo.png")} style={styles.logo} />
       <Text style={styles.title}>Congenital Heart Center Clinic List</Text>
       <Text style={styles.sectionTitle}>
         Pediatric Cardiology/Congenital Heart Group
