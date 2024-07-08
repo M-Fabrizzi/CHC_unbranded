@@ -12,7 +12,7 @@ import {
   fetchUserData,
   pushNotificationtoindividual,
   pushNotificationtouid,
-} from "../services/firebasefirestore";
+} from "../../services/firebasefirestore";
 
 const AgeClassification = () => {
   const [userData, setUserData] = useState([]);
@@ -23,7 +23,7 @@ const AgeClassification = () => {
 
   const handleFetchUserData = async () => {
     try {
-      if(enteredAge === ""){
+      if (enteredAge === "") {
         Alert.alert("Error", "Please enter an age.");
         return;
       }
@@ -35,7 +35,7 @@ const AgeClassification = () => {
   };
 
   const handleSendNotification = () => {
-    if(title === "" || description === ""){
+    if (title === "" || description === "") {
       Alert.alert("Error", "Please fill in all fields.");
       return;
     }

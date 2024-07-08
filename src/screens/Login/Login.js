@@ -14,11 +14,11 @@ import {
   View,
 } from "react-native";
 
-import { signIn } from "../services/firebaseauth";
-import AuthContext from "../context/authContext";
-import { createNotification } from "../services/firebasefirestore";
+import { signIn } from "../../services/firebaseauth";
+import AuthContext from "../../context/authContext";
+import { createNotification } from "../../services/firebasefirestore";
 
-const logo = require("../images/logo.png");
+const logo = require("../../images/logo.png");
 
 function Login({ navigation }) {
   const [username, setUsername] = useState("");
@@ -71,7 +71,12 @@ function Login({ navigation }) {
           accessibilityLabel="Password Input"
         />
       </View>
-      <Text style={styles.forgotText} onPress={() => navigation.navigate("ForgotPassword")}>Forgot Password?</Text>
+      <Text
+        style={styles.forgotText}
+        onPress={() => navigation.navigate("ForgotPassword")}
+      >
+        Forgot Password?
+      </Text>
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
@@ -200,7 +205,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     marginTop: 10,
-    textAlign: "left"
+    textAlign: "left",
   },
 });
 

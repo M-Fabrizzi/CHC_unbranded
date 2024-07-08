@@ -13,14 +13,17 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { checkEmailExists } from "../services/firebaseauth";
-import { signUp } from "../services/firebaseauth";
+import { checkEmailExists } from "../../services/firebaseauth";
+import { signUp } from "../../services/firebaseauth";
 import auth from "@react-native-firebase/auth";
-import { addUserData, addUserToFirestore } from "../services/firebasefirestore";
+import {
+  addUserData,
+  addUserToFirestore,
+} from "../../services/firebasefirestore";
 
-const logo = require("../images/logo.png");
+const logo = require("../../images/logo.png");
 
-const sampleImage = require("../images/video.jpg");
+const sampleImage = require("../../images/video.jpg");
 
 function Register2({ route, navigation }) {
   const [email, setEmail] = useState("");

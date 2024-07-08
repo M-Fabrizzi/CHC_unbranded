@@ -10,10 +10,10 @@ import {
   Modal,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { getNotifications } from "../services/firebasefirestore";
-import NotificationPopup from "../components/notificationComponent";
-import UserDataContext from "../context/userContext";
-import AuthContext from "../context/authContext";
+import { getNotifications } from "../../services/firebasefirestore";
+import NotificationPopup from "../../components/notificationComponent";
+import UserDataContext from "../../context/userContext";
+import AuthContext from "../../context/authContext";
 
 const { width } = Dimensions.get("window");
 
@@ -51,7 +51,7 @@ const NotificationsScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Image source={require("../images/logo.png")} style={styles.logo} />
+        <Image source={require("../../images/logo.png")} style={styles.logo} />
       </View>
       <View style={styles.notificationsContainer}>
         <Text style={styles.title}>Notifications</Text>

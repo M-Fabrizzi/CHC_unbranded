@@ -7,18 +7,17 @@ import {
   Text,
   Alert,
   ScrollView,
-
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Provider, DefaultTheme, Button } from "react-native-paper";
-import { diagnosis } from "./allthedata";
+import { diagnosis } from "../allthedata";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {
   pushNotification,
   pushNotificationtobulk,
   pushNotificationtoindividual,
-} from "../services/firebasefirestore";
+} from "../../services/firebasefirestore";
 
 const theme = {
   ...DefaultTheme,
@@ -52,11 +51,15 @@ const AdminNotification = ({ navigation }) => {
   const handlepushNotification = async () => {
     try {
       if (sendType === "bulk") {
-        const result = await pushNotificationtobulk(diagnosisValue, ageGroupValue, {
-          title,
-          description,
-          isResearch,
-        });
+        const result = await pushNotificationtobulk(
+          diagnosisValue,
+          ageGroupValue,
+          {
+            title,
+            description,
+            isResearch,
+          }
+        );
         if (result) {
           navigation.navigate("AdminHome");
         }
@@ -232,7 +235,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   input: {
     height: 40,

@@ -10,8 +10,11 @@ import {
 } from "react-native";
 import Video from "react-native-video";
 import Orientation from "react-native-orientation-locker";
-import { getVideoMetadata, saveVideoMetadata } from "../cache/MetadataHandler";
-import { downloadVideo } from "../cache/DownloadVideo";
+import {
+  getVideoMetadata,
+  saveVideoMetadata,
+} from "../../cache/MetadataHandler";
+import { downloadVideo } from "../../cache/DownloadVideo";
 
 const VideoPlayerScreen = ({ route }) => {
   const { videoId, title, description, url } = route.params;

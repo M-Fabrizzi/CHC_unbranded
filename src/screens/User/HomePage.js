@@ -44,7 +44,7 @@ const HomePage = ({ navigation }) => {
       <View style={backgroundStyle}>
         <View style={{ alignItems: "center", marginBottom: 9 }}>
           <Image
-            source={require("../images/image2.png")}
+            source={require("../../images/image2.png")}
             style={{ width: 380, height: 80 }}
           />
         </View>
@@ -55,7 +55,7 @@ const HomePage = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../images/box2.png")}
+            source={require("../../images/box2.png")}
             style={[styles.navigationImage, styles.roundedEdges]}
           />
           <Text style={styles.centeredBoldText}>Video Gallery</Text>
@@ -67,7 +67,7 @@ const HomePage = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../images/box1.png")}
+            source={require("../../images/box1.png")}
             style={[styles.navigationImage, styles.roundedEdges]}
           />
           <Text style={styles.centeredBoldText}>Edit Personal Info</Text>
@@ -79,7 +79,7 @@ const HomePage = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../images/box3.png")}
+            source={require("../../images/box3.png")}
             style={[styles.navigationImage, styles.roundedEdges]}
           />
           <Text style={styles.centeredBoldText}>Notifications</Text>
@@ -91,7 +91,7 @@ const HomePage = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../images/box4.png")}
+            source={require("../../images/box4.png")}
             style={[styles.navigationImage, styles.roundedEdges]}
           />
           <Text style={styles.centeredBoldText}>Contact</Text>

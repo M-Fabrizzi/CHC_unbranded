@@ -1,12 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
-import {SafeAreaView, View, Text, Alert, Pressable, StyleSheet} from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Alert,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import CategoryContext from "../context/categoryContext";
-import { deleteCategory } from "../services/firebasefirestore";
-import { confirmAndDeleteCategory } from "../services/firebasefirestore";
-
+import CategoryContext from "../../context/categoryContext";
+import { deleteCategory } from "../../services/firebasefirestore";
+import { confirmAndDeleteCategory } from "../../services/firebasefirestore";
 
 const DeleteCategory = ({ navigation }) => {
   const [category, setCategory] = useState([]);
@@ -18,19 +24,22 @@ const DeleteCategory = ({ navigation }) => {
   const handleDeleteCategory = async () => {
     try {
       if (ageGroup === null || category.length === 0 || videoType === null) {
-        Alert.alert('Please select Age group, Category, and Video type.');
+        Alert.alert("Please select Age group, Category, and Video type.");
         return;
       }
-  
-      const result = await confirmAndDeleteCategory(videoType, ageGroup, category[0]);
-  
+
+      const result = await confirmAndDeleteCategory(
+        videoType,
+        ageGroup,
+        category[0]
+      );
+
       if (result) {
         navigation.navigate("AdminHome");
-        Alert.alert('Category was successfully deleted');
+        Alert.alert("Category was successfully deleted");
       } else {
         console.log("Category deletion cancelled");
       }
-  
     } catch (error) {
       console.error("Error deleting category:", error);
       Alert.alert("Error", "Failed to delete category. Please try again.");
@@ -44,7 +53,10 @@ const DeleteCategory = ({ navigation }) => {
       const subCategories = categories[type]?.[age] || [];
 
       if (Array.isArray(subCategories)) {
-        const formattedSubCategories = subCategories.map((item) => ({ name: item, id: item }));
+        const formattedSubCategories = subCategories.map((item) => ({
+          name: item,
+          id: item,
+        }));
         setSubCategories(formattedSubCategories);
       } else {
         console.log("subCategories is not an array or is undefined");
@@ -55,33 +67,34 @@ const DeleteCategory = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-      <Dropdown
-        style={styles.dropdown}
-        data={[
-          {label: "Penn State", value: "psu" },
-          {label: "CHD Education", value: "chd" }, ]}
-          labelField="label"
-         valueField="value"
-         placeholder="PSU/CHD Info"
-         value={videoType}
-          onChange={(item) => {
-          console.log("Selected videoType:", item.value); // Log the selected value
-          setVideoTypeValue(item.value);
-         }}
-      />
         <Dropdown
           style={styles.dropdown}
           data={[
-            {label: "Child/Pediatric",value: "Child and Peds" },
-            {label: "Transitional",value: "Transitional" },
-            {label: "Adult",value: "Adult" },
+            { label: "Penn State", value: "psu" },
+            { label: "CHD Education", value: "chd" },
           ]}
-           labelField="label"
+          labelField="label"
+          valueField="value"
+          placeholder="PSU/CHD Info"
+          value={videoType}
+          onChange={(item) => {
+            console.log("Selected videoType:", item.value); // Log the selected value
+            setVideoTypeValue(item.value);
+          }}
+        />
+        <Dropdown
+          style={styles.dropdown}
+          data={[
+            { label: "Child/Pediatric", value: "Child and Peds" },
+            { label: "Transitional", value: "Transitional" },
+            { label: "Adult", value: "Adult" },
+          ]}
+          labelField="label"
           valueField="value"
           placeholder="Age Group"
-           value={ageGroup}
+          value={ageGroup}
           onChange={(item) => {
-              setAgeGroup(item.value);
+            setAgeGroup(item.value);
           }}
         />
         <SectionedMultiSelect
@@ -99,7 +112,6 @@ const DeleteCategory = ({ navigation }) => {
       <Pressable style={styles.deleteButton} onPress={handleDeleteCategory}>
         <Text style={styles.deleteButtonText}>Delete</Text>
       </Pressable>
-    
     </SafeAreaView>
   );
 };
@@ -131,9 +143,9 @@ const styles = StyleSheet.create({
     marginTop: 70,
   },
   deleteButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

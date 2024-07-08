@@ -1,49 +1,42 @@
 import React, { useContext, useState } from "react";
 import {
+  Alert,
   SafeAreaView,
   View,
   Text,
   TextInput,
-  Alert,
+  Pressable,
   StyleSheet,
   TouchableOpacity,
   Button,
-  Pressable,
   ScrollView,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { diagnosis, raceData } from "./allthedata";
-import AuthContext from "../context/authContext";
-import UserDataContext from "../context/userContext";
-import { updateUserData } from "../services/firebasefirestore";
-import DoctorContext from '../context/doctorContext';
+import { diagnosis, raceData } from "../allthedata";
+import {
+  addUserData,
+  addUserToFirestore,
+} from "../../services/firebasefirestore";
+import { signUp } from "../../services/firebaseauth";
+import DoctorContext from "../../context/doctorContext";
 
-function EditDetails({ navigation }) {
-  const { userData, setUserData } = useContext(UserDataContext);
-  const { user, setUser } = useContext(AuthContext);
-
-  const [firstNameValue, setFirstNameValue] = useState(userData.first_name);
-  const [lastNameValue, setLastNameValue] = useState(userData.last_name);
-  const [diagnosisValue, setDiagnosisValue] = useState(userData.diagnosis);
-  const [additionalDiagnosis, setAdditionalDiagnosis] = useState(
-    userData.additional_diagnosis
-  );
-  const [raceValue, setRaceValue] = useState(userData.race);
-  const [birthValue, setBirthValue] = useState(userData.sex);
-  const [iscardiologistValue, setIsCardiologistValue] = useState(
-    userData.isCardiologist
-  );
-  const [CardiologistValue, setCardiologistValue] = useState(
-    userData.cardiologist
-  );
+function Register1({ navigation }) {
+  const [firstNameValue, setFirstNameValue] = useState("");
+  const [lastNameValue, setLastNameValue] = useState("");
+  const [zipCodeValue, setZipCodeValue] = useState("");
+  const [diagnosisValue, setDiagnosisValue] = useState(null);
+  const [additionalDiagnosis, setAdditionalDiagnosis] = useState(null);
+  const [raceValue, setRaceValue] = useState(null);
+  const [birthValue, setBirthValue] = useState(null);
+  const [iscardiologistValue, setIsCardiologistValue] = useState(null);
+  const [CardiologistValue, setCardiologistValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-  const [zipCode, setzipCode] = useState(userData.zipcode);
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const [dob, setDob] = useState(userData.dob);
+  const [dob, setDob] = useState("");
   const { doctors } = useContext(DoctorContext);
 
   const onChange = (event, selectedDate) => {
@@ -56,7 +49,6 @@ function EditDetails({ navigation }) {
   const showDatepicker = () => {
     setShow(true);
   };
-  console.log(userData);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -88,7 +80,7 @@ function EditDetails({ navigation }) {
               style={styles.textInput}
               value={dob}
               placeholder="YYYY-MM-DD"
-              editable={true} // Make the text input non-editable
+              editable={true} // Make the text input editable
             />
             <TouchableOpacity
               style={styles.iconContainer}
@@ -203,8 +195,8 @@ function EditDetails({ navigation }) {
           <Text style={styles.label}>Zip Code:</Text>
           <TextInput
             style={styles.textInput}
-            value={zipCode}
-            onChangeText={setzipCode}
+            value={zipCodeValue}
+            onChangeText={setZipCodeValue}
             placeholder="Zip Code"
           />
         </View>
@@ -244,11 +236,25 @@ function EditDetails({ navigation }) {
         <Pressable
           style={styles.submitButton}
           onPress={async () => {
-            if (!firstNameValue || !lastNameValue || !dob || !birthValue || !raceValue || !iscardiologistValue || !CardiologistValue || !zipCode || !diagnosisValue) {
-                  Alert.alert("Error", "Please fill out all fields before submitting.");
-                  return;
+            if (
+              !firstNameValue ||
+              !lastNameValue ||
+              !dob ||
+              !birthValue ||
+              !raceValue ||
+              !iscardiologistValue ||
+              !CardiologistValue ||
+              !zipCodeValue ||
+              !diagnosisValue
+            ) {
+              Alert.alert(
+                "Error",
+                "Please fill out all fields before submitting."
+              );
+              return;
             }
-            await updateUserData(user.uid, {
+
+            navigation.navigate("Register2", {
               first_name: firstNameValue,
               last_name: lastNameValue,
               dob: dob,
@@ -256,12 +262,11 @@ function EditDetails({ navigation }) {
               race: raceValue,
               isCardiologist: iscardiologistValue,
               cardiologist: CardiologistValue,
-              zipcode: zipCode,
+              zipcode: zipCodeValue,
               diagnosis: diagnosisValue,
               additional_diagnosis:
                 diagnosisValue === "Other" ? additionalDiagnosis : null,
             });
-            navigation.navigate("Home");
           }}
         >
           <Text style={styles.submitButtonText}>Submit</Text>
@@ -276,15 +281,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#f8f9fa",
-    alignItems: 'center',
   },
   inputContainer: {
-    marginBottom: 20,    
-
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: "#001E44",
+    height: 45,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
   label: {
     marginBottom: 8,
-    marginTop: 5,
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
@@ -315,8 +326,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     backgroundColor: "#fff",
-    width: "100%",
-
   },
   submitButton: {
     width: "100%",
@@ -333,4 +342,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditDetails;
+export default Register1;

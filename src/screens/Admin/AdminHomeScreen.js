@@ -17,7 +17,7 @@ const AdminHomeScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Image source={require("../images/logo.png")} style={styles.logo} />
+        <Image source={require("../../images/logo.png")} style={styles.logo} />
       </View>
       <Pressable style={styles.optionContainer}>
         <TouchableOpacity
@@ -53,7 +53,6 @@ const AdminHomeScreen = ({ navigation }) => {
         <Text style={styles.optionText}>Create New Video Category</Text>
       </Pressable>
 
-
       <Pressable style={styles.optionContainer}>
         <TouchableOpacity
           style={styles.iconButton}
@@ -70,7 +69,6 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
-
             navigation.navigate("AgeClassification");
           }}
         >
@@ -82,7 +80,6 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
-
             navigation.navigate("EditDoctors");
           }}
         >
@@ -99,7 +96,7 @@ const AdminHomeScreen = ({ navigation }) => {
           }}
         >
           <MaterialIcons name="remove-circle-outline" size={60} color="white" />
-          </TouchableOpacity>
+        </TouchableOpacity>
         <Text style={styles.optionText}>Delete Video</Text>
       </Pressable>
 

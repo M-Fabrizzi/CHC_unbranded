@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import AdminNotificationPopup from "../components/adminNotificationComponent";
-import { diagnosis } from "./allthedata";
-import { getAdminNotifications } from "../services/firebasefirestore";
+import AdminNotificationPopup from "../../components/adminNotificationComponent";
+import { diagnosis } from "../allthedata";
+import { getAdminNotifications } from "../../services/firebasefirestore";
 
 const AdminManageNotifications = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -133,14 +133,13 @@ const styles = StyleSheet.create({
   dropdownContainer: {
     marginBottom: 20,
   },
-  dropdown:{
+  dropdown: {
     width: "95%",
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 10,
     backgroundColor: "white",
-
   },
   button: {
     width: "100%",
@@ -151,9 +150,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   notificationCard: {
     backgroundColor: "white",

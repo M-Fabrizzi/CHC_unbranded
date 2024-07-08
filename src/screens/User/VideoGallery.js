@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import firestore from "@react-native-firebase/firestore";
 
-const logo = require("../images/play_button.jpg");
+const logo = require("../../images/play_button.jpg");
 
 const VideoGallery = ({ route, navigation }) => {
   const [videoPosts, setVideoPosts] = useState([]);

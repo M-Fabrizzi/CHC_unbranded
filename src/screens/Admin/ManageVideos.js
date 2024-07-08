@@ -12,13 +12,13 @@ import {
 import { Dropdown } from "react-native-element-dropdown";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import CategoryContext from "../context/categoryContext";
+import CategoryContext from "../../context/categoryContext";
 import {
   getVideosByCategory,
   deleteVideoById,
-} from "../services/firebasefirestore";
-import { deleteVideoinStorage } from "../services/firebasestorage";
-import { deleteCachedVideo } from "../cache/CacheHandler"; // Import the cache handler
+} from "../../services/firebasefirestore";
+import { deleteVideoinStorage } from "../../services/firebasestorage";
+import { deleteCachedVideo } from "../../cache/CacheHandler"; // Import the cache handler
 
 const { width } = Dimensions.get("window");
 
