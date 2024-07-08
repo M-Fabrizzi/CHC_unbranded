@@ -22,6 +22,7 @@ import ContactInfoScreen from "./ContactInfoScreen";
 import AdminManageNotifications from "./AdminManageNotifications";
 import AgeCategories from "./AgeCategories";
 import SubCategories from "./SubCategories";
+import ForgotPassword from "./ForgotPassword";
 
 import DeleteCategory from "./DeleteCategory";
 
@@ -64,6 +65,11 @@ const App = () => {
                             name="Login"
                             component={Login}
                             options={{ title: "Login" }}
+                          />
+                          <Stack.Screen
+                            name="ForgotPassword"
+                            component={ForgotPassword}
+                            options={{ title: "Forgot Password" }}
                           />
                           <Stack.Screen
                             name="Register1"

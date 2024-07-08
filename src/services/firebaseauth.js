@@ -33,6 +33,15 @@ export const checkEmailExists = async (email) => {
   }
 };
 
+export const passwordReset = async (email) => {
+  try {
+    await auth().sendPasswordResetEmail(email);
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Function to sign in a user
 export const signIn = async (email, password) => {
   try {
