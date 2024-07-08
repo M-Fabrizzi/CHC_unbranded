@@ -14,8 +14,8 @@ import { Dropdown } from "react-native-element-dropdown";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import firebase from "@react-native-firebase/app";
-import { uploadVideo } from "../services/firebasestorage";
-import CategoryContext from "../context/categoryContext";
+import { uploadVideo } from "../../services/firebasestorage";
+import CategoryContext from "../../context/categoryContext";
 
 const AddVideo = ({ navigation }) => {
   const [videoUri, setVideoUri] = useState(null);
@@ -46,7 +46,14 @@ const AddVideo = ({ navigation }) => {
   };
 
   const handleUploadVideo = async () => {
-    if (title && description && category.length > 0 && videoUri && ageGroup && videoType) {
+    if (
+      title &&
+      description &&
+      category.length > 0 &&
+      videoUri &&
+      ageGroup &&
+      videoType
+    ) {
       try {
         if (videoType == "psu") {
           await uploadVideo(
@@ -60,7 +67,7 @@ const AddVideo = ({ navigation }) => {
           );
           alert("Video uploaded successfully!");
           navigation.goBack(); // Navigate back after successful upload
-        } else if (videoType == "chd"){
+        } else if (videoType == "chd") {
           await uploadVideo(
             videoUri,
             title,
@@ -89,7 +96,10 @@ const AddVideo = ({ navigation }) => {
       const subCategories = categories[type][age];
 
       if (subCategories && Array.isArray(subCategories)) {
-        const formattedSubCategories = subCategories.map((item) => ({ name: item, id: item }));
+        const formattedSubCategories = subCategories.map((item) => ({
+          name: item,
+          id: item,
+        }));
         setSubCategories(formattedSubCategories);
       } else {
         console.log("subCategories is not an array or is undefined");

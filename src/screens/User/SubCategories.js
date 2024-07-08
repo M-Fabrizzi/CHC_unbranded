@@ -12,9 +12,9 @@ import {
   TextInput,
   View,
 } from "react-native";
-import CategoryContext from "../context/categoryContext";
+import CategoryContext from "../../context/categoryContext";
 
-const logo = require("../images/play_button.jpg");
+const logo = require("../../images/play_button.jpg");
 
 const SubCategories = ({ route, navigation }) => {
   const { categories } = useContext(CategoryContext);

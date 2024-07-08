@@ -1,39 +1,49 @@
 import React, { useContext, useState } from "react";
 import {
-  Alert,
   SafeAreaView,
   View,
   Text,
   TextInput,
-  Pressable,
+  Alert,
   StyleSheet,
   TouchableOpacity,
   Button,
+  Pressable,
   ScrollView,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { diagnosis, raceData } from "./allthedata";
-import { addUserData, addUserToFirestore } from "../services/firebasefirestore";
-import { signUp } from "../services/firebaseauth";
-import DoctorContext from "../context/doctorContext";
+import { diagnosis, raceData } from "../allthedata";
+import AuthContext from "../../context/authContext";
+import UserDataContext from "../../context/userContext";
+import { updateUserData } from "../../services/firebasefirestore";
+import DoctorContext from "../../context/doctorContext";
 
-function Register1({ navigation }) {
-  const [firstNameValue, setFirstNameValue] = useState("");
-  const [lastNameValue, setLastNameValue] = useState("");
-  const [zipCodeValue, setZipCodeValue] = useState("");
-  const [diagnosisValue, setDiagnosisValue] = useState(null);
-  const [additionalDiagnosis, setAdditionalDiagnosis] = useState(null);
-  const [raceValue, setRaceValue] = useState(null);
-  const [birthValue, setBirthValue] = useState(null);
-  const [iscardiologistValue, setIsCardiologistValue] = useState(null);
-  const [CardiologistValue, setCardiologistValue] = useState(null);
+function EditDetails({ navigation }) {
+  const { userData, setUserData } = useContext(UserDataContext);
+  const { user, setUser } = useContext(AuthContext);
+
+  const [firstNameValue, setFirstNameValue] = useState(userData.first_name);
+  const [lastNameValue, setLastNameValue] = useState(userData.last_name);
+  const [diagnosisValue, setDiagnosisValue] = useState(userData.diagnosis);
+  const [additionalDiagnosis, setAdditionalDiagnosis] = useState(
+    userData.additional_diagnosis
+  );
+  const [raceValue, setRaceValue] = useState(userData.race);
+  const [birthValue, setBirthValue] = useState(userData.sex);
+  const [iscardiologistValue, setIsCardiologistValue] = useState(
+    userData.isCardiologist
+  );
+  const [CardiologistValue, setCardiologistValue] = useState(
+    userData.cardiologist
+  );
   const [isFocus, setIsFocus] = useState(false);
+  const [zipCode, setzipCode] = useState(userData.zipcode);
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const [dob, setDob] = useState("");
+  const [dob, setDob] = useState(userData.dob);
   const { doctors } = useContext(DoctorContext);
 
   const onChange = (event, selectedDate) => {
@@ -43,11 +53,10 @@ function Register1({ navigation }) {
     setDob(dayjs(currentDate).format("YYYY-MM-DD"));
   };
 
- 
-
   const showDatepicker = () => {
     setShow(true);
   };
+  console.log(userData);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -79,7 +88,7 @@ function Register1({ navigation }) {
               style={styles.textInput}
               value={dob}
               placeholder="YYYY-MM-DD"
-              editable={true} // Make the text input editable
+              editable={true} // Make the text input non-editable
             />
             <TouchableOpacity
               style={styles.iconContainer}
@@ -194,8 +203,8 @@ function Register1({ navigation }) {
           <Text style={styles.label}>Zip Code:</Text>
           <TextInput
             style={styles.textInput}
-            value={zipCodeValue}
-            onChangeText={setZipCodeValue}
+            value={zipCode}
+            onChangeText={setzipCode}
             placeholder="Zip Code"
           />
         </View>
@@ -243,7 +252,7 @@ function Register1({ navigation }) {
               !raceValue ||
               !iscardiologistValue ||
               !CardiologistValue ||
-              !zipCodeValue ||
+              !zipCode ||
               !diagnosisValue
             ) {
               Alert.alert(
@@ -252,8 +261,7 @@ function Register1({ navigation }) {
               );
               return;
             }
-
-            navigation.navigate("Register2", {
+            await updateUserData(user.uid, {
               first_name: firstNameValue,
               last_name: lastNameValue,
               dob: dob,
@@ -261,18 +269,17 @@ function Register1({ navigation }) {
               race: raceValue,
               isCardiologist: iscardiologistValue,
               cardiologist: CardiologistValue,
-              zipcode: zipCodeValue,
+              zipcode: zipCode,
               diagnosis: diagnosisValue,
               additional_diagnosis:
                 diagnosisValue === "Other" ? additionalDiagnosis : null,
             });
+            navigation.navigate("Home");
           }}
         >
           <Text style={styles.submitButtonText}>Submit</Text>
         </Pressable>
-
       </ScrollView>
-
     </SafeAreaView>
   );
 }
@@ -280,23 +287,16 @@ function Register1({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 14,
     backgroundColor: "#f8f9fa",
+    alignItems: "center",
   },
   inputContainer: {
     marginBottom: 20,
   },
-  button: {
-    backgroundColor: "#001E44",
-    height: 45,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   label: {
     marginBottom: 8,
+    marginTop: 5,
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
@@ -327,6 +327,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     backgroundColor: "#fff",
+    width: "100%",
   },
   submitButton: {
     width: "100%",
@@ -343,4 +344,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register1;
+export default EditDetails;

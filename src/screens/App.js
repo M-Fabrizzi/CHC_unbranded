@@ -5,35 +5,35 @@ import { Button } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons"; // Importing Ionicons
 import auth from "@react-native-firebase/auth";
 
-import EditDetails from "./EditDetails";
-import Login from "./Login";
-import Register1 from "./Register1";
-import Register2 from "./Register2";
-import HomePage from "./HomePage";
-import NotificationsScreen from "./NotificationsScreen";
-import AddVideo from "./AddVideo";
-import VideoGallery from "./VideoGallery";
-import VideoPlayerScreen from "./VideoPlayer";
-import AdminHomeScreen from "./AdminHomeScreen";
-import AdminNotification from "./AdminNotification";
-import VideoHome from "./VideoHome";
-import NewCategoryScreen from "./NewCategoryScreen";
-import ContactInfoScreen from "./ContactInfoScreen";
-import AdminManageNotifications from "./AdminManageNotifications";
-import AgeCategories from "./AgeCategories";
-import SubCategories from "./SubCategories";
-import ForgotPassword from "./ForgotPassword";
+import EditDetails from "./User/EditDetails";
+import Login from "./Login/Login";
+import Register1 from "./Login/Register1";
+import Register2 from "./Login/Register2";
+import HomePage from "./User/HomePage";
+import NotificationsScreen from "./User/NotificationsScreen";
+import AddVideo from "./Admin/AddVideo";
+import VideoGallery from "./User/VideoGallery";
+import VideoPlayerScreen from "./User/VideoPlayer";
+import AdminHomeScreen from "./Admin/AdminHomeScreen";
+import AdminNotification from "./Admin/AdminNotification";
+import VideoHome from "./User/VideoHome";
+import NewCategoryScreen from "./Admin/NewCategoryScreen";
+import ContactInfoScreen from "./User/ContactInfoScreen";
+import AdminManageNotifications from "./Admin/AdminManageNotifications";
+import AgeCategories from "./User/AgeCategories";
+import SubCategories from "./User/SubCategories";
+import ForgotPassword from "./Login/ForgotPassword";
 
-import DeleteCategory from "./DeleteCategory";
+import DeleteCategory from "./Admin/DeleteCategory";
 
 import AuthContext, { AuthProvider } from "../context/authContext";
 import { UserDataProvider } from "../context/userContext";
 import { CategoryProvider } from "../context/categoryContext";
-import ManageVideos from "./ManageVideos";
-import EditDoctorsScreen from "./EditDoctors";
+import ManageVideos from "./Admin/ManageVideos";
+import EditDoctorsScreen from "./Admin/EditDoctors";
 import { DoctorProvider } from "../context/doctorContext";
 
-import AgeClassification from "./AgeClassification";
+import AgeClassification from "./Admin/AgeClassification";
 
 const Stack = createNativeStackNavigator();
 
