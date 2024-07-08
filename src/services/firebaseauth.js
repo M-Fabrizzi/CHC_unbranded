@@ -9,6 +9,7 @@ export const signUp = async (email, password) => {
       email,
       password
     );
+
     // User signed up successfully
     console.log("User signed up successfully:", userCredential.user);
     return userCredential.user;
