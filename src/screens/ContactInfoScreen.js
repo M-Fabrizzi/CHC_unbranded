@@ -3,13 +3,13 @@ import { View, Text, StyleSheet, Image, Pressable, Linking, ScrollView, Platform
 
 const ContactInfoScreen = () => {
   const handlePhonePress = (number) => {   
-    if (Platform.OS === 'android') {
+    // if (Platform.OS === 'android') {
       Linking.openURL(`tel:${number}`);
-    } else if (Platform.OS === 'ios') {
-      Linking.openURL(`telprompt:${number}`);
-    } else {
-      console.log('Phone number is not supported');
-    }
+    // } else if (Platform.OS === 'ios') {
+    //   Linking.openURL(`telprompt:${number}`);
+    // } else {
+    //   console.log('Phone number is not supported');
+    // }
   };
 
   const handleAddressPress = (address) => {
