@@ -4,6 +4,7 @@ import {
   View,
   Text,
   TextInput,
+  Alert,
   StyleSheet,
   TouchableOpacity,
   Button,
@@ -243,6 +244,10 @@ function EditDetails({ navigation }) {
         <Pressable
           style={styles.submitButton}
           onPress={async () => {
+            if (!firstNameValue || !lastNameValue || !dob || !birthValue || !raceValue || !iscardiologistValue || !CardiologistValue || !zipCode || !diagnosisValue) {
+                  Alert.alert("Error", "Please fill out all fields before submitting.");
+                  return;
+            }
             await updateUserData(user.uid, {
               first_name: firstNameValue,
               last_name: lastNameValue,
@@ -271,12 +276,15 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#f8f9fa",
+    alignItems: 'center',
   },
   inputContainer: {
-    marginBottom: 20,
+    marginBottom: 20,    
+
   },
   label: {
     marginBottom: 8,
+    marginTop: 5,
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
@@ -307,6 +315,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     backgroundColor: "#fff",
+    width: "100%",
+
   },
   submitButton: {
     width: "100%",

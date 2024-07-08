@@ -43,6 +43,8 @@ function Register1({ navigation }) {
     setDob(dayjs(currentDate).format("YYYY-MM-DD"));
   };
 
+ 
+
   const showDatepicker = () => {
     setShow(true);
   };
@@ -268,7 +270,9 @@ function Register1({ navigation }) {
         >
           <Text style={styles.submitButtonText}>Submit</Text>
         </Pressable>
+
       </ScrollView>
+
     </SafeAreaView>
   );
 }

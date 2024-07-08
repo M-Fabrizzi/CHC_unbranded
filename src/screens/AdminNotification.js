@@ -5,8 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  ScrollView,
   Alert,
+  ScrollView,
+
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Provider, DefaultTheme, Button } from "react-native-paper";
@@ -51,28 +52,34 @@ const AdminNotification = ({ navigation }) => {
   const handlepushNotification = async () => {
     try {
       if (sendType === "bulk") {
-        await pushNotificationtobulk(diagnosisValue, ageGroupValue, {
+        const result = await pushNotificationtobulk(diagnosisValue, ageGroupValue, {
           title,
           description,
           isResearch,
         });
+        if (result) {
+          navigation.navigate("AdminHome");
+        }
+      } else if (sendType === "individual") {
+        const result2 = await pushNotificationtoindividual(patientEmail, {
+          title,
+          description,
+          isResearch,
+        });
+        if (result2) {
+          Alert.alert("Response Recorded", "The notification has been sent");
+          navigation.navigate("AdminHome");
+        }
       } else {
-        await pushNotificationtoindividual(patientEmail, {
-          title,
-          description,
-          isResearch,
-        });
+        Alert.alert("Please select notification type");
       }
-      console.log("successful");
-      Alert.alert("Response Recorded", "The notification has been sent");
     } catch (error) {
       console.error(error);
     }
   };
-
   return (
     <Provider theme={theme}>
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <View style={styles.container}>
           <Dropdown
             style={[styles.dropdown]}
@@ -209,6 +216,7 @@ const AdminNotification = ({ navigation }) => {
               placeholder="Individual Patient Email:"
               value={patientEmail}
               onChangeText={setPatientEmail}
+              autoCapitalize="none"
             />
           )}
           <Button style={styles.uploadButton} onPress={handlepushNotification}>
@@ -223,8 +231,8 @@ const AdminNotification = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    justifyContent: "center",
+    padding: 10,
+    backgroundColor: 'white',
   },
   input: {
     height: 40,
@@ -232,7 +240,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   descInput: {
     height: 120,
@@ -240,19 +248,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   multiselect: {
     width: "100%",
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: 1,
     marginBottom: 10,
   },
   uploadButton: {
     width: "100%",
-    paddingVertical: 15,
+    paddingVertical: 8,
     backgroundColor: "#001f54",
     borderRadius: 8,
     alignItems: "center",

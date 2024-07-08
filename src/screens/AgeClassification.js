@@ -23,6 +23,10 @@ const AgeClassification = () => {
 
   const handleFetchUserData = async () => {
     try {
+      if(enteredAge === ""){
+        Alert.alert("Error", "Please enter an age.");
+        return;
+      }
       const data = await fetchUserData();
       setUserData(data);
     } catch (error) {
@@ -31,6 +35,10 @@ const AgeClassification = () => {
   };
 
   const handleSendNotification = () => {
+    if(title === "" || description === ""){
+      Alert.alert("Error", "Please fill in all fields.");
+      return;
+    }
     filteredUserData.forEach(async (user) => {
       console.log("USER", user);
       await pushNotificationtouid(user.id, {
@@ -53,7 +61,7 @@ const AgeClassification = () => {
     <ScrollView contentContainerStyle={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter Age"
+        placeholder="Enter Transitional Age"
         keyboardType="numeric"
         value={enteredAge}
         onChangeText={(text) => setEnteredAge(text)}
@@ -86,7 +94,7 @@ const AgeClassification = () => {
           <View style={styles.dataContainer}>
             {filteredUserData.map((user) => (
               <View key={user.id} style={styles.userCard}>
-                <Text style={styles.userText}>ID: {user.id}</Text>
+                {/* <Text style={styles.userText}>ID: {user.id}</Text> */}
                 <Text style={styles.userText}>
                   Name: {user.first_name} {user.last_name}
                 </Text>
@@ -117,7 +125,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#001f54",
     padding: 15,
     borderRadius: 10,
     marginBottom: 20,
