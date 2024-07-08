@@ -85,7 +85,7 @@ const EditDoctorsScreen = ({ navigation }) => {
         }}
       />
       <Text></Text>
-      <Pressable style={styles.createButton} onPress={removeDoctorPressed}>
+      <Pressable style={styles.deleteButton} onPress={removeDoctorPressed}>
         <Text style={styles.createButtonText}>Mark as Inactive</Text>
       </Pressable>
     </View>
@@ -116,6 +116,14 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingVertical: 15,
     backgroundColor: "#001f54",
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  deleteButton: {
+    width: "100%",
+    paddingVertical: 15,
+    backgroundColor: "#ff0000",
     borderRadius: 8,
     alignItems: "center",
     marginBottom: 15,

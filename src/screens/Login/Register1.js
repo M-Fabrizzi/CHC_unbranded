@@ -269,7 +269,7 @@ function Register1({ navigation }) {
             });
           }}
         >
-          <Text style={styles.submitButtonText}>Submit</Text>
+          <Text style={styles.submitButtonText}>Next</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>

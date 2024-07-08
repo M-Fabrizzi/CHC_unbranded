@@ -32,6 +32,7 @@ const AdminNotificationPopup = ({
   const handleDelete = async () => {
     console.log(notifId, ageGroup, diagnosis);
     await deleteNotification(notifId, ageGroup, diagnosis);
+    Alert.alert("Notification Deleted.")
     onClose();
   };
 
