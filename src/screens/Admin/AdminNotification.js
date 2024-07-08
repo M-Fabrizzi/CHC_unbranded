@@ -7,6 +7,7 @@ import {
   Text,
   Alert,
   ScrollView,
+  Pressable,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Provider, DefaultTheme, Button } from "react-native-paper";
@@ -222,9 +223,9 @@ const AdminNotification = ({ navigation }) => {
               autoCapitalize="none"
             />
           )}
-          <Button style={styles.uploadButton} onPress={handlepushNotification}>
+          <Pressable style={styles.uploadButton} onPress={handlepushNotification}>
             <Text style={styles.uploadButtonText}>Upload</Text>
-          </Button>
+          </Pressable>
         </View>
       </ScrollView>
     </Provider>
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
   },
   uploadButton: {
     width: "100%",
-    paddingVertical: 8,
+    paddingVertical: 15,
     backgroundColor: "#001f54",
     borderRadius: 8,
     alignItems: "center",
