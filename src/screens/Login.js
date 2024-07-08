@@ -71,6 +71,7 @@ function Login({ navigation }) {
           accessibilityLabel="Password Input"
         />
       </View>
+      <Text style={styles.forgotText} onPress={() => navigation.navigate("ForgotPassword")}>Forgot Password?</Text>
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
@@ -192,6 +193,14 @@ const styles = StyleSheet.create({
   footerText: {
     textAlign: "center",
     color: "gray",
+  },
+  forgotText: {
+    color: "#001E44",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginTop: 10,
+    textAlign: "left"
   },
 });
 

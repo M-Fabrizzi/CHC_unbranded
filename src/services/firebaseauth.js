@@ -18,6 +18,31 @@ export const signUp = async (email, password) => {
   }
 };
 
+export const checkEmailExists = async (email) => {
+  try {
+    // Try to fetch sign-in methods for the email
+    await auth().fetchSignInMethodsForEmail(email);
+    return true;
+  } catch (error) {
+    if (error.code === "auth/invalid-email") {
+      throw new Error("Invalid email format.");
+    } else if (error.code === "auth/user-not-found") {
+      return false;
+    } else {
+      throw error;
+    }
+  }
+};
+
+export const passwordReset = async (email) => {
+  try {
+    await auth().sendPasswordResetEmail(email);
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Function to sign in a user
 export const signIn = async (email, password) => {
   try {
