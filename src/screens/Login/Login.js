@@ -201,11 +201,14 @@ const styles = StyleSheet.create({
   },
   forgotText: {
     color: "#001E44",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
     marginBottom: 10,
     marginTop: 10,
     textAlign: "left",
+    textDecorationLine: "underline",
+    alignSelf: "flex-end",
+    marginRight: 50,
   },
 });
 
