@@ -72,7 +72,7 @@ const ManageVideos = ({ navigation }) => {
       );
       console.log("Fetched videos:", fetchedVideos);
       if (fetchedVideos.length === 0) {
-        alert("No videos found in the selected category.");
+        alert("No videos found");
       } else {
         setVideos(fetchedVideos);
       }
