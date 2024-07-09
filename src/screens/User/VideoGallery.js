@@ -75,6 +75,7 @@ const VideoGallery = ({ route, navigation }) => {
           style={styles.itemContainer}
           onPress={() => {
             navigation.navigate("VideoPlayer", {
+              videoId: video.id,
               url: video.url,
               title: video.name,
               description: video.desc,
