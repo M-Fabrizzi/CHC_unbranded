@@ -97,9 +97,10 @@ const ManageVideos = ({ navigation }) => {
               await deleteVideoinStorage(video.id);
               await deleteCachedVideo(video.id);
             }
+            setVideos([]);
             // Delete the cached video
             Alert.alert("Success", "Video deleted successfully");
-            handleFetchVideos(); // Refresh the list after deletion
+            await handleFetchVideos(); // Refresh the list after deletion
           },
         },
       ],
@@ -156,6 +157,11 @@ const ManageVideos = ({ navigation }) => {
         >
           <Text style={styles.fetchButtonText}>Fetch Videos</Text>
         </TouchableOpacity>
+        {videos.length === 0 && (
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            No Videos Found
+          </Text>
+        )}
         <FlatList
           data={videos}
           keyExtractor={(item, index) => `${item.id}-${index}`}
