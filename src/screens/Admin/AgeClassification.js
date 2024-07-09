@@ -28,9 +28,15 @@ const AgeClassification = () => {
         return;
       }
       const data = await fetchUserData();
-      setUserData(data);
+      if (fetchUserData.empty) {
+        setUserData(data);
+      }
+      else {
+        Alert.alert("Alert", "No users found");
+      }
+  
     } catch (error) {
-      Alert.alert("Error", "Failed to fetch user data. Please try again.");
+      Alert.alert("Error", "No users found");
     }
   };
 
