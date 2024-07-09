@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
+  ScrollView,
   StyleSheet,
   Image,
   Pressable,
@@ -125,7 +126,7 @@ const AddVideo = ({ navigation }) => {
   }, [videoType, ageGroup, categories]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.content}>
         <TextInput
           style={styles.input}
@@ -206,7 +207,7 @@ const AddVideo = ({ navigation }) => {
           )}
         </Pressable>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

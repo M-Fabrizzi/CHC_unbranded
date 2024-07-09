@@ -7,6 +7,7 @@ import {
   Pressable,
   Dimensions,
   Alert,
+  ScrollView,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown"; // Ensure this is correct based on documentation
 import DoctorContext from "../../context/doctorContext";
@@ -55,7 +56,7 @@ const EditDoctorsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.titleText}>Add Doctor</Text>
       <TextInput
         style={styles.input}
@@ -91,7 +92,7 @@ const EditDoctorsScreen = ({ navigation }) => {
       <Pressable style={styles.deleteButton} onPress={removeDoctorPressed}>
         <Text style={styles.createButtonText}>Mark as Inactive</Text>
       </Pressable>
-    </View>
+    </ScrollView>
   );
 };
 

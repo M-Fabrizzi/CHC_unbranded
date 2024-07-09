@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
+  ScrollView,
   Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -70,7 +71,7 @@ const NewCategoryScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="Sub-Category Title"
@@ -142,7 +143,7 @@ const NewCategoryScreen = ({ navigation }) => {
       <Pressable style={styles.createButton} onPress={handleCreateCategory}>
         <Text style={styles.createButtonText}>Create</Text>
       </Pressable>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -6,6 +6,7 @@ import {
   Alert,
   Pressable,
   StyleSheet,
+  ScrollView
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
@@ -65,7 +66,7 @@ const DeleteCategory = ({ navigation }) => {
   }, [videoType, ageGroup, categories]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Dropdown
           style={styles.dropdown}
@@ -112,7 +113,7 @@ const DeleteCategory = ({ navigation }) => {
       <Pressable style={styles.deleteButton} onPress={handleDeleteCategory}>
         <Text style={styles.deleteButtonText}>Delete</Text>
       </Pressable>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

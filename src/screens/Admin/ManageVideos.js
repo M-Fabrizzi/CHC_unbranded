@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  ScrollView,
   Dimensions,
   Alert,
 } from "react-native";
@@ -109,7 +110,7 @@ const ManageVideos = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Dropdown
           style={styles.dropdown}
@@ -179,7 +180,7 @@ const ManageVideos = ({ navigation }) => {
           )}
         />
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
