@@ -19,7 +19,6 @@ const EditDoctorsScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const { doctors } = useContext(DoctorContext);
-  console.log(doctors);
 
   const addDoctorPressed = async () => {
     try {
@@ -42,7 +41,7 @@ const EditDoctorsScreen = ({ navigation }) => {
         return;
       }
       await deactivateDoctor(selectedDoctor);
-      Alert.alert("Success", "Doctor deactivated");
+      Alert.alert("Success", "Doctor deactivated.");
       setSelectedDoctor("");
     } catch (error) {
       console.error("Failed to remove doctor: ", error);
@@ -74,7 +73,6 @@ const EditDoctorsScreen = ({ navigation }) => {
         labelField="label"
         valueField="value"
         placeholder="Select Doctor..."
-        multiple
         value={selectedDoctor}
         onChange={(item) => {
           setSelectedDoctor(item);
