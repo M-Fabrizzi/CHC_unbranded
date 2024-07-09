@@ -125,10 +125,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
+    width: "100%",
+    paddingVertical: 15,
     backgroundColor: "#001f54",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 15,
   },
   buttonText: {
     color: "white",

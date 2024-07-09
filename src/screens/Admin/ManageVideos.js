@@ -71,7 +71,11 @@ const ManageVideos = ({ navigation }) => {
         category[0]
       );
       console.log("Fetched videos:", fetchedVideos);
-      setVideos(fetchedVideos);
+      if (fetchedVideos.length === 0) {
+        alert("No videos found");
+      } else {
+        setVideos(fetchedVideos);
+      }
     } else {
       alert("Please select all filters.");
     }
@@ -90,6 +94,7 @@ const ManageVideos = ({ navigation }) => {
             await deleteVideoById(videoType, ageGroup, category[0], videoId);
             await deleteVideoinStorage(videoId);
             await deleteCachedVideo(videoId); // Delete the cached video
+            Alert.alert("Success", "Video deleted successfully");
             handleFetchVideos(); // Refresh the list after deletion
           },
         },

@@ -134,18 +134,19 @@ export const addCategoryData = async (
   }
 };
 
+
+
+
+
+
 export const deleteCategory = async (videoType, ageGroup, category) => {
   try {
     let collectionRef = firestore().collection("Categories");
 
     if (videoType === "chd") {
-      collectionRef = collectionRef
-        .doc("CHD Educational Videos")
-        .collection(ageGroup);
+      collectionRef = collectionRef.doc("CHD Educational Videos").collection(ageGroup);
     } else if (videoType === "psu") {
-      collectionRef = collectionRef
-        .doc("PSU Heart Information")
-        .collection(ageGroup);
+      collectionRef = collectionRef.doc("PSU Heart Information").collection(ageGroup);
     } else {
       throw new Error("Invalid videoType");
     }
@@ -157,37 +158,28 @@ export const deleteCategory = async (videoType, ageGroup, category) => {
   }
 };
 
-export const confirmAndDeleteCategory = async (
-  videoType,
-  ageGroup,
-  category
-) => {
+
+export const confirmAndDeleteCategory = async (videoType, ageGroup, category) => {
   return new Promise((resolve, reject) => {
     Alert.alert(
       "Confirm Sub-Category Deletion",
       "Are you sure you want to delete this video sub-category? All video contents of this sub-category will be relocated",
-      [
-        { text: "Cancel", onPress: () => resolve(false), style: "cancel" },
-        {
-          text: "OK",
-          onPress: async () => {
+      [{ text: "Cancel", onPress: () => resolve(false), style: "cancel" },
+        {text: "OK", onPress: async () => {
             try {
-              const result = await deleteCategory(
-                videoType,
-                ageGroup,
-                category
-              );
-              resolve(result);
-            } catch (error) {
+              const result = await deleteCategory(videoType, ageGroup, category);
+              resolve(result); } 
+            catch (error) {
               reject(error);
-            }
-          },
-        },
+            }}}
       ],
-      { cancelable: false }
-    );
+      { cancelable: false });
   });
 };
+
+
+
+
 
 export const addUserToNotif = async (email, diagnosis, ageGroup, notifId) => {
   try {
@@ -212,33 +204,29 @@ export const addUserToNotif = async (email, diagnosis, ageGroup, notifId) => {
   }
 };
 
-export const pushNotificationtobulk = async (
-  diagnoses,
-  ages,
-  data,
-  navigation
-) => {
-  try {
+export const pushNotificationtobulk = async (diagnoses, ages, data, navigation) => {
+  try { 
+
     // Handle single or multiple values for diagnoses and ages gracefully
     diagnoses = Array.isArray(diagnoses) ? diagnoses : [diagnoses];
     ages = Array.isArray(ages) ? ages : [ages];
 
-    if (diagnoses.length === 0 || ages.length === 0 || data.length === 0) {
+    if (diagnoses.length === 0 || ages.length === 0 || data.length === 0 ) {
       alert("Please fill in all fields.");
       return false;
-    } else {
-      // Iterate through each combination of diagnosis and age
-      for (const diagnosis of diagnoses) {
-        for (const age of ages) {
-          await firestore()
-            .collection("NotificationPost")
-            .doc(diagnosis)
-            .collection(age)
-            .add({
-              title: data.title,
-              description: data.description,
-              isResearch: data.isResearch,
-            }); // Use set() for overwriting existing data (if needed)
+    }
+    else {
+    // Iterate through each combination of diagnosis and age
+    for (const diagnosis of diagnoses) {
+      for (const age of ages) {
+        await firestore()
+          .collection("NotificationPost")
+          .doc(diagnosis)
+          .collection(age)
+          .add({
+            title: data.title,
+            description: data.description,
+          }); // Use set() for overwriting existing data (if needed)
           console.log("successful");
         }
       }
@@ -253,25 +241,19 @@ export const pushNotificationtobulk = async (
   }
 };
 
+
 export const pushNotificationtoindividual = async (email, data) => {
   try {
+
     if (email.length === 0 || data.length === 0) {
-      Alert.alert(
-        "Empty fields",
-        "Please fill in all the fields and try again"
-      );
+      Alert.alert("Empty fields", "Please fill in all the fields and try again");
       return false;
-    } else {
+    }
+    else {
       // Check if the user with the provided email exists in the database
-      const userSnapshot = await firestore()
-        .collection("users")
-        .doc(email)
-        .get();
+      const userSnapshot = await firestore().collection("users").doc(email).get();
       if (!userSnapshot.exists) {
-        Alert.alert(
-          "User not found",
-          "User with this email does not exist in the database"
-        );
+        Alert.alert("User not found", "User with this email does not exist in the database");
         return false;
       }
 
@@ -282,7 +264,7 @@ export const pushNotificationtoindividual = async (email, data) => {
         .doc(userId)
         .collection("Notifications")
         .add(data);
-
+      
       return true;
     }
   } catch (error) {
@@ -451,6 +433,7 @@ export const deleteVideoById = async (
   }
 };
 
+
 export const addDoctor = async (name) => {
   try {
     await firestore().collection("Doctors").add({
@@ -481,7 +464,7 @@ export const deactivateDoctor = async (doctorIds) => {
       }
     }
 
-    console.log("Doctors updated successfully");
+    console.log('Doctors updated successfully');
   } catch (error) {
     console.error("Error updating doctor names in Firestore: ", error);
   }

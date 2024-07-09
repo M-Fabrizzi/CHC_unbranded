@@ -77,12 +77,6 @@ const NotificationsScreen = ({ navigation }) => {
             notifId={selectedNotification.id}
           />
         )}
-        <TouchableOpacity
-          style={styles.homeIcon}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <MaterialIcons name="home" size={28} color="black" />
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );
