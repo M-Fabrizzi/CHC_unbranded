@@ -32,7 +32,7 @@ const AddVideo = ({ navigation }) => {
     const options = {
       mediaType: "video",
     };
-
+    console.log("reached choose video");
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
         console.log("User cancelled video picker");
@@ -43,9 +43,12 @@ const AddVideo = ({ navigation }) => {
         setThumbnail(response.assets[0].uri);
       }
     });
+
+    console.log("pick video");
   };
 
   const handleUploadVideo = async () => {
+    console.log(videoUri);
     if (
       title &&
       description &&
