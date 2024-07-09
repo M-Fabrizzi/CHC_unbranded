@@ -36,8 +36,14 @@ const EditDoctorsScreen = ({ navigation }) => {
 
   const removeDoctorPressed = async () => {
     try {
+      console.log("SelectedDoctor", selectedDoctor);
       if (selectedDoctor === "") {
         Alert.alert("Error", "Please select a doctor to deactivate.");
+        return;
+      }
+      else if(selectedDoctor.label.includes("Not Available")){
+        Alert.alert("Error", "Doctor is already marked as unavailable.");
+        setSelectedDoctor("");
         return;
       }
       await deactivateDoctor(selectedDoctor);
