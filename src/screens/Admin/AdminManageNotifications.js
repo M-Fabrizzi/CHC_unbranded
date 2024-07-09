@@ -25,6 +25,13 @@ const AdminManageNotifications = () => {
       ageGroupValue,
       diagnosisValue
     );
+    if (ageGroupValue.length === 0 || diagnosisValue.length === 0){
+      alert("Please select both a diagnosis and age group");
+    }
+    else if (fetchedNotifications.length === 0) {
+      alert("No notifications found");
+
+    }
 
     // Store the selected age group and diagnosis for each notification
     const notificationsWithDetails = fetchedNotifications.map(

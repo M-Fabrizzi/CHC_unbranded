@@ -71,7 +71,11 @@ const ManageVideos = ({ navigation }) => {
         category[0]
       );
       console.log("Fetched videos:", fetchedVideos);
-      setVideos(fetchedVideos);
+      if (fetchedVideos.length === 0) {
+        alert("No videos found");
+      } else {
+        setVideos(fetchedVideos);
+      }
     } else {
       alert("Please select all filters.");
     }
