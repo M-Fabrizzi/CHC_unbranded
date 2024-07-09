@@ -8,7 +8,7 @@ import {
   Dimensions,
   Alert,
 } from "react-native";
-import SectionedMultiSelect from "react-native-sectioned-multi-select";
+import { Dropdown } from "react-native-element-dropdown"; // Ensure this is correct based on documentation
 import DoctorContext from "../../context/doctorContext";
 import { addDoctor, deactivateDoctor } from "../../services/firebasefirestore";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -17,9 +17,8 @@ const { width } = Dimensions.get("window");
 
 const EditDoctorsScreen = ({ navigation }) => {
   const [name, setName] = useState("");
-  const [selectedDoctors, setSelectedDoctors] = useState([]);
+  const [selectedDoctor, setSelectedDoctor] = useState("");
   const { doctors } = useContext(DoctorContext);
-  console.log(doctors);
 
   const addDoctorPressed = async () => {
     try {
@@ -37,13 +36,19 @@ const EditDoctorsScreen = ({ navigation }) => {
 
   const removeDoctorPressed = async () => {
     try {
-      if (selectedDoctors.length === 0) {
+      console.log("SelectedDoctor", selectedDoctor);
+      if (selectedDoctor === "") {
         Alert.alert("Error", "Please select a doctor to deactivate.");
         return;
       }
-      await deactivateDoctor(selectedDoctors);
-      setSelectedDoctors("");
-      Alert.alert("Success", "Doctor(s) deactivated");
+      else if(selectedDoctor.label.includes("Not Available")){
+        Alert.alert("Error", "Doctor is already marked as unavailable.");
+        setSelectedDoctor("");
+        return;
+      }
+      await deactivateDoctor(selectedDoctor);
+      Alert.alert("Success", "Doctor deactivated.");
+      setSelectedDoctor("");
     } catch (error) {
       console.error("Failed to remove doctor: ", error);
     }
@@ -65,24 +70,22 @@ const EditDoctorsScreen = ({ navigation }) => {
       <Text></Text>
       <Text></Text>
       <Text style={styles.titleText}>Mark as Inactive</Text>
-      <SectionedMultiSelect
-        items={doctors.map((doctor) => ({
-          id: doctor.id,
-          name: doctor.name,
+      <Dropdown
+        style={styles.dropdown}
+        data={doctors.map((doctor) => ({
+          label: doctor.name,
+          value: doctor.id,
         }))}
-        uniqueKey="id"
-        displayKey="name"
-        selectText="Select Doctors..."
-        onSelectedItemsChange={setSelectedDoctors}
-        selectedItems={selectedDoctors}
-        IconRenderer={Icon} // Add this line
-        styles={{
-          selectToggle: styles.selectToggle,
-          selectToggleText: styles.selectToggleText,
-          chipText: styles.chipText,
-          itemText: styles.itemText,
-          selectedItemText: styles.selectedItemText,
+        labelField="label"
+        valueField="value"
+        placeholder="Select Doctor..."
+        value={selectedDoctor}
+        onChange={(item) => {
+          setSelectedDoctor(item);
         }}
+        renderLeftIcon={() => (
+          <Icon name="people" size={24} color="#000" />
+        )}
       />
       <Text></Text>
       <Pressable style={styles.deleteButton} onPress={removeDoctorPressed}>
@@ -133,26 +136,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  selectToggle: {
-    marginTop: 10,
+  dropdown: {
+    margin: 10,
+    width: "100%",
+    padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 5,
-    padding: 10,
-  },
-  selectToggleText: {
-    fontSize: 16,
-  },
-  chipText: {
-    fontSize: 16,
-  },
-  itemText: {
-    fontSize: 22,
-    fontWeight: "light",
-  },
-  selectedItemText: {
-    fontSize: 24,
-    fontWeight: "bold",
   },
 });
 

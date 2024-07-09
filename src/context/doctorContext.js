@@ -8,10 +8,10 @@ export const DoctorProvider = ({ children }) => {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const doctorsCollection = firestore().collection("Doctors");
-        const snapshot = await doctorsCollection.get();
+    const doctorsCollection = firestore().collection("Doctors");
+
+    const unsubscribe = doctorsCollection.onSnapshot(
+      (snapshot) => {
         if (!snapshot.empty) {
           const doctorsList = snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -22,12 +22,14 @@ export const DoctorProvider = ({ children }) => {
         } else {
           console.log("No doctors found in Firestore.");
         }
-      } catch (error) {
+      },
+      (error) => {
         console.error("Error fetching doctors: ", error);
       }
-    };
+    );
 
-    fetchDoctors();
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, []);
 
   return (

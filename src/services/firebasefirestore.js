@@ -445,13 +445,13 @@ export const addDoctor = async (name) => {
   }
 };
 
-export const deactivateDoctor = async (doctorIds) => {
+export const deactivateDoctor = async (doctorId) => {
   try {
     const doctorsCollection = firestore().collection("Doctors");
-
-    for (const id of doctorIds) {
-      const docRef = doctorsCollection.doc(id);
+      console.log(doctorId);
+      const docRef = doctorsCollection.doc(doctorId.value);
       const doc = await docRef.get();
+      console.log(doc);
 
       if (doc.exists) {
         const doctorName = doc.data().name;
@@ -460,9 +460,8 @@ export const deactivateDoctor = async (doctorIds) => {
         });
         console.log(`Doctor ${doctorName} marked as Not Available`);
       } else {
-        console.log(`Doctor with ID ${id} not found in Firestore`);
+        console.log(`Doctor with ID ${doctorId.value} not found in Firestore`);
       }
-    }
 
     console.log('Doctors updated successfully');
   } catch (error) {
