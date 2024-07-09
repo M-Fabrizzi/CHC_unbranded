@@ -228,10 +228,10 @@ export const pushNotificationtobulk = async (diagnoses, ages, data, navigation) 
             description: data.description,
           }); // Use set() for overwriting existing data (if needed)
           console.log("successful");
-          Alert.alert("Response Recorded", "The notification has been sent");
-          return true;
-      }}
-      
+        }
+      }
+      Alert.alert("Response Recorded", "The notification has been sent");
+      return true;
     }
 
     console.log("Documents successfully added!");
