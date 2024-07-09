@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import {
+  Alert,
   SafeAreaView,
   View,
   Text,
@@ -8,6 +9,7 @@ import {
   StyleSheet,
   Image,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import { launchImageLibrary } from "react-native-image-picker";
 import { Dropdown } from "react-native-element-dropdown";
@@ -27,6 +29,7 @@ const AddVideo = ({ navigation }) => {
   const [subCategories, setSubCategories] = useState([]);
   const { categories } = useContext(CategoryContext);
   const [ageGroup, setAgeGroup] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChooseVideo = () => {
     const options = {
@@ -36,11 +39,19 @@ const AddVideo = ({ navigation }) => {
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
         console.log("User cancelled video picker");
-      } else if (response.error) {
-        console.log("VideoPicker Error: ", response.error);
+      } else if (response.errorCode) {
+        console.log("VideoPicker Error: ", response.errorMessage);
+        Alert.alert("Video upload error. Please ensure that you are using a .mp4 video.")
+      } else if (response.assets && response.assets.length > 0) {
+        const selectedVideo = response.assets[0];
+        if (selectedVideo.uri.endsWith(".mp4")) {
+          setVideoUri(selectedVideo.uri);
+          setThumbnail(selectedVideo.uri);
+        } else {
+          Alert.alert("Please select a .mp4 video.");
+        }
       } else {
-        setVideoUri(response.assets[0].uri);
-        setThumbnail(response.assets[0].uri);
+        Alert.alert("Failed to select a video. Please try again.");
       }
     });
 
@@ -57,8 +68,9 @@ const AddVideo = ({ navigation }) => {
       ageGroup &&
       videoType
     ) {
+      setLoading(true);
       try {
-        if (videoType == "psu") {
+        if (videoType === "psu") {
           await uploadVideo(
             videoUri,
             title,
@@ -70,7 +82,7 @@ const AddVideo = ({ navigation }) => {
           );
           alert("Video uploaded successfully!");
           navigation.goBack(); // Navigate back after successful upload
-        } else if (videoType == "chd") {
+        } else if (videoType === "chd") {
           await uploadVideo(
             videoUri,
             title,
@@ -86,6 +98,8 @@ const AddVideo = ({ navigation }) => {
       } catch (error) {
         alert("Failed to upload video. Please try again.");
         console.error("Error uploading video: ", error);
+      } finally {
+        setLoading(false);
       }
     } else {
       alert("Please fill in all fields.");
@@ -185,7 +199,11 @@ const AddVideo = ({ navigation }) => {
           <Image source={{ uri: thumbnail }} style={styles.thumbnailImage} />
         )}
         <Pressable onPress={handleUploadVideo} style={styles.submitButton}>
-          <Text style={styles.submitButtonText}>Upload</Text>
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff" />
+          ) : (
+            <Text style={styles.submitButtonText}>Upload</Text>
+          )}
         </Pressable>
       </View>
     </SafeAreaView>
