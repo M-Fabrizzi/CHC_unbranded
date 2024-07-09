@@ -240,10 +240,10 @@ export const pushNotificationtobulk = async (
               isResearch: data.isResearch,
             }); // Use set() for overwriting existing data (if needed)
           console.log("successful");
-          Alert.alert("Response Recorded", "The notification has been sent");
-          return true;
         }
       }
+      Alert.alert("Response Recorded", "The notification has been sent");
+      return true;
     }
 
     console.log("Documents successfully added!");
