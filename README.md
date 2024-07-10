@@ -14,6 +14,7 @@ Install React - https://react.dev/learn/installation
 Install Firebase CLI - https://rnfirebase.io/ ```npm install --save @react-native-firebase/app```
 
 `expo run:android` to run on android
+
 `expo run:ios` to run on ios
 
 # Figma link
