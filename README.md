@@ -1,21 +1,20 @@
-## HHD-Project
+# HHD-Project
 
-# Instructions
-git clone https://github.com/adithyasingh12/HHD-Project.git
+## Instructions
+```git clone https://github.com/adithyasingh12/HHD-Project.git```
 
 ```npm i```
 
-do "npm i --legacy-peer-drops" or "npm i --force" if had issues with `npm install`
+Do "npm i --legacy-peer-drops" or "npm i --force" if had issues with `npm install`
+
+Install extra packages listed below
 
 Install React - https://react.dev/learn/installation
+
 Install Firebase CLI - https://rnfirebase.io/ ```npm install --save @react-native-firebase/app```
 
 `expo run:android` to run on android
 `expo run:ios` to run on ios
-
-# Google Doc
-
-https://docs.google.com/document/d/17I_UG_9WQw91K_9aN2IOVWiWzlE7L7dEhPs-3BegPr0/edit
 
 # Figma link
 
