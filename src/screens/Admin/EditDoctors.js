@@ -41,8 +41,7 @@ const EditDoctorsScreen = ({ navigation }) => {
       if (selectedDoctor === "") {
         Alert.alert("Error", "Please select a doctor to deactivate.");
         return;
-      }
-      else if(selectedDoctor.label.includes("Not Available")){
+      } else if (selectedDoctor.label.includes("Not Available")) {
         Alert.alert("Error", "Doctor is already marked as unavailable.");
         setSelectedDoctor("");
         return;
@@ -84,9 +83,7 @@ const EditDoctorsScreen = ({ navigation }) => {
         onChange={(item) => {
           setSelectedDoctor(item);
         }}
-        renderLeftIcon={() => (
-          <Icon name="people" size={24} color="#000" />
-        )}
+        renderLeftIcon={() => <Icon name="people" size={24} color="#000" />}
       />
       <Text></Text>
       <Pressable style={styles.deleteButton} onPress={removeDoctorPressed}>
@@ -138,7 +135,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   dropdown: {
-    margin: 10,
     width: "100%",
     padding: 10,
     borderWidth: 1,

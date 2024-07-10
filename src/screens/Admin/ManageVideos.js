@@ -3,10 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   FlatList,
-  ScrollView,
   Dimensions,
   Alert,
 } from "react-native";
@@ -109,78 +107,79 @@ const ManageVideos = ({ navigation }) => {
     );
   };
 
+  const renderHeader = () => (
+    <View style={styles.header}>
+      <Dropdown
+        style={styles.dropdown}
+        data={[
+          { label: "Penn State", value: "PSU Heart Information" },
+          { label: "CHD Education", value: "CHD Educational Videos" },
+        ]}
+        labelField="label"
+        valueField="value"
+        placeholder="PSU/CHD Info"
+        value={videoType}
+        onChange={(item) => {
+          setVideoTypeValue(item.value);
+        }}
+      />
+      <Dropdown
+        style={styles.dropdown}
+        data={[
+          { label: "Child/Pediatric", value: "Child and Peds" },
+          { label: "Transitional", value: "Transitional" },
+          { label: "Adult", value: "Adult" },
+        ]}
+        labelField="label"
+        valueField="value"
+        placeholder="Age Group"
+        value={ageGroup}
+        onChange={(item) => {
+          setAgeGroup(item.value);
+        }}
+      />
+      <SectionedMultiSelect
+        items={subCategories}
+        uniqueKey="id"
+        onSelectedItemsChange={setCategory}
+        selectedItems={category}
+        selectText="Category"
+        searchPlaceholderText="Choose Categories..."
+        confirmText="Select"
+        styles={{ selectToggle: styles.dropdown }}
+        IconRenderer={MaterialIcons}
+      />
+      <TouchableOpacity style={styles.fetchButton} onPress={handleFetchVideos}>
+        <Text style={styles.fetchButtonText}>Fetch Videos</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.content}>
-        <Dropdown
-          style={styles.dropdown}
-          data={[
-            { label: "Penn State", value: "PSU Heart Information" },
-            { label: "CHD Education", value: "CHD Educational Videos" },
-          ]}
-          labelField="label"
-          valueField="value"
-          placeholder="PSU/CHD Info"
-          value={videoType}
-          onChange={(item) => {
-            setVideoTypeValue(item.value);
-          }}
-        />
-        <Dropdown
-          style={styles.dropdown}
-          data={[
-            { label: "Child/Pediatric", value: "Child and Peds" },
-            { label: "Transitional", value: "Transitional" },
-            { label: "Adult", value: "Adult" },
-          ]}
-          labelField="label"
-          valueField="value"
-          placeholder="Age Group"
-          value={ageGroup}
-          onChange={(item) => {
-            setAgeGroup(item.value);
-          }}
-        />
-        <SectionedMultiSelect
-          items={subCategories}
-          uniqueKey="id"
-          onSelectedItemsChange={setCategory}
-          selectedItems={category}
-          selectText="Category"
-          searchPlaceholderText="Choose Categories..."
-          confirmText="Select"
-          styles={{ selectToggle: styles.dropdown }}
-          IconRenderer={MaterialIcons}
-        />
-        <TouchableOpacity
-          style={styles.fetchButton}
-          onPress={handleFetchVideos}
-        >
-          <Text style={styles.fetchButtonText}>Fetch Videos</Text>
-        </TouchableOpacity>
-        {videos.length === 0 && (
+    <View style={styles.container}>
+      <FlatList
+        data={videos}
+        keyExtractor={(item, index) => `${item.id}-${index}`}
+        ListHeaderComponent={renderHeader}
+        renderItem={({ item }) => (
+          <View style={styles.videoItem}>
+            <Text style={styles.videoName}>{item.name}</Text>
+            <Text style={styles.videoDesc}>{item.desc}</Text>
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={() => handleDeleteVideo(item)}
+            >
+              <Text style={styles.deleteButtonText}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        ListEmptyComponent={
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
             No Videos Found
           </Text>
-        )}
-        <FlatList
-          data={videos}
-          keyExtractor={(item, index) => `${item.id}-${index}`}
-          renderItem={({ item }) => (
-            <View style={styles.videoItem}>
-              <Text style={styles.videoName}>{item.name}</Text>
-              <Text style={styles.videoDesc}>{item.desc}</Text>
-              <TouchableOpacity
-                style={styles.deleteButton}
-                onPress={() => handleDeleteVideo(item)}
-              >
-                <Text style={styles.deleteButtonText}>Delete</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      </View>
-    </ScrollView>
+        }
+      />
+    </View>
   );
 };
 
@@ -190,7 +189,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#fff",
   },
-  content: {
+  header: {
     justifyContent: "center",
     alignItems: "center",
   },
