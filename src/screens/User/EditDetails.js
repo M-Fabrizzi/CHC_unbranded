@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from "react"; // Import necessary hooks and components from React.
 import {
   SafeAreaView,
   View,
@@ -7,52 +7,60 @@ import {
   Alert,
   StyleSheet,
   TouchableOpacity,
-  Button,
   Pressable,
   ScrollView,
-} from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import dayjs from "dayjs";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { diagnosis, raceData } from "../allthedata";
-import AuthContext from "../../context/authContext";
-import UserDataContext from "../../context/userContext";
-import { updateUserData } from "../../services/firebasefirestore";
-import DoctorContext from "../../context/doctorContext";
+} from "react-native"; // Import necessary components from react-native.
+import { Dropdown } from "react-native-element-dropdown"; // Import the Dropdown component.
+import DateTimePicker from "@react-native-community/datetimepicker"; // Import the DateTimePicker component.
+import dayjs from "dayjs"; // Import the dayjs library for date formatting.
+import Icon from "react-native-vector-icons/FontAwesome"; // Import FontAwesome icons.
+import { diagnosis, raceData } from "../allthedata"; // Import diagnosis and raceData from a local module.
+import AuthContext from "../../context/authContext"; // Import AuthContext for authentication.
+import UserDataContext from "../../context/userContext"; // Import UserDataContext for user data.
+import { updateUserData } from "../../services/firebasefirestore"; // Import the updateUserData function from a service.
+import DoctorContext from "../../context/doctorContext"; // Import DoctorContext for doctor data.
 
+/**
+ * EditDetails Component
+ * 
+ * This component allows users to edit their personal details, including name, 
+ * date of birth, assigned sex at birth, race, cardiologist information, zip code, 
+ * and diagnosis. It includes validation and updates the user data in Firebase Firestore.
+ * 
+ * @param {object} props - The component props.
+ * @param {object} props.navigation - The navigation object provided by React Navigation for navigating between screens.
+ * 
+ * @returns {JSX.Element} The EditDetails component.
+ */
 function EditDetails({ navigation }) {
-  const { userData, setUserData } = useContext(UserDataContext);
-  const { user, setUser } = useContext(AuthContext);
+  const { userData, setUserData } = useContext(UserDataContext); // Destructure userData and setUserData from UserDataContext.
+  const { user, setUser } = useContext(AuthContext); // Destructure user and setUser from AuthContext.
 
+  // State variables to hold user input values.
   const [firstNameValue, setFirstNameValue] = useState(userData.first_name);
   const [lastNameValue, setLastNameValue] = useState(userData.last_name);
   const [diagnosisValue, setDiagnosisValue] = useState(userData.diagnosis);
-  const [additionalDiagnosis, setAdditionalDiagnosis] = useState(
-    userData.additional_diagnosis
-  );
+  const [additionalDiagnosis, setAdditionalDiagnosis] = useState(userData.additional_diagnosis);
   const [raceValue, setRaceValue] = useState(userData.race);
   const [birthValue, setBirthValue] = useState(userData.sex);
-  const [iscardiologistValue, setIsCardiologistValue] = useState(
-    userData.isCardiologist
-  );
-  const [CardiologistValue, setCardiologistValue] = useState(
-    userData.cardiologist
-  );
+  const [iscardiologistValue, setIsCardiologistValue] = useState(userData.isCardiologist);
+  const [CardiologistValue, setCardiologistValue] = useState(userData.cardiologist);
   const [isFocus, setIsFocus] = useState(false);
   const [zipCode, setzipCode] = useState(userData.zipcode);
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [dob, setDob] = useState(userData.dob);
-  const { doctors } = useContext(DoctorContext);
+  const { doctors } = useContext(DoctorContext); // Destructure doctors from DoctorContext.
 
+  // Function to handle date change from DateTimePicker.
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(false);
-    setDate(currentDate);
-    setDob(dayjs(currentDate).format("YYYY-MM-DD"));
+    setShow(false); // Hide the DateTimePicker.
+    setDate(currentDate); // Update the date state.
+    setDob(dayjs(currentDate).format("YYYY-MM-DD")); // Format and set the date of birth.
   };
 
+  // Function to show the DateTimePicker.
   const showDatepicker = () => {
     setShow(true);
   };
@@ -88,7 +96,7 @@ function EditDetails({ navigation }) {
               style={styles.textInput}
               value={dob}
               placeholder="YYYY-MM-DD"
-              editable={true} // Make the text input non-editable
+              editable={true} // Make the text input editable.
             />
             <TouchableOpacity
               style={styles.iconContainer}
@@ -129,6 +137,7 @@ function EditDetails({ navigation }) {
             }}
           />
         </View>
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Select race:</Text>
           <Dropdown
@@ -149,6 +158,7 @@ function EditDetails({ navigation }) {
             }}
           />
         </View>
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>
             Are you followed by a congenital cardiologist at Penn State:
@@ -261,6 +271,7 @@ function EditDetails({ navigation }) {
               );
               return;
             }
+            // Update user data in Firebase Firestore.
             await updateUserData(user.uid, {
               first_name: firstNameValue,
               last_name: lastNameValue,
@@ -271,10 +282,9 @@ function EditDetails({ navigation }) {
               cardiologist: CardiologistValue,
               zipcode: zipCode,
               diagnosis: diagnosisValue,
-              additional_diagnosis:
-                diagnosisValue === "Other" ? additionalDiagnosis : null,
+              additional_diagnosis: diagnosisValue === "Other" ? additionalDiagnosis : null,
             });
-            navigation.navigate("Home");
+            navigation.navigate("Home"); // Navigate back to the Home screen.
           }}
         >
           <Text style={styles.submitButtonText}>Submit</Text>
@@ -284,64 +294,65 @@ function EditDetails({ navigation }) {
   );
 }
 
+// Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 14,
-    backgroundColor: "#f8f9fa",
-    alignItems: "center",
+    flex: 1, // Allow the container to grow to fit the content
+    padding: 14, // Add padding around the container
+    backgroundColor: "#f8f9fa", // Set the background color
+    alignItems: "center", // Center the content horizontally
   },
   inputContainer: {
-    marginBottom: 20,
+    marginBottom: 20, // Add margin below each input container
   },
   label: {
-    marginBottom: 8,
-    marginTop: 5,
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
+    marginBottom: 8, // Add margin below the label
+    marginTop: 5, // Add margin above the label
+    fontSize: 16, // Set the font size of the label
+    fontWeight: "bold", // Make the label text bold
+    color: "#333", // Set the label text color
   },
   textInput: {
-    flex: 1,
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    backgroundColor: "#fff",
+    flex: 1, // Allow the text input to grow to fit the width
+    height: 40, // Set the height of the text input
+    borderColor: "gray", // Set the border color
+    borderWidth: 1, // Set the border width
+    borderRadius: 8, // Set the border radius for rounded corners
+    paddingHorizontal: 10, // Add horizontal padding
+    backgroundColor: "#fff", // Set the background color
   },
   dateInputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 8,
-    height: 40,
-    backgroundColor: "#fff",
+    flexDirection: "row", // Arrange children in a row
+    alignItems: "center", // Center the content vertically
+    borderRadius: 8, // Set the border radius for rounded corners
+    height: 40, // Set the height
+    backgroundColor: "#fff", // Set the background color
   },
   iconContainer: {
-    padding: 8,
+    padding: 8, // Add padding around the icon
   },
   dropdown: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    backgroundColor: "#fff",
-    width: "100%",
+    height: 40, // Set the height of the dropdown
+    borderColor: "gray", // Set the border color
+    borderWidth: 1, // Set the border width
+    borderRadius: 8, // Set the border radius for rounded corners
+    paddingHorizontal: 10, // Add horizontal padding
+    backgroundColor: "#fff", // Set the background color
+    width: "100%", // Set the width to 100%
   },
   submitButton: {
-    width: "100%",
-    paddingVertical: 15,
-    backgroundColor: "#001f54",
-    borderRadius: 8,
-    alignItems: "center",
-    marginBottom: 15,
+    width: "100%", // Set the button width to 100% of the container width
+    paddingVertical: 15, // Set the vertical padding
+    backgroundColor: "#001f54", // Set the background color of the button
+    borderRadius: 8, // Set the border radius for rounded corners
+    alignItems: "center", // Center the text horizontally within the button
+    marginBottom: 15, // Add bottom margin
   },
   submitButtonText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
+    color: "white", // Set the text color to white
+    fontSize: 18, // Set the font size of the button text
+    fontWeight: "bold", // Make the button text bold
   },
 });
 
-export default EditDetails;
+export default EditDetails; // Export the EditDetails component as the default export
