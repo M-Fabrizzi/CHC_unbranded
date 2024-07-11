@@ -177,7 +177,7 @@ const ManageVideos = ({ navigation }) => {
           </View>
         )}
         ListEmptyComponent={
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+          <Text style={{ fontSize: 20, alignSelf: "center", fontWeight: "bold" }}>
             No Videos Found
           </Text>
         }
