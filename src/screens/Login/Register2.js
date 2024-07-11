@@ -13,8 +13,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { checkEmailExists } from "../../services/firebaseauth";
-import { signUp } from "../../services/firebaseauth";
+
 import auth from "@react-native-firebase/auth";
 import {
   addUserData,
