@@ -83,47 +83,47 @@ const VideoHome = ({ navigation }) => {
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Allow the container to grow to fit the content
-    justifyContent: "center", // Center the content vertically
-    alignItems: "center", // Center the content horizontally
-    backgroundColor: "#fff", // Set the background color to white
+    flex: 1,
+    justifyContent: "center", 
+    alignItems: "center", 
+    backgroundColor: "#fff", 
   },
   Text: {
-    marginTop: -5, // Adjust the top margin
-    textAlign: "center", // Center the text horizontally
-    fontWeight: "bold", // Make the text bold
-    fontSize: 18, // Set the font size of the text
-    width: 300, // Set the width of the text container
-    marginBottom: 100, // Add bottom margin
+    marginTop: -5, 
+    textAlign: "center", 
+    fontWeight: "bold", 
+    fontSize: 18, 
+    width: 300, 
+    marginBottom: 100, 
   },
   psuImage: {
-    width: 175, // Set the width of the PSU image
-    height: 175, // Set the height of the PSU image
-    alignSelf: "center", // Center the image horizontally
-    marginBottom: 0, // Adjust the bottom margin
-    marginTop: 10, // Add top margin
+    width: 175, 
+    height: 175, 
+    alignSelf: "center", 
+    marginBottom: 0, 
+    marginTop: 10, 
   },
   GlobeImage: {
-    width: 260, // Set the width of the Globe image
-    height: 180, // Set the height of the Globe image
-    alignSelf: "center", // Center the image horizontally
-    marginBottom: 20, // Add bottom margin
-    marginTop: 20, // Add top margin
+    width: 260, 
+    height: 180, 
+    alignSelf: "center",
+    marginBottom: 20, 
+    marginTop: 20, 
   },
   submitButtonText: {
-    color: "white", // Set the text color to white
-    fontSize: 18, // Set the font size of the button text
-    fontWeight: "bold", // Make the button text bold
+    color: "white", 
+    fontSize: 18, 
+    fontWeight: "bold", 
   },
   submitButton: {
-    width: "30%", // Set the button width to 30% of the container width
-    height: 50, // Set the button height
-    paddingVertical: 15, // Set the vertical padding
-    backgroundColor: "#001f54", // Set the background color of the button
-    borderRadius: 8, // Set the border radius for rounded corners
-    alignItems: "center", // Center the text horizontally within the button
-    marginBottom: 40, // Add bottom margin
-    marginTop: -90, // Adjust the top margin
+    width: "30%", 
+    height: 50, 
+    paddingVertical: 15, 
+    backgroundColor: "#001f54", 
+    borderRadius: 8, 
+    alignItems: "center", 
+    marginBottom: 40, 
+    marginTop: -90, 
   },
 });
 

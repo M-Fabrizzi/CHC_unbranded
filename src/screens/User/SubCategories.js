@@ -80,34 +80,34 @@ const SubCategories = ({ route, navigation }) => {
 // Define the styles for the components
 const styles = StyleSheet.create({
   image: {
-    height: 150, // Set the height of the image
-    width: "100%", // Set the width of the image to 100%
+    height: 150, 
+    width: "100%", 
   },
   container: {
-    flex: 1, // Allow the container to grow to fit the content
-    flexDirection: "row", // Arrange children in a row
-    flexWrap: "wrap", // Wrap the children to the next line
-    alignContent: "flex-start", // Align the content to the start of the container
+    flex: 1, 
+    flexDirection: "row", 
+    flexWrap: "wrap",
+    alignContent: "flex-start", 
   },
   itemContainer: {
-    width: "50%", // Set the width of the item container to 50%
-    padding: 10, // Add padding around the item container
+    width: "50%",
+    padding: 10, 
   },
   item: {
-    backgroundColor: "#EEEEEE", // Set the background color of the item
-    height: 150, // Set the height of the item
-    overflow: "hidden", // Hide overflow content
-    justifyContent: "center", // Center the content vertically
-    alignItems: "center", // Center the content horizontally
+    backgroundColor: "#EEEEEE", 
+    height: 150, 
+    overflow: "hidden", 
+    justifyContent: "center",
+    alignItems: "center", 
   },
   name: {
-    textAlign: "center", // Center the text horizontally
-    fontWeight: "bold", // Make the text bold
-    fontSize: 14, // Set the font size of the text
-    marginTop: 10, // Add top margin to the text
+    textAlign: "center", 
+    fontWeight: "bold", 
+    fontSize: 14, 
+    marginTop: 10, 
   },
   roundedEdges: {
-    borderRadius: 15, // Set the border radius for rounded corners
+    borderRadius: 15,
   },
 });
 

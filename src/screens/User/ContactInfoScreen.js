@@ -120,60 +120,60 @@ const ContactInfoScreen = () => {
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1, // Allow the container to grow to fit the content
-    padding: 20, // Add padding around the container
-    backgroundColor: "#fff", // Set the background color to white
+    flexGrow: 1,
+    padding: 20, 
+    backgroundColor: "#fff", 
   },
   logo: {
-    width: 380, // Set the width of the logo
-    height: 80, // Set the height of the logo
-    alignSelf: "center", // Center the logo horizontally
-    resizeMode: "contain", // Contain the image within the given width and height
+    width: 380, 
+    height: 80, 
+    alignSelf: "center", 
+    resizeMode: "contain", 
   },
   title: {
-    fontSize: 22, // Set the font size of the title
-    fontWeight: "bold", // Make the title bold
-    alignSelf: "center", // Center the title horizontally
-    marginVertical: 10, // Add vertical margin to the title
+    fontSize: 22, 
+    fontWeight: "bold", 
+    alignSelf: "center", 
+    marginVertical: 10, 
   },
   phoneText: {
-    fontSize: 16, // Set the font size of the phone text
-    fontWeight: "bold", // Make the phone text bold
-    marginBottom: 5, // Add bottom margin to the phone text
-    color: "blue", // Set the text color to blue
+    fontSize: 16,
+    fontWeight: "bold", 
+    marginBottom: 5, 
+    color: "blue", 
   },
   sectionTitle: {
-    fontSize: 18, // Set the font size of the section title
-    fontWeight: "bold", // Make the section title bold
-    marginVertical: 10, // Add vertical margin to the section title
+    fontSize: 18, 
+    fontWeight: "bold", 
+    marginVertical: 10, 
   },
   locationText: {
-    fontSize: 16, // Set the font size of the location text
-    fontWeight: "bold", // Make the location text bold
-    marginBottom: 5, // Add bottom margin to the location text
+    fontSize: 16, 
+    fontWeight: "bold", 
+    marginBottom: 5, 
   },
   text: {
-    fontSize: 16, // Set the font size of the general text
-    marginBottom: 5, // Add bottom margin to the general text
+    fontSize: 16, 
+    marginBottom: 5, 
   },
   submitButton: {
-    width: "30%", // Set the button width to 30% of the container width
-    height: 50, // Set the button height
-    paddingVertical: 15, // Set the vertical padding
-    backgroundColor: "#001f54", // Set the background color of the button
-    borderRadius: 8, // Set the border radius for rounded corners
-    alignItems: "center", // Center the text horizontally within the button
+    width: "30%", 
+    height: 50, 
+    paddingVertical: 15, 
+    backgroundColor: "#001f54", 
+    borderRadius: 8, 
+    alignItems: "center", 
   },
   submitButtonText: {
-    color: "white", // Set the text color to white
-    fontSize: 18, // Set the font size of the button text
-    fontWeight: "bold", // Make the button text bold
+    color: "white", 
+    fontSize: 18, 
+    fontWeight: "bold", 
   },
   portalContainer: {
-    flex: 1, // Allow the container to grow to fit the content
-    justifyContent: "center", // Center the content vertically
-    alignItems: "center", // Center the content horizontally
-    backgroundColor: "#fff", // Set the background color to white
+    flex: 1,
+    justifyContent: "center", 
+    alignItems: "center", 
+    backgroundColor: "#fff", 
   },
 });
 

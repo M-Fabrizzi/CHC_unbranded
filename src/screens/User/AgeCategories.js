@@ -71,38 +71,34 @@ const AgeCategories = ({ route, navigation }) => {
 
 // Define the styles for the components
 const styles = StyleSheet.create({
-  // Styles for the container View
   container: {
-    flex: 1, // Take up the full height of the screen
-    justifyContent: 'center', // Center the content vertically
-    alignItems: 'center', // Center the content horizontally
-    backgroundColor: '#fff', // Set the background color to white
-    flexDirection: 'column' // Arrange children in a column
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    backgroundColor: '#fff', 
+    flexDirection: 'column' 
   },
-  // Styles for the main Text component
   Text: {
-    marginTop: -50, // Adjust the top margin
-    textAlign: "center", // Center the text
-    fontWeight: "bold", // Make the text bold
-    fontSize: 23, // Set the font size
-    width: 300, // Set the width of the text container
-    marginBottom: 40, // Set the bottom margin
+    marginTop: -50, 
+    textAlign: "center", 
+    fontWeight: "bold", 
+    fontSize: 23, 
+    width: 300, 
+    marginBottom: 40, 
   },
-  // Styles for the text inside the buttons
   submitButtonText: {
-    color: 'white', // Set the text color to white
-    fontSize: 18, // Set the font size
-    fontWeight: 'bold', // Make the text bold
+    color: 'white', 
+    fontSize: 18, 
+    fontWeight: 'bold', 
   },
-  // Styles for the buttons
   submitButton: {
-    width: "90%", // Set the button width to 90% of the container width
-    height: 50, // Set the button height
-    paddingVertical: 15, // Set the vertical padding
-    backgroundColor: "#001f54", // Set the background color of the button
-    borderRadius: 8, // Set the border radius for rounded corners
-    alignItems: "center", // Center the text horizontally within the button
-    marginBottom: 15, // Set the bottom margin to create space between buttons
+    width: "90%", 
+    height: 50,
+    paddingVertical: 15, 
+    backgroundColor: "#001f54", 
+    borderRadius: 8, 
+    alignItems: "center", 
+    marginBottom: 15,
   },
 });
 

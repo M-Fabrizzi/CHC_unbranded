@@ -118,34 +118,34 @@ const VideoGallery = ({ route, navigation }) => {
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row", // Arrange children in a row
-    flexWrap: "wrap", // Wrap the children to the next line
-    padding: 10, // Add padding around the container
-    justifyContent: "space-between", // Distribute children evenly with space between them
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    padding: 10, 
+    justifyContent: "space-between", 
   },
   itemContainer: {
-    width: Dimensions.get("window").width / 2 - 15, // Set the width of the item container to half the screen width minus some margin
-    marginBottom: 20, // Add bottom margin
-    borderRadius: 10, // Set the border radius for rounded corners
-    backgroundColor: "#f0f0f0", // Set the background color
-    overflow: "hidden", // Hide overflow content
+    width: Dimensions.get("window").width / 2 - 15, 
+    marginBottom: 20, 
+    borderRadius: 10, 
+    backgroundColor: "#f0f0f0", 
+    overflow: "hidden",
   },
   imageContainer: {
-    borderTopLeftRadius: 10, // Rounded top left corner for the image container
-    borderTopRightRadius: 10, // Rounded top right corner for the image container
-    overflow: "hidden", // Hide overflow content
+    borderTopLeftRadius: 10, 
+    borderTopRightRadius: 10, 
+    overflow: "hidden",
   },
   image: {
-    height: 150, // Set the height of the image
-    width: "100%", // Set the width of the image to 100%
-    resizeMode: "cover", // Cover the image to maintain aspect ratio
+    height: 150, 
+    width: "100%", 
+    resizeMode: "cover", 
   },
   title: {
-    textAlign: "center", // Center the text horizontally
-    fontWeight: "bold", // Make the text bold
-    fontSize: 14, // Set the font size of the text
-    marginTop: 5, // Add top margin
-    paddingHorizontal: 10, // Add horizontal padding
+    textAlign: "center", 
+    fontWeight: "bold", 
+    fontSize: 14,
+    marginTop: 5, 
+    paddingHorizontal: 10,
   },
 });
 

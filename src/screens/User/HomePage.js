@@ -126,23 +126,23 @@ const HomePage = ({ navigation }) => {
 // Define the styles for the components
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1, // Allow the container to grow to fit the content
+    flex: 1, 
   },
   navigationImage: {
-    width: 200, // Set the width of the navigation images
-    height: 88, // Set the height of the navigation images
-    alignSelf: "center", // Center the images horizontally
-    marginBottom: 20, // Add bottom margin to the images
+    width: 200, 
+    height: 88, 
+    alignSelf: "center",
+    marginBottom: 20, 
   },
   roundedEdges: {
-    borderRadius: 10, // Set the border radius for rounded corners
+    borderRadius: 10,
   },
   centeredBoldText: {
-    textAlign: "center", // Center the text horizontally
-    fontWeight: "bold", // Make the text bold
-    fontSize: 16, // Set the font size of the text
-    marginBottom: 20, // Add bottom margin to the text
-    marginTop: -20, // Adjust the top margin of the text
+    textAlign: "center", 
+    fontWeight: "bold",
+    fontSize: 16,
+    marginBottom: 20, 
+    marginTop: -20,
   },
 });
 

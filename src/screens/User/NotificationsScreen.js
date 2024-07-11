@@ -103,57 +103,57 @@ const NotificationsScreen = ({ navigation }) => {
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1, // Allow the container to grow to fit the content
-    backgroundColor: "white", // Set the background color to white
-    alignItems: "center", // Center the content horizontally
-    paddingTop: 40, // Add top padding
+    flexGrow: 1, 
+    backgroundColor: "white", 
+    alignItems: "center", 
+    paddingTop: 40,
   },
   header: {
-    height: 60, // Set a fixed height for the header
-    alignItems: "center", // Center the content horizontally
-    justifyContent: "center", // Center the content vertically
-    marginBottom: 20, // Add bottom margin
+    height: 60,
+    alignItems: "center", 
+    justifyContent: "center", 
+    marginBottom: 20,
   },
   logo: {
-    width: 320, // Set the width of the logo
-    height: 160, // Set the height of the logo
-    resizeMode: "contain", // Contain the image within the given width and height
+    width: 320, 
+    height: 160, 
+    resizeMode: "contain", 
   },
   notificationsContainer: {
-    width: width * 0.9, // Set the width of the container to 90% of the screen width
-    backgroundColor: "white", // Set the background color to white
-    borderRadius: 10, // Set the border radius for rounded corners
-    padding: 20, // Add padding around the container
-    alignItems: "center", // Center the content horizontally
-    shadowColor: "#000", // Set the shadow color
-    shadowOffset: { width: 0, height: 5 }, // Set the shadow offset
-    shadowOpacity: 0.3, // Set the shadow opacity
-    shadowRadius: 10, // Set the shadow radius
-    elevation: 5, // Set the elevation for Android shadow
-    marginVertical: 20, // Add vertical margin
-    marginHorizontal: 20, // Add horizontal margin
+    width: width * 0.9, 
+    backgroundColor: "white", 
+    borderRadius: 10,
+    padding: 20,
+    alignItems: "center", 
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 5,
+    marginVertical: 20, 
+    marginHorizontal: 20, 
   },
   title: {
-    fontSize: 20, // Set the font size of the title
-    fontWeight: "bold", // Make the title bold
-    marginBottom: 20, // Add bottom margin
+    fontSize: 20, 
+    fontWeight: "bold", 
+    marginBottom: 20, 
   },
   notificationButton: {
-    width: "100%", // Set the button width to 100% of the container width
-    paddingVertical: 15, // Set the vertical padding
-    backgroundColor: "#001f54", // Set the background color of the button
-    borderRadius: 8, // Set the border radius for rounded corners
-    alignItems: "center", // Center the text horizontally within the button
-    marginBottom: 15, // Add bottom margin
+    width: "100%", 
+    paddingVertical: 15, 
+    backgroundColor: "#001f54",
+    borderRadius: 8, 
+    alignItems: "center", 
+    marginBottom: 15, 
   },
   buttonText: {
-    color: "white", // Set the text color to white
-    fontSize: 16, // Set the font size of the text
+    color: "white", 
+    fontSize: 16, 
   },
   homeIcon: {
-    position: "absolute", // Position the icon absolutely
-    top: 20, // Set the top position
-    right: 20, // Set the right position
+    position: "absolute", 
+    top: 20, 
+    right: 20, 
   },
 });
 

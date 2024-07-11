@@ -297,61 +297,61 @@ function EditDetails({ navigation }) {
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Allow the container to grow to fit the content
-    padding: 14, // Add padding around the container
-    backgroundColor: "#f8f9fa", // Set the background color
-    alignItems: "center", // Center the content horizontally
+    flex: 1, 
+    padding: 14, 
+    backgroundColor: "#f8f9fa",
+    alignItems: "center", 
   },
   inputContainer: {
-    marginBottom: 20, // Add margin below each input container
+    marginBottom: 20, 
   },
   label: {
-    marginBottom: 8, // Add margin below the label
-    marginTop: 5, // Add margin above the label
-    fontSize: 16, // Set the font size of the label
-    fontWeight: "bold", // Make the label text bold
-    color: "#333", // Set the label text color
+    marginBottom: 8,
+    marginTop: 5,
+    fontSize: 16, 
+    fontWeight: "bold", 
+    color: "#333", 
   },
   textInput: {
-    flex: 1, // Allow the text input to grow to fit the width
-    height: 40, // Set the height of the text input
-    borderColor: "gray", // Set the border color
-    borderWidth: 1, // Set the border width
-    borderRadius: 8, // Set the border radius for rounded corners
-    paddingHorizontal: 10, // Add horizontal padding
-    backgroundColor: "#fff", // Set the background color
+    flex: 1,
+    height: 40, 
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 8, 
+    paddingHorizontal: 10, 
+    backgroundColor: "#fff",
   },
   dateInputContainer: {
-    flexDirection: "row", // Arrange children in a row
-    alignItems: "center", // Center the content vertically
-    borderRadius: 8, // Set the border radius for rounded corners
-    height: 40, // Set the height
-    backgroundColor: "#fff", // Set the background color
+    flexDirection: "row", 
+    alignItems: "center", 
+    borderRadius: 8, 
+    height: 40, 
+    backgroundColor: "#fff", 
   },
   iconContainer: {
-    padding: 8, // Add padding around the icon
+    padding: 8, 
   },
   dropdown: {
-    height: 40, // Set the height of the dropdown
-    borderColor: "gray", // Set the border color
-    borderWidth: 1, // Set the border width
-    borderRadius: 8, // Set the border radius for rounded corners
-    paddingHorizontal: 10, // Add horizontal padding
-    backgroundColor: "#fff", // Set the background color
-    width: "100%", // Set the width to 100%
+    height: 40, 
+    borderColor: "gray",
+    borderWidth: 1, 
+    borderRadius: 8, 
+    paddingHorizontal: 10, 
+    backgroundColor: "#fff", 
+    width: "100%", 
   },
   submitButton: {
-    width: "100%", // Set the button width to 100% of the container width
-    paddingVertical: 15, // Set the vertical padding
-    backgroundColor: "#001f54", // Set the background color of the button
-    borderRadius: 8, // Set the border radius for rounded corners
-    alignItems: "center", // Center the text horizontally within the button
-    marginBottom: 15, // Add bottom margin
+    width: "100%",
+    paddingVertical: 15, 
+    backgroundColor: "#001f54", 
+    borderRadius: 8, 
+    alignItems: "center", 
+    marginBottom: 15, 
   },
   submitButtonText: {
-    color: "white", // Set the text color to white
-    fontSize: 18, // Set the font size of the button text
-    fontWeight: "bold", // Make the button text bold
+    color: "white",
+    fontSize: 18, 
+    fontWeight: "bold", 
   },
 });
 

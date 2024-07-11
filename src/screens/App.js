@@ -36,7 +36,11 @@ import { DoctorProvider } from "../context/doctorContext";
 import AgeClassification from "./Admin/AgeClassification";
 
 const Stack = createNativeStackNavigator();
-
+/** 
+ * Providers wrap the app so that they can be accessed from anywhere.
+ * If the user uid matches the admin uid, they are signed into the admin side.
+ * Otherwise, they access the user side.
+*/
 const App = () => {
   return (
     <AuthProvider>
@@ -81,26 +85,6 @@ const App = () => {
                             component={Register2}
                             options={{ title: "Register2" }}
                           />
-                          {/* <Stack.Screen
-                            name="Home"
-                            component={HomePage}
-                            options={{
-                              title: "Home Page",
-                              headerRight: () => (
-                                <Button onPress={handleLogout} title="Logout" />
-                              ),
-                            }}
-                          />
-                          <Stack.Screen
-                            name="AdminHome"
-                            component={AdminHomeScreen}
-                            options={{
-                              title: "Admin Home",
-                              headerRight: () => (
-                                <Button onPress={handleLogout} title="Logout" />
-                              ),
-                            }}
-                          /> */}
                         </>
                       ) : isAdmin ? (
                         <>

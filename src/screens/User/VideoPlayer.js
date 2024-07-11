@@ -127,35 +127,35 @@ const VideoPlayerScreen = ({ route }) => {
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1, // Allow the container to grow to fit the content
-    alignItems: "center", // Center the content horizontally
-    padding: 16, // Add padding around the container
+    flexGrow: 1, 
+    alignItems: "center", 
+    padding: 16, 
   },
   title: {
-    fontSize: 24, // Set the font size of the title
-    fontWeight: "bold", // Make the title bold
-    marginBottom: 8, // Add bottom margin
+    fontSize: 24, 
+    fontWeight: "bold", 
+    marginBottom: 8, 
   },
   description: {
-    fontSize: 16, // Set the font size of the description
-    marginBottom: 16, // Add bottom margin
+    fontSize: 16, 
+    marginBottom: 16, 
   },
   videoContainer: {
-    width: "100%", // Set the width of the video container to 100%
-    aspectRatio: 16 / 9, // Set the aspect ratio for the video container
+    width: "100%",
+    aspectRatio: 16 / 9, 
   },
   fullScreenVideo: {
-    position: "absolute", // Position the fullscreen video absolutely
-    top: 0, // Set the top position to 0
-    left: 0, // Set the left position to 0
-    right: 0, // Set the right position to 0
-    bottom: 0, // Set the bottom position to 0
-    backgroundColor: "black", // Set the background color to black
+    position: "absolute", 
+    top: 0, 
+    left: 0, 
+    right: 0, 
+    bottom: 0,
+    backgroundColor: "black", 
     zIndex: 9999, // Set the z-index to ensure it is on top
   },
   video: {
-    width: "100%", // Set the width of the video to 100%
-    height: "100%", // Set the height of the video to 100%
+    width: "100%", 
+    height: "100%", 
   },
 });
 
