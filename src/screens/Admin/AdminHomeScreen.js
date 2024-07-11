@@ -23,6 +23,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to AddVideo screen
             navigation.navigate("AddVideo");
           }}
         >
@@ -34,6 +35,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to AdminNotifications screen
             navigation.navigate("AdminNotifications");
           }}
         >
@@ -45,6 +47,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to NewCategory screen
             navigation.navigate("NewCategory");
           }}
         >
@@ -57,6 +60,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to AdminManageNotifications screen
             navigation.navigate("AdminManageNotifications");
           }}
         >
@@ -69,6 +73,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to AgeClassification screen
             navigation.navigate("AgeClassification");
           }}
         >
@@ -80,6 +85,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to EditDoctors screen
             navigation.navigate("EditDoctors");
           }}
         >
@@ -92,6 +98,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to ManageVideos screen
             navigation.navigate("ManageVideos");
           }}
         >
@@ -104,6 +111,7 @@ const AdminHomeScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.iconButton}
           onPress={() => {
+            //Navigate to DeleteCategory screen
             navigation.navigate("DeleteCategory");
           }}
         >

@@ -24,11 +24,12 @@ const DeleteCategory = ({ navigation }) => {
 
   const handleDeleteCategory = async () => {
     try {
+      // Check if all fields are populated
       if (ageGroup === null || category.length === 0 || videoType === null) {
         Alert.alert("Please select Age group, Category, and Video type.");
         return;
       }
-
+      // Call confirmAndDeleteCategory to delete the category
       const result = await confirmAndDeleteCategory(
         videoType,
         ageGroup,
@@ -36,11 +37,12 @@ const DeleteCategory = ({ navigation }) => {
       );
 
       if (result) {
-        navigation.navigate("AdminHome");
+        navigation.navigate("AdminHome"); // navigate to AdminHome after deletion sucess 
         Alert.alert("Category was successfully deleted");
       } else {
         console.log("Category deletion cancelled");
       }
+      //Catches any errors that occur during the deletion
     } catch (error) {
       console.error("Error deleting category:", error);
       Alert.alert("Error", "Failed to delete category. Please try again.");
@@ -48,26 +50,30 @@ const DeleteCategory = ({ navigation }) => {
   };
 
   useEffect(() => {
+     // Update subCategories when videoType or ageGroup change
     if (videoType && ageGroup) {
-      const type = videoType.toLowerCase();
+      const type = videoType.toLowerCase(); //converts type and age to lowercase for consistency 
       const age = ageGroup.toLowerCase();
       const subCategories = categories[type]?.[age] || [];
 
+      // Format subCategories if its an array
       if (Array.isArray(subCategories)) {
         const formattedSubCategories = subCategories.map((item) => ({
           name: item,
           id: item,
         }));
+        // Set formatted subCategories in state
         setSubCategories(formattedSubCategories);
       } else {
         console.log("subCategories is not an array or is undefined");
       }
     }
-  }, [videoType, ageGroup, categories]);
+  }, [videoType, ageGroup, categories]); // Run useEffect when videoType, ageGroup, or categories change
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
+        {/* Dropdown for selecting video type */}
         <Dropdown
           style={styles.dropdown}
           data={[
@@ -80,9 +86,10 @@ const DeleteCategory = ({ navigation }) => {
           value={videoType}
           onChange={(item) => {
             console.log("Selected videoType:", item.value); // Log the selected value
-            setVideoTypeValue(item.value);
+            setVideoTypeValue(item.value);  // update state with selected video type
           }}
         />
+        {/* Dropdown for selecting age group */}
         <Dropdown
           style={styles.dropdown}
           data={[
@@ -95,11 +102,12 @@ const DeleteCategory = ({ navigation }) => {
           placeholder="Age Group"
           value={ageGroup}
           onChange={(item) => {
-            setAgeGroup(item.value);
+            setAgeGroup(item.value); // update state with selected age group
           }}
         />
+        {/* SectionedMultiSelect for selecting categories */}
         <SectionedMultiSelect
-          items={subCategories}
+          items={subCategories} //populates options with subCategories array
           uniqueKey="id"
           onSelectedItemsChange={setCategory}
           selectedItems={category}
@@ -110,6 +118,7 @@ const DeleteCategory = ({ navigation }) => {
           IconRenderer={MaterialIcons}
         />
       </View>
+      {/* Delete button to handle category deletion */}
       <Pressable style={styles.deleteButton} onPress={handleDeleteCategory}>
         <Text style={styles.deleteButtonText}>Delete</Text>
       </Pressable>

@@ -22,12 +22,16 @@ const AdminManageNotifications = () => {
   const fetchNotifications = async () => {
     // Fetch notifications
     const fetchedNotifications = await getAdminNotifications(
+     // put the selected age group and diagnosis as a parameter
       ageGroupValue,
       diagnosisValue
     );
+    // Check if ageGroupValue or diagnosisValue is empty
     if (ageGroupValue.length === 0 || diagnosisValue.length === 0){
       alert("Please select both a diagnosis and age group");
+      // Alert the user to select both fields
     }
+    // Check if no notifications were fetched
     else if (fetchedNotifications.length === 0) {
       alert("No notifications found");
 
@@ -36,10 +40,12 @@ const AdminManageNotifications = () => {
     // Store the selected age group and diagnosis for each notification
     const notificationsWithDetails = fetchedNotifications.map(
       (notification) => {
+        // Extract path parts from notification ref
         const pathParts = notification._ref._documentPath._parts;
         const diagnosis = pathParts[1];
         const ageGroup = pathParts[2];
         console.log("diagnosis", diagnosis);
+         // Return new object with notification information
         return {
           id: notification.id,
           data: notification.data(),
@@ -51,7 +57,7 @@ const AdminManageNotifications = () => {
 
     console.log(notificationsWithDetails);
 
-    setNotifications(notificationsWithDetails);
+    setNotifications(notificationsWithDetails); // Update the state with the detailed notifications
   };
 
   return (
@@ -69,6 +75,7 @@ const AdminManageNotifications = () => {
           searchPlaceholderText="Choose diagnosis..."
           IconRenderer={MaterialIcons}
           confirmText="Select"
+         //populates selectedItems with diagnosisValue selected
           selectedItems={diagnosisValue}
           onSelectedItemsChange={setDiagnosisValue}
         />
@@ -87,6 +94,7 @@ const AdminManageNotifications = () => {
           searchPlaceholderText="Choose Age Group..."
           IconRenderer={MaterialIcons}
           confirmText="Select"
+          //populates selectedItems with ageGroupValue selected
           selectedItems={ageGroupValue}
           onSelectedItemsChange={setAgeGroupValue}
         />

@@ -24,14 +24,15 @@ const AgeClassification = () => {
   const handleFetchUserData = async () => {
     try {
       if (enteredAge === "") {
+        //alerts user if no age entered
         Alert.alert("Error", "Please enter an age.");
         return;
       }
       const data = await fetchUserData();
       if (!fetchUserData.empty) {
-        setUserData(data);
+        setUserData(data); //Update state with fetched user data
       } else {
-        Alert.alert("Alert", "No users found");
+        Alert.alert("Alert", "No users found"); //alert if no users are found
       }
     } catch (error) {
       Alert.alert("Error", "No users found");
@@ -39,26 +40,28 @@ const AgeClassification = () => {
   };
 
   const handleSendNotification = () => {
+    // Alert if title or description empty
     if (title === "" || description === "") {
       Alert.alert("Error", "Please fill in all fields.");
       return;
     }
     filteredUserData.forEach(async (user) => {
       console.log("USER", user);
-      await pushNotificationtouid(user.id, {
+      await pushNotificationtouid(user.id, { // Send notifications to each user in filteredUserData
         title,
         description,
         isResearch,
       });
     });
+    // Alert success message
     Alert.alert("Success", "Notifications sent to all matching users.");
   };
 
   const filteredUserData = userData.filter((user) => {
-    if (!enteredAge) return true;
-    const birthYear = new Date(user.dob).getFullYear();
-    const currentYear = new Date().getFullYear();
-    return currentYear - birthYear === parseInt(enteredAge, 10);
+    if (!enteredAge) return true; // If no age entered, return all users
+    const birthYear = new Date(user.dob).getFullYear();// Get birth year from users birthday
+    const currentYear = new Date().getFullYear();// Get current year
+    return currentYear - birthYear === parseInt(enteredAge, 10); // filter users based on entered age
   });
 
   return (
@@ -66,44 +69,45 @@ const AgeClassification = () => {
       <TextInput
         style={styles.input}
         placeholder="Enter Transitional Age"
-        keyboardType="numeric"
+        keyboardType="numeric" // only allows numeric input
+        //populates enteredAge with age entered
         value={enteredAge}
-        onChangeText={(text) => setEnteredAge(text)}
+        onChangeText={(text) => setEnteredAge(text)}  // Updates the enteredAge when text change
       />
       <TouchableOpacity style={styles.button} onPress={handleFetchUserData}>
         <Text style={styles.buttonText}>Fetch User Data</Text>
       </TouchableOpacity>
 
-      {filteredUserData.length > 0 && (
+      {filteredUserData.length > 0 && ( // Check if there are users in filteredUserData array
         <>
           <TextInput
             style={styles.input}
             placeholder="Notification Title"
-            value={title}
-            onChangeText={(text) => setTitle(text)}
+            value={title} // set value of the input to title state
+            onChangeText={(text) => setTitle(text)} // Update the title state as text changes
           />
           <TextInput
             style={styles.input}
             placeholder="Notification Description"
-            value={description}
-            onChangeText={(text) => setDescription(text)}
+            value={description} // set value of the description to title state
+            onChangeText={(text) => setDescription(text)} // Update the description state as text changes
           />
 
           <TouchableOpacity
             style={styles.button}
-            onPress={handleSendNotification}
+            onPress={handleSendNotification} // call handleSendNotification function when pressed
           >
             <Text style={styles.buttonText}>Send Notification</Text>
           </TouchableOpacity>
           <View style={styles.dataContainer}>
-            {filteredUserData.map((user) => (
+            {filteredUserData.map((user) => ( // Map over filteredUserData array to get user information
               <View key={user.id} style={styles.userCard}>
                 {/* <Text style={styles.userText}>ID: {user.id}</Text> */}
                 <Text style={styles.userText}>
-                  Name: {user.first_name} {user.last_name}
+                  Name: {user.first_name} {user.last_name} {/* Display user's first and last name */}
                 </Text>
-                <Text style={styles.userText}>Diagnosis: {user.diagnosis}</Text>
-                <Text style={styles.userText}>DOB: {user.dob}</Text>
+                <Text style={styles.userText}>Diagnosis: {user.diagnosis}</Text> {/* Display user's diagnosis */}
+                <Text style={styles.userText}>DOB: {user.dob}</Text> {/* Display user's date of birth */}
               </View>
             ))}
           </View>

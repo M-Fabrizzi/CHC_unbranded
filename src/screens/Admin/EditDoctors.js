@@ -19,17 +19,17 @@ const { width } = Dimensions.get("window");
 const EditDoctorsScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState("");
-  const { doctors } = useContext(DoctorContext);
+  const { doctors } = useContext(DoctorContext); // Accessing doctors data from context
 
   const addDoctorPressed = async () => {
     try {
       if (!name.trim()) {
-        Alert.alert("Error", "Please enter a doctor name.");
+        Alert.alert("Error", "Please enter a doctor name."); // Alert if name is not entered
         return;
       }
-      await addDoctor(name);
-      setName("");
-      Alert.alert("Success", "Doctor added successfully");
+      await addDoctor(name); // Call addDoctor function
+      setName(""); // Clear the name input field after adding
+      Alert.alert("Success", "Doctor added successfully"); // Success 
     } catch (error) {
       console.error("Failed to add doctor: ", error);
     }
@@ -37,20 +37,20 @@ const EditDoctorsScreen = ({ navigation }) => {
 
   const removeDoctorPressed = async () => {
     try {
-      console.log("SelectedDoctor", selectedDoctor);
+      console.log("SelectedDoctor", selectedDoctor); // Log the selected doctor
       if (selectedDoctor === "") {
-        Alert.alert("Error", "Please select a doctor to deactivate.");
+        Alert.alert("Error", "Please select a doctor to deactivate.");  // Send alert if no doctor is selected
         return;
-      } else if (selectedDoctor.label.includes("Not Available")) {
-        Alert.alert("Error", "Doctor is already marked as unavailable.");
-        setSelectedDoctor("");
+      } else if (selectedDoctor.label.includes("Not Available")) {  
+        Alert.alert("Error", "Doctor is already marked as unavailable."); // Alert if doctor is already inactive
+        setSelectedDoctor(""); // Clear selected doctor state
         return;
       }
       await deactivateDoctor(selectedDoctor);
-      Alert.alert("Success", "Doctor deactivated.");
+      Alert.alert("Success", "Doctor deactivated."); // Success message
       setSelectedDoctor("");
     } catch (error) {
-      console.error("Failed to remove doctor: ", error);
+      console.error("Failed to remove doctor: ", error); // Error handling incase deactivation fails
     }
   };
 
@@ -61,8 +61,9 @@ const EditDoctorsScreen = ({ navigation }) => {
         style={styles.input}
         placeholder="Doctor Name"
         value={name}
-        onChangeText={setName}
+        onChangeText={setName} // Update name when text input changes
       />
+      {/* Button to add a new doctor */}
       <Pressable style={styles.createButton} onPress={addDoctorPressed}>
         <Text style={styles.createButtonText}>Add Doctor</Text>
       </Pressable>
@@ -71,9 +72,10 @@ const EditDoctorsScreen = ({ navigation }) => {
       <Text></Text>
       <Text style={styles.titleText}>Mark as Inactive</Text>
       <Dropdown
+      //Dropdown to select a doctor
         style={styles.dropdown}
-        data={doctors.map((doctor) => ({
-          label: doctor.name,
+        data={doctors.map((doctor) => ({ // array for doctors and their id as drop down
+          label: doctor.name, 
           value: doctor.id,
         }))}
         labelField="label"
@@ -81,11 +83,12 @@ const EditDoctorsScreen = ({ navigation }) => {
         placeholder="Select Doctor..."
         value={selectedDoctor}
         onChange={(item) => {
-          setSelectedDoctor(item);
+          setSelectedDoctor(item); // Set chosen doctor when dropdown value change
         }}
         renderLeftIcon={() => <Icon name="people" size={24} color="#000" />}
       />
       <Text></Text>
+      {/* Button to remove/deactivate selected doctor */}
       <Pressable style={styles.deleteButton} onPress={removeDoctorPressed}>
         <Text style={styles.createButtonText}>Mark as Inactive</Text>
       </Pressable>

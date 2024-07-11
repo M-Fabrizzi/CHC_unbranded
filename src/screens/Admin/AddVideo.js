@@ -37,6 +37,7 @@ const AddVideo = ({ navigation }) => {
       mediaType: "video",
     };
     console.log("reached choose video");
+    //User selects video from photo library to upload
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
         console.log("User cancelled video picker");
@@ -45,6 +46,7 @@ const AddVideo = ({ navigation }) => {
         Alert.alert("Video upload error. Please ensure that you are using a .mp4 video.")
       } else if (response.assets && response.assets.length > 0) {
         const selectedVideo = response.assets[0];
+        //ensures video seected is an .mp4 video 
         if (selectedVideo.uri.endsWith(".mp4")) {
           setVideoUri(selectedVideo.uri);
           setThumbnail(selectedVideo.uri);
@@ -61,6 +63,7 @@ const AddVideo = ({ navigation }) => {
 
   const handleUploadVideo = async () => {
     console.log(videoUri);
+    // check if all fields are filled
     if (
       title &&
       description &&
@@ -70,7 +73,9 @@ const AddVideo = ({ navigation }) => {
       videoType
     ) {
       setLoading(true);
+       // determine the type of video (PSU or CHD) 
       try {
+     // uploads video to PSU category
         if (videoType === "psu") {
           await uploadVideo(
             videoUri,
@@ -83,6 +88,7 @@ const AddVideo = ({ navigation }) => {
           );
           alert("Video uploaded successfully!");
           navigation.goBack(); // Navigate back after successful upload
+          // uploads video to CHD category
         } else if (videoType === "chd") {
           await uploadVideo(
             videoUri,
@@ -94,14 +100,17 @@ const AddVideo = ({ navigation }) => {
             ageGroup
           );
           alert("Video uploaded successfully!");
-          navigation.goBack(); // Navigate back after successful upload
+          navigation.goBack(); 
+          // Navigate back to previous screen after successful upload
         }
+        //handles any errors during the upload
       } catch (error) {
         alert("Failed to upload video. Please try again.");
         console.error("Error uploading video: ", error);
       } finally {
         setLoading(false);
       }
+      //alerts user to fil lin all fields if any are empty
     } else {
       alert("Please fill in all fields.");
     }
@@ -109,16 +118,21 @@ const AddVideo = ({ navigation }) => {
 
   useEffect(() => {
     if (videoType && ageGroup) {
+       // Convert videoType and ageGroup to lowercase
       const type = videoType.toLowerCase();
       const age = ageGroup.toLowerCase();
+      // Retrieve the subcategories based on the selected videoType and ageGroup
       const subCategories = categories[type][age];
 
       if (subCategories && Array.isArray(subCategories)) {
+        // Format the categories into objects with name and id 
         const formattedSubCategories = subCategories.map((item) => ({
           name: item,
           id: item,
         }));
+        // Update the subCategories with the formatted subcategories
         setSubCategories(formattedSubCategories);
+        // Log an error if subCategories is not an array or is undefined
       } else {
         console.log("subCategories is not an array or is undefined");
       }
@@ -167,13 +181,15 @@ const AddVideo = ({ navigation }) => {
           placeholder="Age Group"
           value={ageGroup}
           onChange={(item) => {
+            //populate setAgeGroup with selected choice
             setAgeGroup(item.value);
           }}
         />
         <SectionedMultiSelect
+        //populates multiselect with array from subCategories
           items={subCategories}
           uniqueKey="id"
-          onSelectedItemsChange={setCategory}
+          onSelectedItemsChange={setCategory} //populate setCategory with selected choices
           selectedItems={category}
           selectText="Category"
           searchPlaceholderText="Choose Categories..."
@@ -191,8 +207,7 @@ const AddVideo = ({ navigation }) => {
           />
           <TouchableOpacity
             style={styles.thumbnailButton}
-            onPress={handleChooseVideo}
-          >
+            onPress={handleChooseVideo}>
             <MaterialIcons name="photo-library" size={24} color="black" />
           </TouchableOpacity>
         </View>
