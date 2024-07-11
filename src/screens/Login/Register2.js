@@ -13,9 +13,9 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { checkEmailExists } from "../../services/firebaseauth"; // Importing function to check if email exists
-import { signUp } from "../../services/firebaseauth"; // Importing function to sign up user
-import auth from "@react-native-firebase/auth"; // Importing firebase authentication
+
+import auth from "@react-native-firebase/auth";
+
 import {
   addUserData,
   addUserToFirestore,
