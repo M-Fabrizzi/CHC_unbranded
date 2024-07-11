@@ -19,7 +19,7 @@ import { addCategoryData } from "../../services/firebasefirestore";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import firestore from "@react-native-firebase/firestore";
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get("window"); // Get window width
 
 const NewCategoryScreen = ({ navigation }) => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -28,9 +28,10 @@ const NewCategoryScreen = ({ navigation }) => {
   const [selectedPublicity, setSelectedPublicity] = useState("");
   const [isFocus, setIsFocus] = useState(false);
 
+  // handle selecting a thumbnail picture
   const handleSelectThumbnail = () => {
     const options = {
-      mediaType: "photo",
+      mediaType: "photo", // Only allow photo selection
     };
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
@@ -38,33 +39,34 @@ const NewCategoryScreen = ({ navigation }) => {
       } else if (response.error) {
         console.log("ImagePicker Error: ", response.error);
       } else if (response.assets && response.assets.length > 0) {
-        setThumbnail(response.assets[0].uri);
+        setThumbnail(response.assets[0].uri); // Set picked image URI as thumbnail
       }
     });
   };
 
+  // handle creating a new category
   const handleCreateCategory = async () => {
     try {
       if (!title.trim()) {
-        Alert.alert("Error", "Please enter a title.");
+        Alert.alert("Error", "Please enter a title."); // Alert if title is empty
         return;
       }
       const categoryData = {
-        title: title,
-        thumbnail: thumbnail,
+        title: title, // Category title
+        thumbnail: thumbnail, // Category thumbnail image
       };
 
       const categoryId = await addCategoryData(
         categoryData,
         selectedItems,
         selectedPublicity
-      );
+      ); // function to add category data
       if (categoryId) {
-        navigation.navigate("AdminHome");
+        navigation.navigate("AdminHome"); // Navigate to Admin Home when success
       }
 
-      setTitle("");
-      setThumbnail(null);
+      setTitle(""); // Clear title input
+      setThumbnail(null); // Clear thumbnail 
     } catch (error) {
       console.error("Failed to create category: ", error);
     }
@@ -72,6 +74,7 @@ const NewCategoryScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      {/* Input for category title */}
       <TextInput
         style={styles.input}
         placeholder="Sub-Category Title"
@@ -79,6 +82,7 @@ const NewCategoryScreen = ({ navigation }) => {
         onChangeText={setTitle}
       />
 
+      {/* Dropdown for selecting publicity option */}
       <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
         data={[
@@ -95,11 +99,12 @@ const NewCategoryScreen = ({ navigation }) => {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
-          setSelectedPublicity(item.value);
+          setSelectedPublicity(item.value); // Update selected publicity value
           setIsFocus(false);
         }}
       />
 
+      {/* multi-select for selecting age group/categories */}
       <SectionedMultiSelect
         items={[
           { id: "1", name: "Child" },
@@ -107,7 +112,7 @@ const NewCategoryScreen = ({ navigation }) => {
           { id: "3", name: "Transition Education" },
         ]}
         uniqueKey="id"
-        onSelectedItemsChange={setSelectedItems}
+        onSelectedItemsChange={setSelectedItems} // selected items change
         selectedItems={selectedItems}
         selectText="Age Group/Category"
         searchPlaceholderText="Choose Categories..."
@@ -122,24 +127,26 @@ const NewCategoryScreen = ({ navigation }) => {
         }}
       />
 
+{/* Container for thumbnail and selection */}
       <View style={styles.thumbnailContainer}>
         <TextInput
           style={styles.thumbnailInput}
           placeholder="Category Thumbnail"
           value={thumbnail}
-          editable={false}
+          editable={false} // Thumbnail input not editable
         />
         <TouchableOpacity
           style={styles.thumbnailButton}
-          onPress={handleSelectThumbnail}
+          onPress={handleSelectThumbnail} // Button to select thumbnail image
         >
           <MaterialIcons name="photo-library" size={24} color="black" />
         </TouchableOpacity>
       </View>
+      {/* Display selected thumbnail image */}
       {thumbnail && (
         <Image source={{ uri: thumbnail }} style={styles.thumbnailImage} />
       )}
-
+      {/* Button to create new category */}
       <Pressable style={styles.createButton} onPress={handleCreateCategory}>
         <Text style={styles.createButtonText}>Create</Text>
       </Pressable>

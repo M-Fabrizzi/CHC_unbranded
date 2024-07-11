@@ -38,20 +38,27 @@ const AdminNotification = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [sendType, setSendType] = useState(null);
+
+  // Set the research preset message
   const [researchPreset, onChangeResearch] = useState(
     "Your congenital heart team has identified you as someone potentially eligible for a current study being conducted on congenital heart disease. Would you like to be contacted about this study?"
   );
+  // Set the catherization preset message
   const [cathPreset, onChangeCath] = useState(
     "You are scheduled for an upcoming heart catheterization at Penn State Health's Congenital Heart Center. Enclosed, you will find instructions for this procedure:"
   );
+  // Set the surgery preset message
   const [surgeryPreset, onChangeSurgery] = useState(
     "You are scheduled for an upcoming heart surgery at Penn State Health's Congenital Heart Center. Enclosed, you will find instructions for this procedure:"
   );
+  // determine if the research preset message is selected
   const [isResearch, setIsResearch] = useState(false);
 
   const handlepushNotification = async () => {
     try {
+      // Check if notification is bulk or individual
       if (sendType === "bulk") {
+         // send bulk notification with diagnosis, age group, title, description, and isResearch 
         const result = await pushNotificationtobulk(
           diagnosisValue,
           ageGroupValue,
@@ -61,9 +68,11 @@ const AdminNotification = ({ navigation }) => {
             isResearch,
           }
         );
+        // If notification send is successful, navigate to AdminHome screen
         if (result) {
           navigation.navigate("AdminHome");
         }
+      // send individual notification with diagnosis, age group, title, description, and isResearch 
       } else if (sendType === "individual") {
         const result2 = await pushNotificationtoindividual(patientEmail, {
           title,
@@ -71,10 +80,12 @@ const AdminNotification = ({ navigation }) => {
           isResearch,
         });
         if (result2) {
+          // if notification sending successful, show an alert and navigate to AdminHome screen
           Alert.alert("Response Recorded", "The notification has been sent");
           navigation.navigate("AdminHome");
         }
       } else {
+        //Alert user if no notification type was selected
         Alert.alert("Please select notification type");
       }
     } catch (error) {
@@ -98,8 +109,10 @@ const AdminNotification = ({ navigation }) => {
             onChange={(item) => {
               setSendType(item.value);
               if (item.value === "bulk") {
+                // Clear patientEmail state when selecting bulk
                 setPatientEmail("");
               } else if (item.value === "individual") {
+                // Clear diagnosisValue and setAgeGroupValue state when selecting individual
                 setAgeGroupValue([]);
                 setDiagnosisValue([]);
               }
@@ -111,6 +124,7 @@ const AdminNotification = ({ navigation }) => {
             value={title}
             onChangeText={setTitle}
           />
+          {/* if user selects Bulk notification */}
           {sendType === "bulk" && (
             <>
               <Dropdown
@@ -128,15 +142,19 @@ const AdminNotification = ({ navigation }) => {
                 onChange={(item) => {
                   setNotifTypeValue(item.value);
                   if (item.value == "1") {
+                    // Set isResearch to true and set description to researchPreset
                     setIsResearch(true);
                     setDescription(researchPreset);
                   } else if (item.value == "2") {
+                    // Set isResearch to false and set description to catherization
                     setIsResearch(false);
                     setDescription(cathPreset);
                   } else if (item.value == "3") {
+                    // Set isResearch to false and set description to surgery
                     setIsResearch(false);
                     setDescription(surgeryPreset);
                   } else {
+                   // Set isResearch to false and set description blank template
                     setIsResearch(false);
                     setDescription("");
                   }
@@ -144,6 +162,7 @@ const AdminNotification = ({ navigation }) => {
               />
             </>
           )}
+          {/* if user selects individual notification */}
           {sendType === "individual" && (
             <>
               <Dropdown
@@ -160,12 +179,15 @@ const AdminNotification = ({ navigation }) => {
                 onChange={(item) => {
                   setNotifTypeValue(item.value);
                   if (item.value == "1") {
+                  // Set isResearch to false and set description to CathPreset
                     setIsResearch(false);
                     setDescription(cathPreset);
                   } else if (item.value == "2") {
+                    // Set isResearch to false and set description to SurgeryPreset
                     setIsResearch(false);
                     setDescription(surgeryPreset);
                   } else {
+                    // Set isResearch to false and set description blank
                     setIsResearch(false);
                     setDescription("");
                   }
@@ -200,8 +222,8 @@ const AdminNotification = ({ navigation }) => {
               />
               <SectionedMultiSelect
                 styles={{ selectToggle: styles.multiselect }}
-                items={diagnosis.map((item) => ({
-                  name: item.label,
+                items={diagnosis.map((item) => ({ // Array of items to display in the multi select
+                  name: item.label, 
                   id: item.value,
                 }))}
                 selectText="Diagnosis"
@@ -209,7 +231,7 @@ const AdminNotification = ({ navigation }) => {
                 searchPlaceholderText={"Choose diagnosis..."}
                 IconRenderer={MaterialIcons}
                 confirmText="Select"
-                selectedItems={diagnosisValue}
+                selectedItems={diagnosisValue} // Array of currently selected item ids
                 onSelectedItemsChange={setDiagnosisValue}
               />
             </>
@@ -218,7 +240,7 @@ const AdminNotification = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder="Individual Patient Email:"
-              value={patientEmail}
+              value={patientEmail} // set value of the input to the patientEmail 
               onChangeText={setPatientEmail}
               autoCapitalize="none"
             />
