@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useContext } from "react";
+import { StatusBar } from "expo-status-bar"; // Import the StatusBar component from Expo.
+import React, { useState, useContext } from "react"; // Import necessary hooks and components from React.
 import {
   Alert,
   Button,
@@ -12,47 +12,53 @@ import {
   Linking,
   TextInput,
   View,
-} from "react-native";
+} from "react-native"; // Import necessary components from react-native.
 
-import { passwordReset } from "../../services/firebaseauth";
+import { passwordReset } from "../../services/firebaseauth"; // Import the password reset function from the firebaseauth service.
 
-const logo = require("../../images/logo.png");
+const logo = require("../../images/logo.png"); // Import the logo image.
 
 /**
  * This screen allows the user to input their email and send an email that will allow them to reset their password.
  */
 
 const ForgotPassword = ({ navigation }) => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); // State to hold the email input.
+
   return (
     <SafeAreaView style={styles.container}>
+      {/* Display the logo image */}
       <Image source={logo} style={styles.image} resizeMode="contain" />
       <Text style={styles.text}>Congenital Heart Center{"\n"}</Text>
-      {/*input container that allows the user to input their email */}
+      
+      {/* Input container that allows the user to input their email */}
       <View style={styles.inputView}>
         <TextInput
           style={styles.input}
           placeholder="Account Email"
-          value={email}
-          onChangeText={setEmail}
+          value={email} // Bind the email state to the TextInput value.
+          onChangeText={setEmail} // Update the email state when the TextInput value changes.
           autoCorrect={false}
           autoCapitalize="none"
           accessibilityLabel="Forgot Password Email Input"
         />
       </View>
+
+      {/* Button to trigger the password reset */}
       <View style={styles.buttonView}>
         <Pressable
           style={styles.button}
           onPress={async () => {
             try {
-              //calls password reset from firebaseauth which emails the user a password reset link. Will not send out an email if there is no account matching the email inputted
+              // Call the password reset function which emails the user a password reset link.
+              // It will not send out an email if there is no account matching the email inputted.
               passwordReset(email);
               Alert.alert(
                 "Password Reset Email Sent",
-                "If you do not recieve it in the next 5 minutes, please ensure the email address is correct and try again."
+                "If you do not receive it in the next 5 minutes, please ensure the email address is correct and try again."
               );
             } catch (error) {
-              throw error;
+              throw error; // Throw an error if something goes wrong.
             }
           }}
           accessibilityLabel="Forgot Password Button"
@@ -64,6 +70,7 @@ const ForgotPassword = ({ navigation }) => {
   );
 };
 
+// Define the styles for the components.
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -124,4 +131,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgotPassword;
+export default ForgotPassword; // Export the ForgotPassword component as the default export.

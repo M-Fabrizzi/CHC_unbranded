@@ -8,7 +8,6 @@ import {
   Pressable,
   StyleSheet,
   TouchableOpacity,
-  Button,
   ScrollView,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
@@ -29,6 +28,7 @@ import DoctorContext from "../../context/doctorContext";
  */
 
 function Register1({ navigation }) {
+  // State variables for storing user input
   const [firstNameValue, setFirstNameValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
   const [zipCodeValue, setZipCodeValue] = useState("");
@@ -42,24 +42,24 @@ function Register1({ navigation }) {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [dob, setDob] = useState("");
-  const { doctors } = useContext(DoctorContext);
+  const { doctors } = useContext(DoctorContext); // Use context to get the list of doctors
 
-  //change method for date picker
+  // Change method for date picker
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(false);
-    setDate(currentDate);
-    setDob(dayjs(currentDate).format("YYYY-MM-DD"));
+    const currentDate = selectedDate || date; // Use selected date or keep the current date
+    setShow(false); // Hide the date picker
+    setDate(currentDate); // Update the date state
+    setDob(dayjs(currentDate).format("YYYY-MM-DD")); // Format and set date of birth
   };
 
   const showDatepicker = () => {
-    setShow(true);
+    setShow(true); // Show the date picker
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {/*input containers */}
+        {/* First name input */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>First Name:</Text>
           <TextInput
@@ -70,6 +70,7 @@ function Register1({ navigation }) {
           />
         </View>
 
+        {/* Last name input */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Last Name:</Text>
           <TextInput
@@ -80,7 +81,7 @@ function Register1({ navigation }) {
           />
         </View>
 
-        {/*date picker */}
+        {/* Date picker */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Date of Birth:</Text>
           <View style={styles.dateInputContainer}>
@@ -92,7 +93,7 @@ function Register1({ navigation }) {
             />
             <TouchableOpacity
               style={styles.iconContainer}
-              onPress={showDatepicker}
+              onPress={showDatepicker} // Show date picker on press
             >
               <Icon name="calendar" size={20} color="gray" />
             </TouchableOpacity>
@@ -104,11 +105,11 @@ function Register1({ navigation }) {
             value={date}
             mode="date"
             display="default"
-            onChange={onChange}
+            onChange={onChange} // Update date on change
           />
         )}
 
-        {/*assigned sex dropdown */}
+        {/* Assigned sex dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Assigned sex at birth:</Text>
           <Dropdown
@@ -125,12 +126,13 @@ function Register1({ navigation }) {
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={(item) => {
-              setBirthValue(item.value);
+              setBirthValue(item.value); // Update assigned sex value
               setIsFocus(false);
             }}
           />
         </View>
-        {/*race dropdown */}
+
+        {/* Race dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Select race:</Text>
           <Dropdown
@@ -146,12 +148,13 @@ function Register1({ navigation }) {
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={(item) => {
-              setRaceValue(item.value);
+              setRaceValue(item.value); // Update race value
               setIsFocus(false);
             }}
           />
         </View>
-        {/*cardiologist yes/no dropdown */}
+
+        {/* Cardiologist follow-up dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>
             Are you followed by a congenital cardiologist at Penn State:
@@ -173,13 +176,13 @@ function Register1({ navigation }) {
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={(item) => {
-              setIsCardiologistValue(item.value);
+              setIsCardiologistValue(item.value); // Update follow-up status
               setIsFocus(false);
             }}
           />
         </View>
 
-        {/*cardiologist picker, maps doctors from doctorContext */}
+        {/* Cardiologist selection dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>
             Who is your primary congenital cardiologist:
@@ -197,12 +200,13 @@ function Register1({ navigation }) {
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={(item) => {
-              setCardiologistValue(item.value);
+              setCardiologistValue(item.value); // Update cardiologist value
               setIsFocus(false);
             }}
           />
         </View>
 
+        {/* Zip code input */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Zip Code:</Text>
           <TextInput
@@ -213,7 +217,7 @@ function Register1({ navigation }) {
           />
         </View>
 
-        {/*diagnosis dropdown */}
+        {/* Diagnosis dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Select Diagnosis:</Text>
           <Dropdown
@@ -229,11 +233,13 @@ function Register1({ navigation }) {
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={(item) => {
-              setDiagnosisValue(item.value);
+              setDiagnosisValue(item.value); // Update diagnosis value
               setIsFocus(false);
             }}
           />
         </View>
+
+        {/* Additional diagnosis input, shown if "Other" is selected */}
         {diagnosisValue === "Other" && (
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Additional Diagnosis Information:</Text>
@@ -245,11 +251,12 @@ function Register1({ navigation }) {
             />
           </View>
         )}
-        {/*submit */}
+
+        {/* Submit button */}
         <Pressable
           style={styles.submitButton}
           onPress={async () => {
-            //check that all boxes are filled
+            // Check that all fields are filled
             if (
               !firstNameValue ||
               !lastNameValue ||
@@ -268,7 +275,7 @@ function Register1({ navigation }) {
               return;
             }
 
-            //navigate to second register screen. Pass all data to that screen.
+            // Navigate to second register screen and pass all data to that screen
             navigation.navigate("Register2", {
               first_name: firstNameValue,
               last_name: lastNameValue,
@@ -299,15 +306,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 20,
-  },
-  button: {
-    backgroundColor: "#001E44",
-    height: 45,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
   },
   label: {
     marginBottom: 8,
