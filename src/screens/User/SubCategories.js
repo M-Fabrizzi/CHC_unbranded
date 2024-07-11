@@ -49,12 +49,12 @@ const SubCategories = ({ route, navigation }) => {
   }, [type, age, categories]); // Dependency array to run the effect when type, age, or categories change.
 
   return (
-    // ScrollView component to allow vertical scrolling of the content.
     <ScrollView>
       <View style={styles.container}>
         {/* Map over the subCategories array and render each subcategory */}
         {subCategories.map((subCategory, index) => (
           <View key={index} style={styles.itemContainer}>
+             {/* Navigate to the VideoGallery screen with the selected subcategory.*/}
             <Pressable
               style={[styles.item, styles.roundedEdges]}
               onPress={() => {
@@ -62,12 +62,14 @@ const SubCategories = ({ route, navigation }) => {
                   type,
                   age,
                   subCategory,
-                }); // Navigate to the VideoGallery screen with the selected subcategory.
+                });
               }}
             >
-              <Image source={logo} style={styles.image} /> {/* Display the logo image */}
+              {/* Display the logo image */}
+              <Image source={logo} style={styles.image} />
             </Pressable>
-            <Text style={styles.name}>{subCategory}</Text> {/* Display the subcategory name */}
+            {/* Display the subcategory name */}
+            <Text style={styles.name}>{subCategory}</Text> 
           </View>
         ))}
       </View>

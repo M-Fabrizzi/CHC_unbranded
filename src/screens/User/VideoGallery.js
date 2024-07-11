@@ -87,6 +87,7 @@ const VideoGallery = ({ route, navigation }) => {
     // ScrollView component to allow vertical scrolling of the content.
     <ScrollView contentContainerStyle={styles.container}>
       {/* Map over the videoPosts array and render each video post */}
+      {/* Navigate to the VideoPlayer screen with the selected video's details.*/}
       {videoPosts.map((video, index) => (
         <Pressable
           key={index}
@@ -96,16 +97,17 @@ const VideoGallery = ({ route, navigation }) => {
               url: video.url,
               title: video.name,
               description: video.desc,
-            }); // Navigate to the VideoPlayer screen with the selected video's details.
+            }); 
           }}
         >
           <View style={styles.imageContainer}>
             <Image
-              source={{ uri: video.thumbnail || logo }} // Display the video's thumbnail or the default logo.
+              source={{ uri: video.thumbnail || logo }} 
               style={styles.image}
             />
           </View>
-          <Text style={styles.title}>{video.name}</Text> {/* Display the video title */}
+           {/* Display the video title */}
+          <Text style={styles.title}>{video.name}</Text>
         </Pressable>
       ))}
     </ScrollView>
