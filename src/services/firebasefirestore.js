@@ -1,5 +1,4 @@
 import firebase from "@react-native-firebase/app";
-
 import firestore, { query } from "@react-native-firebase/firestore";
 import { useNavigationBuilder } from "@react-navigation/native";
 import { diagnosis } from "../screens/allthedata";
@@ -10,9 +9,10 @@ import auth from "@react-native-firebase/auth";
 import { Alert } from "react-native";
 import { TurboModuleRegistry } from "react-native";
 
+// Function to calculate age from date of birth
 const calculateAge = (dob) => {
   const today = new Date();
-  const birthDate = parse(dob, "yyyy-MM-dd", new Date()); // Use a flexible date format parser
+  const birthDate = parse(dob, "yyyy-MM-dd", new Date()); // Parse date of birth
 
   if (isNaN(birthDate.getTime())) {
     return null; // Handle invalid date format
@@ -32,6 +32,7 @@ const calculateAge = (dob) => {
   return age;
 };
 
+// Function to add user data to Firestore
 export const addUserData = async (uid, data) => {
   try {
     await firestore().collection("UserPost").doc(uid).set(data);
@@ -41,15 +42,17 @@ export const addUserData = async (uid, data) => {
   }
 };
 
+// Function to update user data in Firestore
 export const updateUserData = async (uid, data) => {
   try {
     await firestore().collection("UserPost").doc(uid).update(data);
-    console.log("Document successfully written!");
+    console.log("Document successfully updated!");
   } catch (error) {
-    console.error("Error writing document: ", error);
+    console.error("Error updating document: ", error);
   }
 };
 
+// Function to delete a notification from Firestore
 export const deleteNotification = async (notifId, ageGroup, diagnosis) => {
   try {
     await firestore()
@@ -63,10 +66,11 @@ export const deleteNotification = async (notifId, ageGroup, diagnosis) => {
   }
 };
 
+// Function to add category data to Firestore
 export const addCategoryData = async (
-  categoryData,
-  selectedItems,
-  selectedPublicity
+  categoryData, // Data for the category
+  selectedItems, // Selected items for the category
+  selectedPublicity // Publicity type
 ) => {
   try {
     if (selectedItems.length === 0) {
@@ -134,6 +138,7 @@ export const addCategoryData = async (
   }
 };
 
+// Function to delete a category from Firestore
 export const deleteCategory = async (videoType, ageGroup, category) => {
   try {
     let collectionRef = firestore().collection("Categories");
@@ -157,10 +162,11 @@ export const deleteCategory = async (videoType, ageGroup, category) => {
   }
 };
 
+// Function to confirm and delete a category with a prompt
 export const confirmAndDeleteCategory = async (
-  videoType,
-  ageGroup,
-  category
+  videoType, // Type of video
+  ageGroup, // Age group
+  category // Category to delete
 ) => {
   return new Promise((resolve, reject) => {
     Alert.alert(
@@ -189,6 +195,7 @@ export const confirmAndDeleteCategory = async (
   });
 };
 
+// Function to add a user to a notification in Firestore
 export const addUserToNotif = async (email, diagnosis, ageGroup, notifId) => {
   try {
     let ageG = "";
@@ -212,14 +219,14 @@ export const addUserToNotif = async (email, diagnosis, ageGroup, notifId) => {
   }
 };
 
+// Function to push notifications to multiple users in bulk
 export const pushNotificationtobulk = async (
-  diagnoses,
-  ages,
-  data,
-  navigation
+  diagnoses, // List of diagnoses
+  ages, // List of age groups
+  data, // Notification data
+  navigation // Navigation object
 ) => {
   try {
-    // Handle single or multiple values for diagnoses and ages gracefully
     diagnoses = Array.isArray(diagnoses) ? diagnoses : [diagnoses];
     ages = Array.isArray(ages) ? ages : [ages];
 
@@ -227,7 +234,6 @@ export const pushNotificationtobulk = async (
       alert("Please fill in all fields.");
       return false;
     } else {
-      // Iterate through each combination of diagnosis and age
       for (const diagnosis of diagnoses) {
         for (const age of ages) {
           await firestore()
@@ -237,7 +243,7 @@ export const pushNotificationtobulk = async (
             .add({
               title: data.title,
               description: data.description,
-            }); // Use set() for overwriting existing data (if needed)
+            });
           console.log("successful");
         }
       }
@@ -252,6 +258,7 @@ export const pushNotificationtobulk = async (
   }
 };
 
+// Function to push a notification to an individual user
 export const pushNotificationtoindividual = async (email, data) => {
   try {
     if (email.length === 0 || data.length === 0) {
@@ -261,7 +268,6 @@ export const pushNotificationtoindividual = async (email, data) => {
       );
       return false;
     } else {
-      // Check if the user with the provided email exists in the database
       const userSnapshot = await firestore()
         .collection("users")
         .doc(email)
@@ -289,6 +295,8 @@ export const pushNotificationtoindividual = async (email, data) => {
     return false;
   }
 };
+
+// Function to push a notification to a user by UID
 export const pushNotificationtouid = async (uid, data) => {
   try {
     await firestore()
@@ -302,6 +310,8 @@ export const pushNotificationtouid = async (uid, data) => {
     console.error("Error writing documents:", error);
   }
 };
+
+// Function to add a user to Firestore
 export const addUserToFirestore = async (uid, email) => {
   try {
     await firestore().collection("users").doc(email).set({
@@ -313,6 +323,7 @@ export const addUserToFirestore = async (uid, email) => {
   }
 };
 
+// Function to get notifications for a user
 export const getNotifications = async (userData, userID) => {
   try {
     let agegroup = "";
@@ -351,11 +362,12 @@ export const getNotifications = async (userData, userID) => {
     console.log("Document successfully read", notifs);
     return notifs;
   } catch (error) {
-    console.error("Error writing document", error);
+    console.error("Error reading document", error);
     return [];
   }
 };
 
+// Function to get notifications for an admin
 export const getAdminNotifications = async (agegroup, diagnoses) => {
   try {
     let notifs = [];
@@ -367,10 +379,9 @@ export const getAdminNotifications = async (agegroup, diagnoses) => {
           .collection("NotificationPost")
           .doc(diagnosis)
           .collection(age)
-          .get(); // Use set() for overwriting existing data (if needed)
+          .get();
         console.log(querySnapshot.docs);
         querySnapshot.forEach((documentSnapshot) => {
-          console.log("hi", documentSnapshot);
           console.log(
             "User ID: ",
             documentSnapshot.id,
@@ -381,23 +392,25 @@ export const getAdminNotifications = async (agegroup, diagnoses) => {
       }
     }
 
-    console.log("Document successfully read", notifs);
+    console.log("Documents successfully read", notifs);
     return notifs;
   } catch (error) {
-    console.error("Error writing document", error);
+    console.error("Error reading document", error);
     return [];
   }
 };
 
+// Function to add video data to Firestore
 export const addVideoData = async (videoData) => {
   try {
-    await firestore().collection("VideoPost").add(videoData); // Correct usage of add
+    await firestore().collection("VideoPost").add(videoData);
     console.log("Video data successfully added!");
   } catch (error) {
     console.error("Error adding video data: ", error);
   }
 };
 
+// Function to get videos by category from Firestore
 export const getVideosByCategory = async (videoType, ageGroup, category) => {
   try {
     console.log(
@@ -429,11 +442,12 @@ export const getVideosByCategory = async (videoType, ageGroup, category) => {
   }
 };
 
+// Function to delete a video by its ID from Firestore
 export const deleteVideoById = async (
-  videoType,
-  ageGroup,
-  category,
-  videoId
+  videoType, // Type of video
+  ageGroup, // Age group
+  category, // Category
+  videoId // ID of the video to delete
 ) => {
   try {
     await firestore()
@@ -451,6 +465,7 @@ export const deleteVideoById = async (
   }
 };
 
+// Function to add a doctor to Firestore
 export const addDoctor = async (name) => {
   try {
     await firestore().collection("Doctors").add({
@@ -462,23 +477,24 @@ export const addDoctor = async (name) => {
   }
 };
 
+// Function to deactivate a doctor in Firestore
 export const deactivateDoctor = async (doctorId) => {
   try {
     const doctorsCollection = firestore().collection("Doctors");
-      console.log(doctorId);
-      const docRef = doctorsCollection.doc(doctorId.value);
-      const doc = await docRef.get();
-      console.log(doc);
+    console.log(doctorId);
+    const docRef = doctorsCollection.doc(doctorId.value);
+    const doc = await docRef.get();
+    console.log(doc);
 
-      if (doc.exists) {
-        const doctorName = doc.data().name;
-        await docRef.update({
-          name: `${doctorName} (Not Available)`,
-        });
-        console.log(`Doctor ${doctorName} marked as Not Available`);
-      } else {
-        console.log(`Doctor with ID ${doctorId.value} not found in Firestore`);
-      }
+    if (doc.exists) {
+      const doctorName = doc.data().name;
+      await docRef.update({
+        name: `${doctorName} (Not Available)`,
+      });
+      console.log(`Doctor ${doctorName} marked as Not Available`);
+    } else {
+      console.log(`Doctor with ID ${doctorId.value} not found in Firestore`);
+    }
 
     console.log("Doctors updated successfully");
   } catch (error) {
@@ -513,8 +529,3 @@ export const fetchUserData = async () => {
     return [];
   }
 };
-
-// Usage example
-fetchUserData().then((userData) => {
-  console.log("fetchUserData: Fetched user data", userData);
-});
