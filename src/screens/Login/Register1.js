@@ -23,6 +23,11 @@ import {
 import { signUp } from "../../services/firebaseauth";
 import DoctorContext from "../../context/doctorContext";
 
+/**
+ * First registration screen. 
+ * Allows the user to input personal information.
+ */
+
 function Register1({ navigation }) {
   const [firstNameValue, setFirstNameValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
@@ -39,6 +44,7 @@ function Register1({ navigation }) {
   const [dob, setDob] = useState("");
   const { doctors } = useContext(DoctorContext);
 
+  //change method for date picker
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
@@ -53,6 +59,7 @@ function Register1({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        {/*input containers */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>First Name:</Text>
           <TextInput
@@ -73,6 +80,7 @@ function Register1({ navigation }) {
           />
         </View>
 
+        {/*date picker */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Date of Birth:</Text>
           <View style={styles.dateInputContainer}>
@@ -100,6 +108,7 @@ function Register1({ navigation }) {
           />
         )}
 
+        {/*assigned sex dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Assigned sex at birth:</Text>
           <Dropdown
@@ -121,6 +130,7 @@ function Register1({ navigation }) {
             }}
           />
         </View>
+        {/*race dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Select race:</Text>
           <Dropdown
@@ -141,6 +151,7 @@ function Register1({ navigation }) {
             }}
           />
         </View>
+        {/*cardiologist yes/no dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>
             Are you followed by a congenital cardiologist at Penn State:
@@ -168,6 +179,7 @@ function Register1({ navigation }) {
           />
         </View>
 
+        {/*cardiologist picker, maps doctors from doctorContext */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>
             Who is your primary congenital cardiologist:
@@ -201,6 +213,7 @@ function Register1({ navigation }) {
           />
         </View>
 
+        {/*diagnosis dropdown */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Select Diagnosis:</Text>
           <Dropdown
@@ -232,10 +245,11 @@ function Register1({ navigation }) {
             />
           </View>
         )}
-
+        {/*submit */}
         <Pressable
           style={styles.submitButton}
           onPress={async () => {
+            //check that all boxes are filled
             if (
               !firstNameValue ||
               !lastNameValue ||
@@ -254,6 +268,7 @@ function Register1({ navigation }) {
               return;
             }
 
+            //navigate to second register screen. Pass all data to that screen.
             navigation.navigate("Register2", {
               first_name: firstNameValue,
               last_name: lastNameValue,

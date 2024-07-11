@@ -25,6 +25,13 @@ const logo = require("../../images/logo.png");
 
 const sampleImage = require("../../images/video.jpg");
 
+/**
+ * Second register screen
+ * Takes in params from Register1.
+ * Takes email and password.
+ * Posts user account to Firebase.
+ */
+
 function Register2({ route, navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,6 +40,7 @@ function Register2({ route, navigation }) {
 
   const handleSignUp = async () => {
     try {
+      //attempt to create a new user with given email and password
       const userCredential = await auth().createUserWithEmailAndPassword(
         email,
         password
@@ -41,6 +49,7 @@ function Register2({ route, navigation }) {
       console.log("User signed up successfully:", userCredential.user);
       return userCredential.user;
     } catch (error) {
+      //if user with the same email already exists, user is not created
       if (error.code === "auth/email-already-in-use") {
         Alert.alert("Error", "The email is already in use. Please try again.");
       } else {
@@ -50,6 +59,7 @@ function Register2({ route, navigation }) {
   };
 
   useEffect(() => {
+    //check password strength and confirms that passwords are the same
     if (
       password.length >= 8 &&
       confirmPassword.length >= 8 &&
@@ -65,6 +75,7 @@ function Register2({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.image} resizeMode="contain" />
+      {/*input fields */}
       <View style={styles.inputView}>
         <TextInput
           style={styles.input}
@@ -94,11 +105,13 @@ function Register2({ route, navigation }) {
         />
       </View>
       <View style={styles.buttonView}>
+        {/*when pressed, signs user up through firebase */}
         <Pressable
           style={isDisabled ? styles.disabledButton : styles.button}
           onPress={async () => {
             const user = await handleSignUp();
 
+            //if user exists, log them in and navigate to the home screen
             if (user) {
               const userid = user.uid;
               await addUserToFirestore(userid, email);
@@ -114,6 +127,7 @@ function Register2({ route, navigation }) {
       <View>
         <Text>{"\n"}</Text>
       </View>
+      {/*if the user has an account, they can navigate back to the login screen */}
       <Text style={styles.footerText}>Already have an Account?</Text>
 
       <View style={styles.buttonView}>
@@ -130,7 +144,7 @@ function Register2({ route, navigation }) {
       <View>
         <Text>{"\n"}</Text>
       </View>
-
+      {/*shows TOS and privacy links */}
       <Text style={styles.footerText}>
         By clicking “Login” or “Register,” {"\n"}you agree to our
         <Text

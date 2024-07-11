@@ -18,12 +18,17 @@ import { passwordReset } from "../../services/firebaseauth";
 
 const logo = require("../../images/logo.png");
 
+/**
+ * This screen allows the user to input their email and send an email that will allow them to reset their password.
+ */
+
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState("");
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.image} resizeMode="contain" />
       <Text style={styles.text}>Congenital Heart Center{"\n"}</Text>
+      {/*input container that allows the user to input their email */}
       <View style={styles.inputView}>
         <TextInput
           style={styles.input}
@@ -40,6 +45,7 @@ const ForgotPassword = ({ navigation }) => {
           style={styles.button}
           onPress={async () => {
             try {
+              //calls password reset from firebaseauth which emails the user a password reset link. Will not send out an email if there is no account matching the email inputted
               passwordReset(email);
               Alert.alert(
                 "Password Reset Email Sent",
