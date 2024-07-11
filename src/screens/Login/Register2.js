@@ -15,14 +15,15 @@ import {
 } from "react-native";
 
 import auth from "@react-native-firebase/auth";
+
 import {
   addUserData,
   addUserToFirestore,
-} from "../../services/firebasefirestore";
+} from "../../services/firebasefirestore"; // Importing functions to add user data to Firestore
 
-const logo = require("../../images/logo.png");
+const logo = require("../../images/logo.png"); // Importing logo image
 
-const sampleImage = require("../../images/video.jpg");
+const sampleImage = require("../../images/video.jpg"); // Importing sample image
 
 /**
  * Second register screen
@@ -30,16 +31,15 @@ const sampleImage = require("../../images/video.jpg");
  * Takes email and password.
  * Posts user account to Firebase.
  */
-
 function Register2({ route, navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [email, setEmail] = useState(""); // State for storing email input
+  const [password, setPassword] = useState(""); // State for storing password input
+  const [confirmPassword, setConfirmPassword] = useState(""); // State for storing confirm password input
+  const [isDisabled, setIsDisabled] = useState(true); // State for disabling button based on input validation
 
   const handleSignUp = async () => {
     try {
-      //attempt to create a new user with given email and password
+      // Attempt to create a new user with given email and password
       const userCredential = await auth().createUserWithEmailAndPassword(
         email,
         password
@@ -48,7 +48,7 @@ function Register2({ route, navigation }) {
       console.log("User signed up successfully:", userCredential.user);
       return userCredential.user;
     } catch (error) {
-      //if user with the same email already exists, user is not created
+      // If user with the same email already exists, alert the user
       if (error.code === "auth/email-already-in-use") {
         Alert.alert("Error", "The email is already in use. Please try again.");
       } else {
@@ -58,24 +58,25 @@ function Register2({ route, navigation }) {
   };
 
   useEffect(() => {
-    //check password strength and confirms that passwords are the same
+    // Check password strength and confirm passwords match to enable/disable button
     if (
       password.length >= 8 &&
       confirmPassword.length >= 8 &&
       password === confirmPassword &&
       email.length > 0
     ) {
-      setIsDisabled(false);
+      setIsDisabled(false); // Enable button
     } else {
-      setIsDisabled(true);
+      setIsDisabled(true); // Disable button
     }
   }, [password, confirmPassword, email]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={logo} style={styles.image} resizeMode="contain" />
-      {/*input fields */}
+      {/* Displaying logo image */}
+      <Image source={logo} style={styles.image} resizeMode="contain" /> 
       <View style={styles.inputView}>
+        {/* Email input field */}
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -84,6 +85,7 @@ function Register2({ route, navigation }) {
           autoCorrect={false}
           autoCapitalize="none"
         />
+        {/* Password input field */}
         <TextInput
           style={styles.input}
           placeholder="Password"
@@ -93,6 +95,7 @@ function Register2({ route, navigation }) {
           autoCorrect={false}
           autoCapitalize="none"
         />
+        {/* Confirm password input field */}
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
@@ -104,17 +107,16 @@ function Register2({ route, navigation }) {
         />
       </View>
       <View style={styles.buttonView}>
-        {/*when pressed, signs user up through firebase */}
+        {/* Create Account button */}
+        {/*If user exists, add user data to Firestore and navigate to Home screen*/}
         <Pressable
           style={isDisabled ? styles.disabledButton : styles.button}
           onPress={async () => {
-            const user = await handleSignUp();
-
-            //if user exists, log them in and navigate to the home screen
+            const user = await handleSignUp(); 
             if (user) {
               const userid = user.uid;
               await addUserToFirestore(userid, email);
-              await addUserData(userid, route.params);
+              await addUserData(userid, route.params); 
               navigation.navigate("Home");
             }
           }}
@@ -126,10 +128,11 @@ function Register2({ route, navigation }) {
       <View>
         <Text>{"\n"}</Text>
       </View>
-      {/*if the user has an account, they can navigate back to the login screen */}
+      {/* Link to login screen if user already has an account */}
       <Text style={styles.footerText}>Already have an Account?</Text>
 
       <View style={styles.buttonView}>
+        {/* Login button */}
         <Pressable
           style={styles.registerButton}
           onPress={() => {
@@ -143,7 +146,7 @@ function Register2({ route, navigation }) {
       <View>
         <Text>{"\n"}</Text>
       </View>
-      {/*shows TOS and privacy links */}
+      {/* Terms of Service and Privacy Policy links */}
       <Text style={styles.footerText}>
         By clicking “Login” or “Register,” {"\n"}you agree to our
         <Text

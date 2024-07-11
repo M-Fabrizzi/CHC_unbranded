@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useContext } from "react";
+import { StatusBar } from "expo-status-bar"; // Import the StatusBar component from Expo.
+import React, { useState, useContext } from "react"; // Import necessary hooks and components from React.
 import {
   Alert,
   Button,
@@ -12,13 +12,13 @@ import {
   Linking,
   TextInput,
   View,
-} from "react-native";
+} from "react-native"; // Import necessary components from react-native.
 
-import { signIn } from "../../services/firebaseauth";
-import AuthContext from "../../context/authContext";
-import { createNotification } from "../../services/firebasefirestore";
+import { signIn } from "../../services/firebaseauth"; // Import the signIn function from the firebaseauth service.
+import AuthContext from "../../context/authContext"; // Import the AuthContext to access authentication state.
+import { createNotification } from "../../services/firebasefirestore"; // Import the createNotification function from the firebasefirestore service.
 
-const logo = require("../../images/logo.png");
+const logo = require("../../images/logo.png"); // Import the logo image.
 
 /**
  * This is the primary login screen for the application.
@@ -27,25 +27,26 @@ const logo = require("../../images/logo.png");
  */
 
 function Login({ navigation }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { setUser } = useContext(AuthContext);
+  const [username, setUsername] = useState(""); // State to hold the username input.
+  const [password, setPassword] = useState(""); // State to hold the password input.
+  const { setUser } = useContext(AuthContext); // Destructure setUser from AuthContext to update the user state.
 
+  // Function to handle user sign-in.
   const handleSignIn = async () => {
-    //checks if both username and password fields are filled
+    // Check if both username and password fields are filled.
     if (!username || !password) {
       Alert.alert("Validation Error", "Please enter both email and password.");
       return false;
     }
 
     try {
-      //checks the credentials against the database. If the credentials are valid, the user is logged in
+      // Check the credentials against the database. If valid, log the user in.
       const user = await signIn(username, password);
-      setUser(user);
+      setUser(user); // Update the user state.
       Alert.alert("Sign In Successful", `Welcome back, ${user.email}`);
       return user;
     } catch (error) {
-      //if the credentials are invalid, user is not logged in
+      // If the credentials are invalid, show an alert.
       if (error.code === "auth/invalid-credential") {
         Alert.alert("Sign In Failed", "User not found. Please register.");
       } else {
@@ -57,15 +58,17 @@ function Login({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={logo} style={styles.image} resizeMode="contain" />
+      {/* Display the logo image */}
+      <Image source={logo} style={styles.image} resizeMode="contain" /> 
       <Text style={styles.text}>Congenital Heart Center{"\n"}</Text>
-      {/*username and password input fields */}
+      
+      {/* Username and password input fields */}
       <View style={styles.inputView}>
         <TextInput
           style={styles.input}
           placeholder="Email"
-          value={username}
-          onChangeText={setUsername}
+          value={username} // Bind the username state to the TextInput value.
+          onChangeText={setUsername} // Update the username state when the TextInput value changes.
           autoCorrect={false}
           autoCapitalize="none"
           accessibilityLabel="Email Input"
@@ -74,22 +77,24 @@ function Login({ navigation }) {
           style={styles.input}
           placeholder="Password"
           secureTextEntry
-          value={password}
-          onChangeText={setPassword}
+          value={password} // Bind the password state to the TextInput value.
+          onChangeText={setPassword} // Update the password state when the TextInput value changes.
           autoCorrect={false}
           autoCapitalize="none"
           accessibilityLabel="Password Input"
         />
       </View>
-      {/*navigates to forgot password screen */}
+
+      {/* Navigate to forgot password screen */}
       <Text
         style={styles.forgotText}
         onPress={() => navigation.navigate("ForgotPassword")}
       >
         Forgot Password?
       </Text>
+
       <View style={styles.buttonView}>
-        {/*attempts to log the user into the app. Also checks if the user is an admin or not */}
+        {/* Attempt to log the user into the app. Also checks if the user is an admin or not */}
         <Pressable
           style={styles.button}
           onPress={async () => {
@@ -97,7 +102,7 @@ function Login({ navigation }) {
 
             if (signInSuccess) {
               navigation.navigate(
-                //if the user's uid matches the admin uid, navigate to admin home. Otherwise, navigate to the user homepage.
+                // If the user's uid matches the admin uid, navigate to admin home. Otherwise, navigate to the user homepage.
                 signInSuccess.uid === "DMKClrz8iXb0WxVSV64x3J8vj6j1"
                   ? "AdminHome"
                   : "Home"
@@ -109,12 +114,13 @@ function Login({ navigation }) {
           <Text style={styles.buttonText}>Login</Text>
         </Pressable>
       </View>
+      
       <View>
         <Text>{"\n"}</Text>
       </View>
       <Text style={styles.footerText}>Don't Have Account?</Text>
       <View style={styles.buttonView}>
-        {/*navigates to the register screen */}
+        {/* Navigate to the register screen */}
         <Pressable
           style={styles.registerButton}
           onPress={() => navigation.navigate("Register1")}
@@ -123,10 +129,12 @@ function Login({ navigation }) {
           <Text style={styles.buttonText}>Register</Text>
         </Pressable>
       </View>
+      
       <View>
         <Text>{"\n"}</Text>
       </View>
-      {/*links to psu resources about privacy and TOS */}
+
+      {/* Links to PSU resources about privacy and TOS */}
       <Text style={styles.footerText}>
         By clicking “Login” or “Register,” {"\n"}you agree to our
         <Text
@@ -156,6 +164,7 @@ function Login({ navigation }) {
   );
 }
 
+// Define the styles for the components.
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -227,4 +236,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Login; // Export the Login component as the default export.
