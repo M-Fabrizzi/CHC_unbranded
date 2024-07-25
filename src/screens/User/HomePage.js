@@ -31,6 +31,7 @@ const HomePage = ({ navigation }) => {
     backgroundColor: isDarkMode ? "black" : "white",
     flex: 1,
     padding: 20,
+    alignItems: "center",
     marginTop: -7,
   };
 
@@ -59,14 +60,7 @@ const HomePage = ({ navigation }) => {
       />
       {/* Main container view */}
       <View style={backgroundStyle}>
-        {/* Logo Image */}
-        <View style={{ alignItems: "center", marginBottom: 9 }}>
-          <Image
-            source={require("../../images/image2.png")}
-            style={{ width: 380, height: 80 }}
-          />
-        </View>
-
+      <Text style={styles.titleText}>Congenital Heart{"\n"}Education Project{"\n"}</Text>
         {/* Navigation option to Video Gallery */}
         <Pressable
           onPress={() => {
@@ -133,6 +127,11 @@ const styles = StyleSheet.create({
     height: 88, 
     alignSelf: "center",
     marginBottom: 20, 
+  },
+  titleText: {
+    color: "#001E44",
+    fontSize: 28,
+    fontWeight: "bold",
   },
   roundedEdges: {
     borderRadius: 10,

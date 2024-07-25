@@ -155,7 +155,7 @@ function Register1({ navigation }) {
         </View>
 
         {/* Cardiologist follow-up dropdown */}
-        <View style={styles.inputContainer}>
+        {/* <View style={styles.inputContainer}>
           <Text style={styles.label}>
             Are you followed by a congenital cardiologist at Penn State:
           </Text>
@@ -183,7 +183,7 @@ function Register1({ navigation }) {
         </View>
 
         {/* Cardiologist selection dropdown */}
-        <View style={styles.inputContainer}>
+        {/* <View style={styles.inputContainer}>
           <Text style={styles.label}>
             Who is your primary congenital cardiologist:
           </Text>
@@ -204,7 +204,7 @@ function Register1({ navigation }) {
               setIsFocus(false);
             }}
           />
-        </View>
+        </View> */}
 
         {/* Zip code input */}
         <View style={styles.inputContainer}>
@@ -263,8 +263,7 @@ function Register1({ navigation }) {
               !dob ||
               !birthValue ||
               !raceValue ||
-              !iscardiologistValue ||
-              !CardiologistValue ||
+              
               !zipCodeValue ||
               !diagnosisValue
             ) {
@@ -282,8 +281,7 @@ function Register1({ navigation }) {
               dob: dob,
               sex: birthValue,
               race: raceValue,
-              isCardiologist: iscardiologistValue,
-              cardiologist: CardiologistValue,
+              
               zipcode: zipCodeValue,
               diagnosis: diagnosisValue,
               additional_diagnosis:

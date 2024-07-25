@@ -115,12 +115,11 @@ const ManageVideos = ({ navigation }) => {
       <Dropdown
         style={styles.dropdown}
         data={[
-          { label: "Penn State", value: "PSU Heart Information" },
           { label: "CHD Education", value: "CHD Educational Videos" },
         ]}
         labelField="label"
         valueField="value"
-        placeholder="PSU/CHD Info"
+        placeholder="Video Type"
         value={videoType}
         onChange={(item) => {
           setVideoTypeValue(item.value); // Set selected video type

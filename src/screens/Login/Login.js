@@ -58,9 +58,7 @@ function Login({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Display the logo image */}
-      <Image source={logo} style={styles.image} resizeMode="contain" /> 
-      <Text style={styles.text}>Congenital Heart Center{"\n"}</Text>
+      <Text style={styles.text}>Congenital Heart{"\n"}Education Project{"\n"}</Text>
       
       {/* Username and password input fields */}
       <View style={styles.inputView}>
@@ -141,7 +139,7 @@ function Login({ navigation }) {
           style={{ color: "blue" }}
           onPress={() =>
             Linking.openURL(
-              "https://www.pennstatehealth.org/privacy-legal-notices"
+              ""
             )
           }
         >
@@ -152,7 +150,7 @@ function Login({ navigation }) {
           style={{ color: "blue" }}
           onPress={() =>
             Linking.openURL(
-              "https://www.pennstatehealth.org/sites/default/files/Privacy/561-103-Privacy-Notice-PSH-Rev-11-21.pdf"
+              ""
             )
           }
         >

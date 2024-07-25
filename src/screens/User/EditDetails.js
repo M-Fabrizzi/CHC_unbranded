@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Pressable,
   ScrollView,
+  Dimensions
 } from "react-native"; // Import necessary components from react-native.
 import { Dropdown } from "react-native-element-dropdown"; // Import the Dropdown component.
 import DateTimePicker from "@react-native-community/datetimepicker"; // Import the DateTimePicker component.
@@ -32,6 +33,10 @@ import DoctorContext from "../../context/doctorContext"; // Import DoctorContext
  * 
  * @returns {JSX.Element} The EditDetails component.
  */
+
+const { width } = Dimensions.get("window");
+
+
 function EditDetails({ navigation }) {
   const { userData, setUserData } = useContext(UserDataContext); // Destructure userData and setUserData from UserDataContext.
   const { user, setUser } = useContext(AuthContext); // Destructure user and setUser from AuthContext.
@@ -67,10 +72,10 @@ function EditDetails({ navigation }) {
   console.log(userData);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>First Name:</Text>
+          <Text style={styles.label}>First Name:                                                                                                </Text>
           <TextInput
             style={styles.textInput}
             value={firstNameValue}
@@ -158,57 +163,6 @@ function EditDetails({ navigation }) {
             }}
           />
         </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>
-            Are you followed by a congenital cardiologist at Penn State:
-          </Text>
-          <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
-            data={[
-              { label: "Yes", value: "Yes" },
-              { label: "No", value: "No" },
-              {
-                label: "I'd rather not answer",
-                value: "I'd rather not answer",
-              },
-            ]}
-            labelField="label"
-            valueField="value"
-            placeholder={"Select an option"}
-            value={iscardiologistValue}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={(item) => {
-              setIsCardiologistValue(item.value);
-              setIsFocus(false);
-            }}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>
-            Who is your primary congenital cardiologist:
-          </Text>
-          <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
-            data={doctors.map((item) => ({
-              label: item.name,
-              value: item.name,
-            }))}
-            labelField="label"
-            valueField="value"
-            placeholder={"Select an option"}
-            value={CardiologistValue}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={(item) => {
-              setCardiologistValue(item.value);
-              setIsFocus(false);
-            }}
-          />
-        </View>
-
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Zip Code:</Text>
           <TextInput
@@ -260,8 +214,6 @@ function EditDetails({ navigation }) {
               !dob ||
               !birthValue ||
               !raceValue ||
-              !iscardiologistValue ||
-              !CardiologistValue ||
               !zipCode ||
               !diagnosisValue
             ) {
@@ -278,8 +230,6 @@ function EditDetails({ navigation }) {
               dob: dob,
               sex: birthValue,
               race: raceValue,
-              isCardiologist: iscardiologistValue,
-              cardiologist: CardiologistValue,
               zipcode: zipCode,
               diagnosis: diagnosisValue,
               additional_diagnosis: diagnosisValue === "Other" ? additionalDiagnosis : null,
@@ -290,14 +240,14 @@ function EditDetails({ navigation }) {
           <Text style={styles.submitButtonText}>Submit</Text>
         </Pressable>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flexGrow: 1,
     padding: 14, 
     backgroundColor: "#f8f9fa",
     alignItems: "center", 

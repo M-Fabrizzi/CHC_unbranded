@@ -73,8 +73,6 @@ function Register2({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Displaying logo image */}
-      <Image source={logo} style={styles.image} resizeMode="contain" /> 
       <View style={styles.inputView}>
         {/* Email input field */}
         <TextInput
@@ -153,18 +151,18 @@ function Register2({ route, navigation }) {
           style={{ color: "blue" }}
           onPress={() =>
             Linking.openURL(
-              "https://www.pennstatehealth.org/privacy-legal-notices"
+              ""
             )
           }
         >
-          {" Terms of Service "}
+          {" Terms of Service"}
         </Text>
         and
         <Text
           style={{ color: "blue" }}
           onPress={() =>
             Linking.openURL(
-              "https://www.pennstatehealth.org/sites/default/files/Privacy/561-103-Privacy-Notice-PSH-Rev-11-21.pdf"
+              ""
             )
           }
         >

@@ -65,10 +65,6 @@ const NotificationsScreen = ({ navigation }) => {
   return (
     // ScrollView component to allow vertical scrolling of the content.
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Header view containing the logo */}
-      <View style={styles.header}>
-        <Image source={require("../../images/logo.png")} style={styles.logo} />
-      </View>
       {/* Container for notifications */}
       <View style={styles.notificationsContainer}>
         <Text style={styles.title}>Notifications</Text>

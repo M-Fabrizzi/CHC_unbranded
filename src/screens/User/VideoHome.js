@@ -38,16 +38,16 @@ const VideoHome = ({ navigation }) => {
     // Main container view
     <View style={styles.container}>
       {/* PSU Information Image */}
-      <Image
+      {/* <Image
         source={require("../../images/VideoHomePSU.jpeg")}
         style={styles.psuImage}
       />
-      {/* Text describing the PSU Information */}
+      {}
       <Text style={styles.Text}>
         Penn State Congenital Heart Center Information
       </Text>
 
-      {/* Navigation button to AgeCategories screen with 'psu' choice */}
+      {}
       <Pressable
         onPress={() => {
           navigation.navigate("AgeCategories", { choice: "psu" });
@@ -55,7 +55,7 @@ const VideoHome = ({ navigation }) => {
         style={styles.submitButton}
       >
         <Text style={styles.submitButtonText}>Go</Text>
-      </Pressable>
+      </Pressable> */}
 
       {/* Globe Image for CHD Educational Videos */}
       <Image

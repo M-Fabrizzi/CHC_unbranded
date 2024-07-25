@@ -75,21 +75,6 @@ const AddVideo = ({ navigation }) => {
       setLoading(true);
        // determine the type of video (PSU or CHD) 
       try {
-     // uploads video to PSU category
-        if (videoType === "psu") {
-          await uploadVideo(
-            videoUri,
-            title,
-            description,
-            category,
-            thumbnail,
-            "PSU Heart Information",
-            ageGroup
-          );
-          alert("Video uploaded successfully!");
-          navigation.goBack(); // Navigate back after successful upload
-          // uploads video to CHD category
-        } else if (videoType === "chd") {
           await uploadVideo(
             videoUri,
             title,
@@ -102,7 +87,6 @@ const AddVideo = ({ navigation }) => {
           alert("Video uploaded successfully!");
           navigation.goBack(); 
           // Navigate back to previous screen after successful upload
-        }
         //handles any errors during the upload
       } catch (error) {
         alert("Failed to upload video. Please try again.");
@@ -158,12 +142,11 @@ const AddVideo = ({ navigation }) => {
         <Dropdown
           style={styles.dropdown}
           data={[
-            { label: "Penn State", value: "psu" },
             { label: "CHD Education", value: "chd" },
           ]}
           labelField="label"
           valueField="value"
-          placeholder="PSU/CHD Info"
+          placeholder="Video Type"
           value={videoType}
           onChange={(item) => {
             setVideoTypeValue(item.value);

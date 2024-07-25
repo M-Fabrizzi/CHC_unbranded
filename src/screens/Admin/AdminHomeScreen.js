@@ -16,9 +16,7 @@ const { width } = Dimensions.get("window");
 const AdminHomeScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <Image source={require("../../images/logo.png")} style={styles.logo} />
-      </View>
+      
       <Pressable style={styles.optionContainer}>
         <TouchableOpacity
           style={styles.iconButton}
@@ -80,18 +78,6 @@ const AdminHomeScreen = ({ navigation }) => {
           <MaterialIcons name="add-circle-outline" size={60} color="white" />
         </TouchableOpacity>
         <Text style={styles.optionText}>Transitional Messaging</Text>
-      </Pressable>
-      <Pressable style={styles.optionContainer}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => {
-            //Navigate to EditDoctors screen
-            navigation.navigate("EditDoctors");
-          }}
-        >
-          <MaterialIcons name="add-circle-outline" size={60} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.optionText}>Edit Doctors</Text>
       </Pressable>
 
       <Pressable style={styles.optionContainer}>

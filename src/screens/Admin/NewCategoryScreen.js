@@ -87,14 +87,10 @@ const NewCategoryScreen = ({ navigation }) => {
         style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
         data={[
           { label: "CHD Educational Videos", value: "1" },
-          {
-            label: "Penn State Congenital Heart Center Information",
-            value: "2",
-          },
         ]}
         labelField="label"
         valueField="value"
-        placeholder={"Select an option"}
+        placeholder={"Category Type"}
         value={selectedPublicity}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}

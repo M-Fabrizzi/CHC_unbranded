@@ -43,25 +43,4 @@ const diagnosis = [
   { label: "Other", value: "16" },
 ];
 
-const doctors = [
-  { label: "Elizabeth Adams, DO", value: "1" },
-  { label: "Vincent Aluquin, MD", value: "2" },
-  { label: "Elisa Bradley, MD", value: "3" },
-  { label: "John Breinholt, MD", value: "4" },
-  { label: "Amanda Cai, MD", value: "5" },
-  { label: "Dennis Chang, MD", value: "6" },
-  { label: "Anisa Chaudhry, MD", value: "7" },
-  { label: "Stephen Cyran, MD", value: "8" },
-  { label: "Thomas Dispenza, MD", value: "9" },
-  { label: "Gretchen Hackett, DO", value: "10" },
-  { label: "Jason Imundo, MD", value: "11" },
-  { label: "John Kelleman, MD", value: "12" },
-  { label: "James Kimber, DO", value: "13" },
-  { label: "Bryan Stefek, MD", value: "14" },
-  { label: "Robert Tunks, MD", value: "15" },
-  { label: "Howard Weber, MD", value: "16" },
-  { label: "Timothy Wolfe, MD", value: "17" },
-  { label: "Other", value: "18" },
-];
-
-export { raceData, diagnosis, doctors };
+export { raceData, diagnosis};

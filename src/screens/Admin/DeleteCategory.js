@@ -77,12 +77,11 @@ const DeleteCategory = ({ navigation }) => {
         <Dropdown
           style={styles.dropdown}
           data={[
-            { label: "Penn State", value: "psu" },
             { label: "CHD Education", value: "chd" },
           ]}
           labelField="label"
           valueField="value"
-          placeholder="PSU/CHD Info"
+          placeholder="Category Type"
           value={videoType}
           onChange={(item) => {
             console.log("Selected videoType:", item.value); // Log the selected value

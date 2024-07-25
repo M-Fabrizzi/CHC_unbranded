@@ -28,8 +28,7 @@ const ForgotPassword = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Display the logo image */}
-      <Image source={logo} style={styles.image} resizeMode="contain" />
-      <Text style={styles.text}>Congenital Heart Center{"\n"}</Text>
+      
       
       {/* Input container that allows the user to input their email */}
       <View style={styles.inputView}>
